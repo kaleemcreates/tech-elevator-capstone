@@ -40,9 +40,9 @@ INSERT INTO hotels (name, location_id, street_address, city, state, zip, latitud
 INSERT INTO hotels (name, location_id, street_address, city, state, zip, latitude, longitude) VALUES('Hampton Inn & Suites University Area',	'HIS',	'3160 Olentangy River Rd',	'Columbus',	'OH',	43202,	40.025428,	-83.024906);
 INSERT INTO hotels (name, location_id, street_address, city, state, zip, latitude, longitude) VALUES('Drury Inn & Suites Columbus Convention Center',	'DIS',	'88 E Nationwide Blvd',	'Columbus',	'OH',	43215,	39.969771,	-82.999478);
 
-INSERT INTO users (user_name, password, user_role) VALUES('hilary', 'password', 'admin' );
-INSERT INTO users (user_name, password, user_role) VALUES('keith', 'password', 'cityuser');
-INSERT INTO users (user_name, password, user_role) VALUES('ryan', 'password', 'cityuser');
+INSERT INTO users (user_name, password, salt, user_role) VALUES('hilary', 'password','SDJydqT014UpMj7hCx+1/aeV7HJ82PA+CxZm0BeelT75HfxhbnAH/w5AVIHoX+A6eGiyzIMPflQlLiYhQxtB8LqddoMPWIW6jsX3MrjuKZKlRdd52az4DXdV3jWzFb+CwkGjVlLZ0SE/NvNmMxoEcwKPEEnGevnkZ8T0ZJJdh/s=', 'admin' );
+INSERT INTO users (user_name, password, salt, user_role) VALUES('keith', 'password', 'SDJydqT014UpMj7hCx+1/aeV7HJ82PA+CxZm0BeelT75HfxhbnAH/w5AVIHoX+A6eGiyzIMPflQlLiYhQxtB8LqddoMPWIW6jsX3MrjuKZKlRdd52az4DXdV3jWzFb+CwkGjVlLZ0SE/NvNmMxoEcwKPEEnGevnkZ8T0ZJJdh/s=','cityuser');
+INSERT INTO users (user_name, password, salt, user_role) VALUES('ryan', 'password','SDJydqT014UpMj7hCx+1/aeV7HJ82PA+CxZm0BeelT75HfxhbnAH/w5AVIHoX+A6eGiyzIMPflQlLiYhQxtB8LqddoMPWIW6jsX3MrjuKZKlRdd52az4DXdV3jWzFb+CwkGjVlLZ0SE/NvNmMxoEcwKPEEnGevnkZ8T0ZJJdh/s=', 'cityuser');
 
 INSERT INTO landmark_reviews (landmark_id, user_name, thumbs_up, review_text) VALUES('ZOO', 'hilary', true, 'fake review');
 

@@ -23,17 +23,18 @@ public class JDBCUserDAO implements UserDAO {
 	}
 	
 	@Override
-	public void saveUser(String userName, String password) {
+	public void saveUser(String userName, String password, String role) {
 		byte[] salt = passwordHasher.generateRandomSalt();
 		String hashedPassword = passwordHasher.computeHash(password, salt);
 		String saltString = new String(Base64.encode(salt));
-		jdbcTemplate.update("INSERT INTO app_user(user_name, password, salt) VALUES (?, ?, ?)", userName, hashedPassword, saltString);
+		String userRole = role;
+		jdbcTemplate.update("INSERT INTO users(user_name, password, salt, user_role) VALUES (?, ?, ?, ?)", userName, hashedPassword, saltString, role);
 	}
 
 	@Override
 	public boolean searchForUsernameAndPassword(String userName, String password) {
 		String sqlSearchForUser = "SELECT * "+
-							      "FROM app_user "+
+							      "FROM users "+
 							      "WHERE UPPER(user_name) = ?";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForUser, userName.toUpperCase());
@@ -52,7 +53,7 @@ public class JDBCUserDAO implements UserDAO {
 		byte[] salt = passwordHasher.generateRandomSalt();
 		String hashedPassword = passwordHasher.computeHash(password, salt);
 		String saltString = new String(Base64.encode(salt));
-		jdbcTemplate.update("UPDATE app_user SET password = ?, salt = ? WHERE user_name = ?", hashedPassword, saltString, userName);
+		jdbcTemplate.update("UPDATE users SET password = ?, salt = ? WHERE user_name = ?", hashedPassword, saltString, userName);
 	}
 
 }

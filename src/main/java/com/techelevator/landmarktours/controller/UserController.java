@@ -30,8 +30,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/users", method=RequestMethod.POST)
-	public String createUser(@RequestParam String userName, @RequestParam String password) {
-		userDAO.saveUser(userName, password);
+	public String createUser(@RequestParam String userName, @RequestParam String password, @RequestParam String role) {
+		userDAO.saveUser(userName, password, role);
 		return "redirect:/login";
 	}
 	

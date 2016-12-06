@@ -53,6 +53,10 @@
 				<label for="confirmPassword">Confirm Password: </label>
 				<input type="password" id="confirmPassword" name="confirmPassword" placeHolder="Re-Type Password" class="form-control" />	
 			</div>
+			<div class="form-group">
+				<label for="role">User Role: </label>
+				<input type="text" id="role" name="role" placeHolder="user-role" class="form-control" />	
+			</div>
 			<button type="submit" class="btn btn-default">Create User</button>
 		</div>
 		<div class="col-sm-6">

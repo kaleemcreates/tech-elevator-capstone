@@ -23,6 +23,7 @@ CREATE TABLE landmarks (
 CREATE TABLE users (
   user_name varchar(32) NOT NULL,     -- Username
   password varchar(32) NOT NULL,      -- Password (in plain-text)
+  salt varchar(256) NOT NULL,		  -- Password Salt
   user_role varchar(32) NOT NULL, 		-- USER ROLE
   CONSTRAINT ck_users_user_role CHECK (user_role IN ('admin','cityuser')),
   CONSTRAINT pk_users_username PRIMARY KEY (user_name)
