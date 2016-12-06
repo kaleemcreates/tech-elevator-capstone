@@ -12,18 +12,7 @@ import com.techelevator.landmarktours.model.LandmarksDAO;
 
 @Controller
 public class HomeController {
-	
-	//private ReviewDAO reviewDAO;
-	//private LandmarkDAO landmarkDAO;
-//	@Autowired
-//	public HomeController(ReviewDAO reviewDAO) {
-//		this.reviewDAO = reviewDAO;
-//	}
-//	@Autowired
-//	public HomeController(LandmarkDAO landmarkDAO){
-//		this.landmarkDAO = landmarkDAO;
-//	}
-	
+
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.GET)
 	public String showHomePage(Map<String, Object> model) {
 		//model.put("landmarks", landmarkDAO.getHotels(5));
