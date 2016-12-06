@@ -24,6 +24,13 @@
 		
 
 </form>
+<form NAME="roundtrip" METHOD="get" ACTION="http://gebweb.net/optimap/index.php">
+<input NAME="loc0" TYPE="text" VALUE="39.965741,	-83.002793"/>
+<input NAME="loc1" TYPE="text" VALUE="39.965849,	-82.953303" />
+<input NAME="loc2" TYPE="text" VALUE="39.956723,	-83.003568" />
+<input NAME="loc3" TYPE="text" VALUE="39.969817,	-83.010041" />
+<input TYPE="submit" TYPE="text" VALUE="Submit" />
+</form>
 		
 <c:import url="/WEB-INF/jsp/footer.jsp" />
 		
