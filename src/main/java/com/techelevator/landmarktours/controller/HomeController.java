@@ -24,7 +24,7 @@ public class HomeController {
 //		this.landmarkDAO = landmarkDAO;
 //	}
 	
-	@RequestMapping(path="/", method=RequestMethod.GET)
+	@RequestMapping(path={"/", "/home"}, method=RequestMethod.GET)
 	public String showHomePage(Map<String, Object> model) {
 		//model.put("landmarks", landmarkDAO.getHotels(5));
 	
