@@ -35,7 +35,7 @@ CREATE TABLE landmark_reviews (
   thumbs_up boolean NOT NULL,      -- Thumps Up Rating
   review_text varchar(256) NOT NULL, 		-- Review Text
   create_date timestamp NOT NULL DEFAULT now(), --TimeStamp
-  CONSTRAINT pk_landmark_reviews_review_id PRIMARY KEY (landmark_id, user_name)
+  CONSTRAINT pk_landmark_reviews_landmark_id_user_name PRIMARY KEY (landmark_id, user_name)
 );
 CREATE TABLE hotels(
   location_id varchar(3) NOT NULL,			--location ID
