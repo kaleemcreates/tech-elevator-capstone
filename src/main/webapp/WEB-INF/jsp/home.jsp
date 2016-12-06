@@ -24,6 +24,14 @@
 		
 
 </form>
+<div><p> Stuff we need to implement
+origin: New York, NY
+destination: Boston, MA
+waypoints: optimize:true|Providence, RI|Hartford, CT
+mode: driving
+key: AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8
+</p>
+</div>
 <form NAME="roundtrip" METHOD="get" ACTION="http://gebweb.net/optimap/index.php">
 <input NAME="loc0" TYPE="text" VALUE="39.965741,	-83.002793"/>
 <input NAME="loc1" TYPE="text" VALUE="39.965849,	-82.953303" />
