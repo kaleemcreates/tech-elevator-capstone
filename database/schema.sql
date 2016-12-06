@@ -10,7 +10,6 @@ CREATE TABLE landmarks (
    name varchar(32) NOT NULL,		  -- name
    latitude decimal(2,6) NOT NULL,		  -- latitude
 	longitude decimal(2,6) NOT NULL,			-- longitude
-	image varchar(256) NOT NULL, 				-- Image
 	description varchar(256) NOT NULL, 				-- Description
 	street_address varchar(256) NOT NULL, 				-- street address
 	city varchar(32) NOT NULL, 				-- City
@@ -32,7 +31,7 @@ CREATE TABLE landmark_reviews (
   review_id integer NOT NULL,
   landmark_id varchar(3) NOT NULL,     -- landmark ID
   user_name varchar(32) NOT NULL,     -- Username
-  thumps_up boolean NOT NULL,      -- Thumps Up Rating
+  thumbs_up boolean NOT NULL,      -- Thumps Up Rating
   review_text varchar(256) NOT NULL, 		-- Review Text
   create_date timestamp NOT NULL DEFAULT now(), --TimeStamp
   CONSTRAINT pk_landmark_reviews_review_id_landmark_id PRIMARY KEY (review_id, landmark_id),
