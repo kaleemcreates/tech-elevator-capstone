@@ -50,7 +50,18 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 		}
 		return landmark;
 	}
-	
+	@Override
+	public Landmarks searchLandMarksByRadius(String landmarkId) {
+		Landmarks landmark = null;
+		String sqlSelectLandmarkById = "SELECT id, ( 3959 * acos( cos( radians(37) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(-122) ) + "
+				+ "sin( radians(37) ) * sin( radians( lat ) ) ) ) AS distance + "
+				+ "FROM landmarkss HAVING distance < 25 ORDER BY distance LIMIT 0 , 20";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarkById, landmarkId);
+		if(results.next()) {
+			landmark = mapRowToLandmarks(results);
+		}
+		return landmark;
+	}
 	@Override
 	public Landmarks getLandmarksByType(String type) {
 		Landmarks landmark = null;
