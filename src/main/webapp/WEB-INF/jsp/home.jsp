@@ -6,37 +6,7 @@
 
 <h3> Please Select Your Hotel as a Starting point</h3>
 
-<script type="text/javascript">
-    var mile = ['1 Mile','2 Miles','10 Miles','25 Miles'];
-    var type = ['Entertainment','Sports', 'Shopping'];
-    function setSelect(v) {
-        var x = document.getElementById("Miles");
-        for (i = 0; i < x.length; ++i) { 
-            x.remove(x.length -1);
-        }
-        var a;
-        if (v=='miledd'){
-            a = bedrooms;
-        } else if (v=='typedd'){
-            a = offices
-        }
-        for (i = 0; i < a.length; ++i) {
-            var option = document.createElement("option");
-            option.text = a[i];
-            x.add(option);
-        }
-    }
-    function load() {
-        setSelect('milesdd');
-    }
-    window.onload = load;
 
-</script>
-<input type="radio" name="bb" value="milesearch"   onclick="setSelect('milesdd')" checked > Radius Search <br>
-<input type="radio" name="bb" value="typesearch" onclick="setSelect('typedd')" > Type Search <br>
-<label>Size</label>
-<select name="bedroom" id="bedroom" style="color: #8E9092; /*height: 38px;width: 228px;*/"  >
-</select>
 <form method="POST" action="${formAction}">
 	<div class="row">
 		<div class="col-sm-6">	
@@ -48,7 +18,38 @@
 					<input type="radio" id="Hampton Inn & Suites University Area" name="startingPoint" />Hampton Inn & Suites University Area</input></br>
 					<input type="radio" id="Drury Inn & Suites Columbus Convention Center" name="startingPoint" />Drury Inn & Suites Columbus Convention Center</input></br>
 					</br> -->
-				
+ 
+				<script type="text/javascript">
+    				var miles = ['1 mile','2 mile','10 mile','25 mile'];
+   					var types = ['Sports', 'Museum', 'Entertainment', 'Park', 'Shopping', 'Theater', 'Government', 'Restaurant'];
+    					function setSelect(v) {
+       						var x = document.getElementById("mile");
+        						for (i = 0; i < x.length; ) { 
+            						x.remove(x.length -1);
+        						}
+       						var a;
+						        if (v=='milesdd'){
+						            a = miles;
+						        } else if (v=='typesdd'){
+						            a = types
+						        }
+						        for (i = 0; i < a.length; ++i) {
+						            var option = document.createElement("option");
+						            option.text = a[i];
+						            x.add(option);
+						        }
+						    }
+						    function load() {
+						        setSelect('milesdd');
+						    }
+						    window.onload = load;
+						
+						</script>
+					<input type="radio" name="bb" value="milesearch"   onclick="setSelect('milesdd')" checked > Radius Search <br>
+					<input type="radio" name="bb" value="typesearch" onclick="setSelect('typesdd')" > Type Search <br>
+					<label>Search Option</label>
+				<select name="mile" id="mile" style="color: #8E9092; /*height: 38px;width: 228px;*/"  >
+				</select>
 			</div>
 			
 			<button type="submit" class="btn btn-default">Enter Starting Point</button>
