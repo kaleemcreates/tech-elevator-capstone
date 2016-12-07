@@ -58,8 +58,8 @@ public class JDBCHotelsDAO implements HotelsDAO {
 		hotel.setCity(results.getString("city"));
 		hotel.setState(results.getString("state"));
 		hotel.setZip(results.getString("zip"));
-		hotel.setLatitude(results.getLong("latitude"));
-		hotel.setLongitude(results.getLong("longitude"));
+		hotel.setLatitude(results.getDouble("latitude"));
+		hotel.setLongitude(results.getDouble("longitude"));
 		hotel.setZip(results.getString("zip"));
 
 		return hotel;
