@@ -7,13 +7,13 @@ public class Landmarks {
 	private String name;
 	private String landmarkId;
 	private String type;
-	private Long latitude;
-	private Long longitude;
+	private Double latitude;
+	private Double longitude;
 	private String streetAddress;
 	private String city;
 	private String state;
 	private String zip;
-	private String desciption;
+	private String description;
 	private LocalDateTime createTime;
 	
 	
@@ -35,16 +35,16 @@ public class Landmarks {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Long getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(Long latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public Long getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(Long longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 	public String getStreetAddress() {
@@ -71,11 +71,11 @@ public class Landmarks {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	public String getDesciption() {
-		return desciption;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesciption(String desciption) {
-		this.desciption = desciption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public LocalDateTime getCreateTime() {
 		return createTime;

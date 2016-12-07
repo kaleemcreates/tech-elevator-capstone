@@ -18,7 +18,6 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 
 	@Autowired
 	public JDBCLandmarksDAO(DataSource dataSource) {
-		
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
@@ -36,14 +35,14 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 
 		jdbcTemplate.update("INSERT INTO landmarks(name, landmark_id, type, latitude, longitude, street_address, city, state, zip, description) VALUES (?,?,?,?,?,?,?,?,?,?)",
 							landmarks.getName(), landmarks.getLandmarkId(), landmarks.getLatitude(), landmarks.getLongitude(), landmarks.getStreetAddress(), landmarks.getCity(),
-							landmarks.getState(), landmarks.getZip(), landmarks.getDesciption());
+							landmarks.getState(), landmarks.getZip(), landmarks.getDescription());
 	}
 	
 	@Override
 	public Landmarks getLandmarksById(String landmarkId) {
 		Landmarks landmark = null;
-		String sqlSelectLandmarkById = "SELECT *"
-										+ "FROM landmarks"
+		String sqlSelectLandmarkById = "SELECT * "
+										+ "FROM landmarks "
 										+ "WHERE landmark_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarkById, landmarkId);
 		if(results.next()) {
@@ -55,9 +54,9 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 	@Override
 	public Landmarks getLandmarksByType(String type) {
 		Landmarks landmark = null;
-		String sqlSelectLandmarkById = "SELECT *"
-										+ "FROM landmarks"
-										+ "WHERE type = ?";
+		String sqlSelectLandmarkById = "SELECT * "
+										+ "FROM landmarks "
+										+ "WHERE type = ? ";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarkById, type);
 		if(results.next()) {
 			landmark = mapRowToLandmarks(results);
@@ -79,12 +78,13 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 		landmark.setName(results.getString("name"));
 		landmark.setLandmarkId(results.getString("landmark_id"));
 		landmark.setType(results.getString("type"));
-		landmark.setLatitude(results.getLong("latitude"));
-		landmark.setLongitude(results.getLong("longitude"));
+		landmark.setLatitude(results.getDouble("latitude"));
+		landmark.setLongitude(results.getDouble("longitude"));
 		landmark.setStreetAddress(results.getString("street_address"));
 		landmark.setCity(results.getString("city"));
 		landmark.setState(results.getString("state"));
 		landmark.setZip(results.getString("zip"));
+		landmark.setDescription(results.getString("description"));
 
 		return landmark;
 	}

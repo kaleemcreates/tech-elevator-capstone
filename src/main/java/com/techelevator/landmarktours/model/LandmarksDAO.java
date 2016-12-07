@@ -8,7 +8,7 @@ public interface LandmarksDAO {
 	public Landmarks getLandmarksById(String landmarkId);
 
 	public void saveLandmarks(Landmarks landmark);
-	Landmarks getLandmarksByType(String type);
+	public Landmarks getLandmarksByType(String type);
 
 
 }
