@@ -39,10 +39,31 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 							landmarks.getState(), landmarks.getZip(), landmarks.getDesciption());
 	}
 	
-
-
+	@Override
+	public Landmarks getLandmarksById(String landmarkId) {
+		Landmarks landmark = null;
+		String sqlSelectLandmarkById = "SELECT *"
+										+ "FROM landmarks"
+										+ "WHERE landmark_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarkById, landmarkId);
+		if(results.next()) {
+			landmark = mapRowToLandmarks(results);
+		}
+		return landmark;
+	}
 	
-
+	@Override
+	public Landmarks getLandmarksByType(String type) {
+		Landmarks landmark = null;
+		String sqlSelectLandmarkById = "SELECT *"
+										+ "FROM landmarks"
+										+ "WHERE type = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarkById, type);
+		if(results.next()) {
+			landmark = mapRowToLandmarks(results);
+		}
+		return landmark;
+	}
 
 	private List<Landmarks> mapRowSetToLandmarks(SqlRowSet results) {
 		ArrayList<Landmarks> landmarkList = new ArrayList<>();
@@ -67,6 +88,8 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 
 		return landmark;
 	}
+
+
 
 
 }
