@@ -9,6 +9,8 @@ public interface LandmarksDAO {
 
 	public void saveLandmarks(Landmarks landmark);
 	Landmarks getLandmarksByType(String type);
+	
+	public Landmarks searchLandMarksByRadius(String landmarkId); 
 
 
 }
