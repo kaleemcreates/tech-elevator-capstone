@@ -11,13 +11,15 @@
 	<div id="main-content">
 		<h1>Landmark Detail</h1>
 		<c:url var="imagehref" value="/img/${landmark.landmarkId}.jpg" />
-		<img src="${imagehref}">
+		<img src="${imagehref}" class="img-responsive" alt="Responsive image">
 		
 		<h2><c:out value="${landmark.name}" /></h2>
 		
-		<h2><c:out value="${landmark.streetAddress}" /></h2>
+		<h3><c:out value="${landmark.streetAddress}" /></h3>
+		<h3><c:out value="${landmark.city}, ${landmark.state} ${landmark.zip}" /></h3>
 		
-		<h3><c:out value="${landmark.description}" /></h3>
+		
+		<c:out value="${landmark.description}" />
 	
 	
 	</div>
