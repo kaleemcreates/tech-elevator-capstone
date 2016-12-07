@@ -5,10 +5,43 @@
 <h2>Welcome to Landmark Tours</h2>
 
 <h3> Please Select Your Hotel as a Starting point</h3>
+
+<script type="text/javascript">
+    var mile = ['1 Mile','2 Miles','10 Miles','25 Miles'];
+    var type = ['Entertainment','Sports', 'Shopping'];
+    function setSelect(v) {
+        var x = document.getElementById("Miles");
+        for (i = 0; i < x.length; ++i) { 
+            x.remove(x.length -1);
+        }
+        var a;
+        if (v=='miledd'){
+            a = bedrooms;
+        } else if (v=='typedd'){
+            a = offices
+        }
+        for (i = 0; i < a.length; ++i) {
+            var option = document.createElement("option");
+            option.text = a[i];
+            x.add(option);
+        }
+    }
+    function load() {
+        setSelect('milesdd');
+    }
+    window.onload = load;
+
+</script>
+<input type="radio" name="bb" value="milesearch"   onclick="setSelect('milesdd')" checked > Radius Search <br>
+<input type="radio" name="bb" value="typesearch" onclick="setSelect('typedd')" > Type Search <br>
+<label>Size</label>
+<select name="bedroom" id="bedroom" style="color: #8E9092; /*height: 38px;width: 228px;*/"  >
+</select>
 <form method="POST" action="${formAction}">
 	<div class="row">
 		<div class="col-sm-6">	
 			<div class="form-search">
+
 				<table>
 					<tr>
 						<td class="entry">
@@ -30,6 +63,15 @@
         </tr>
     </table>
 </form>
+
+<!-- 				<label for="statingPoint">Hotel: </label></br>
+					<input type="radio" id="Courtyard Columbus Downtown" name="startingPoint">Courtyard Columbus Downtown</input></br>
+					<input type="radio" id="Homewood Suites by Hilton Polaris" name="startingPoint" />Homewood Suites by Hilton Polaris</input></br>
+					<input type="radio" id="The Blackwell" name="startingPoint" />The Blackwell</input></br>
+					<input type="radio" id="Hampton Inn & Suites University Area" name="startingPoint" />Hampton Inn & Suites University Area</input></br>
+					<input type="radio" id="Drury Inn & Suites Columbus Convention Center" name="startingPoint" />Drury Inn & Suites Columbus Convention Center</input></br>
+					</br> -->
+				
 			</div>
 			
 			<button type="submit" class="btn btn-default">Enter Starting Point</button>
