@@ -2,7 +2,7 @@
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
 		$("form").validate({
 			debug: true,
@@ -18,7 +18,7 @@
 			validClass: "valid"
 		});	
 	});
-</script>
+</script> -->
 
 <!DOCTYPE html>
 <html>
