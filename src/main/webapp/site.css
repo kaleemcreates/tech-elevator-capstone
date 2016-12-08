@@ -1,4 +1,4 @@
-header h1 {
+ header h1 {
 	display : inline;
 }
 
@@ -62,6 +62,9 @@ footer {
 #currentUser {
 	text-align : right;
 	font-weight : bold;
+<<<<<<< HEAD
+} 
+=======
 }
 #right-panel {
   font-family: 'Roboto','sans-serif';
@@ -109,3 +112,4 @@ html, body {
   background-color: #FFEE77;
   padding: 10px;
 }
+>>>>>>> ce1c572628fe35607c8b521563aa3a4200e6480b

@@ -21,31 +21,38 @@
 		</br>
 		</br>
 		
+		<c:if test="${not empty currentUser}">
+		
 		<h3>Landmark Feedback</h3>
 		
 		<c:url var="formResult" value="/landmarkDetail" /></c>
 		<form action="${formResult}" method="POST">
+		<input type="hidden" name="landmark_id" value="${param.landmark_id}" />
+		<input type="hidden" name="userName" value="${currentUser}" />
+		
 			<div class="radio">
 				<label>
-					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+					<input type="radio" name="thumbsUp" id="optionsRadios1" value="true" checked>
 					Thumbs up?
 				</label>
 			</div>
 			<div class="radio">
 				<label>
-					<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+					<input type="radio" name="thumbsUp" id="optionsRadios2" value="false">
 					Thumbs down?
 				</label>
 			</div>
 			<div class="form-group">
 				<label for="landmarkFeedback">Landmark Feedback</label>
-				<textarea class="form-control" id="feedback"  placeholder="Feedback goes here!"></textarea>
+				<textarea class="form-control" id="reviewText" name="reviewText" placeholder="Feedback goes here!"></textarea>
 				
 			</div>
 			<div class="form-group">
 			<input class="btn btn-primary" type="submit" value="Submit!">
 			</div>
 		</form>
+		
+		</c:if>
 	</div>
 </body>
 </html>

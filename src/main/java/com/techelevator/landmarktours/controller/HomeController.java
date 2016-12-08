@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
@@ -27,6 +31,21 @@ public class HomeController {
 	
 		return "home";
 	}
+	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
+	public String getAnonymousSearchResults(@RequestParam Double latitude, @RequestParam Double longitude,  
+												Map<String, Object> model) {
+		
+	
+		return "redirect: /anonmyousSearchResults";
+	}
+	@RequestMapping(path={"/anonmyousSearchResults"}, method=RequestMethod.GET)
+	public String showAnonymousSearhResults(Map<String, Object> model) {
+		//model.put("landmarks", landmarkDAO.getHotels(5));
+	
+		return "anonmyousSearchResults";
+	}
+	
+
 //    @RequestMapping(value = "/map", method = RequestMethod.GET)
 //    public ModelAndView getPages(HttpServletRequest request) {
 //        //Geolocation geoloc = geolocDAO.get();
@@ -37,5 +56,6 @@ public class HomeController {
 ////        model.addObject("listGeo", listGeo);
 //        return model;
 //    }
+
 
 }
