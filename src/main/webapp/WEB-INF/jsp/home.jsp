@@ -1,34 +1,51 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/WEB-INF/jsp/header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<!--  <script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
-<!--       <script type="text/javascript">
-        google.load("maps", "3", {other_params:"sensor=false&libraries=geometry&key='AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8'"});
-      </script> -->
-		  
-
-
-<!--        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhbicUDjW_BD72V_mIN4qF2GNH9RViFaM&callback=initMap" async defer>
-       </script> -->
-
-    
 
 
 <h2>Welcome to Landmark Tours</h2>
 
 <h3> Please Select Your Hotel as a Starting point</h3>
 
-	
-
-<!-- <div class="map_container">
-  <div id="map" class="gmaps4rails_map"> -->
-    <div id="map_canvas" style="width: 500px; height: 300px; position: static; background-color: rgb(229, 227, 223);">
+<div id="map_canvas" style="width: 500px; height: 300px; position: static; background-color: rgb(229, 227, 223);">
     </div>
-      
-
+    <div id="right-panel" >
+    <div>
+    <b>Start:</b>
+    <select id="start">
+      <option value="39.965741,	-83.002793">Courtyard Columbus Downtown</option>
+      <option value="40.143805,	-82.9618">Homewood Suites by Hilton Polaris</option>
+      <option value="40.004871,	-83.016261">The Blackwell</option>
+      <option value="40.025428,	-83.024906">Hampton Inn & Suites University Area</option>
+    </select>
+    <br>
+    <b>Waypoints:</b> <br>
+    <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
+    <select multiple id="waypoints">
+      <option value="39.959651,	-83.00659">COSI</option>
+      <option value="40.155399,	-83.109278">Columbus ZooT</option>
+      <option value="40.157562,	-83.120654">Zoombezi Bay</option>
+      <option value="39.941737,	-82.992176">Schiller Park</option>
+      <option value="39.975383,	-83.004769">Goodale Park</option>
+      <option value="39.962509,	-83.00198">LeVeque Tower</option>
+      <option value="40.14147,	-82.978953">Polaris Fashion Place</option>
+    </select>
+    <br>
+    <b>End:</b>
+    <select id="end">
+      <option value="39.965741,	-83.002793">Courtyard Columbus Downtown</option>
+      <option value="40.143805,	-82.9618">Homewood Suites by Hilton Polaris</option>
+      <option value="40.004871,	-83.016261">The Blackwell</option>
+      <option value="40.025428,	-83.024906">Hampton Inn & Suites University Area</option>
+    </select>
+    <br>
+      <input type="submit" id="submit">
+    </div>      
+<div id="directions-panel"></div>
+    </div>
 <!--   </div> 
 </div> -->
-<div>
+<%-- <div>
 <form method="POST" action="${formAction}">
 	<div class="row">
 		<div class="col-sm-6">	
@@ -72,11 +89,11 @@
 					<label>Search Option</label>
 				<select name="mile" id="mile" style="color: #8E9092; /*height: 38px;width: 228px;*/"  >
 				</select>
-				<select id="radius_km">
-					 <option value=1>1km</option>
-					 <option value=2>2km</option>
-					 <option value=5>5km</option>
-					 <option value=30>30km</option>
+				<select id="radius_m">
+					 <option value=1>1 mile</option>
+					 <option value=2>2 mile</option>
+					 <option value=5>5 mile</option>
+					 <option value=25>25 mile</option>
 			 	</select>
 			 	</div>
 			 </div>
@@ -89,7 +106,7 @@
 			
 			<button type="submit" class="btn btn-default">Enter Starting Point</button>
 			<p> Then Use google APi </p>
-		</div>
+		</div> --%>
 <!-- <div>
 	<p> Stuff we need to implement
 	origin: New York, NY
@@ -99,31 +116,63 @@
 	key: AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8
 	</p>
 </div> -->
-<div>
-	<form NAME="roundtrip" METHOD="get" ACTION="http://gebweb.net/optimap/index.php">
-		<input NAME="loc0" TYPE="text" VALUE="39.965741,	-83.002793"/>
-		<input NAME="loc1" TYPE="text" VALUE="39.965849,	-82.953303" />
-		<input NAME="loc2" TYPE="text" VALUE="39.956723,	-83.003568" />
-		<input NAME="loc3" TYPE="text" VALUE="39.969817,	-83.010041" />
-		<input TYPE="submit" TYPE="text" VALUE="Submit" />
-	</form>
-</div>
-<div>
-	<form NAME="address" >
-		<input NAME="address" TYPE="text" VALUE="Columbus, OH"/>
-		<input TYPE="submit" TYPE="text" VALUE="Submit" />
-	</form>
-</div>
+
 
        <script>
-       var map;
-	       function initMap() {
-	       map = new google.maps.Map(document.getElementById('map_canvas'), {
-	       center: {lat: 39.9612, lng: -82.9988},
-	       zoom: 10
-	       });
+       function initMap() {
+         var directionsService = new google.maps.DirectionsService;
+         var directionsDisplay = new google.maps.DirectionsRenderer;
+         var map = new google.maps.Map(document.getElementById('map_canvas'), {
+           zoom: 7,
+           center: {lat: 39.965741, lng: -83.002793}
+         });
+         directionsDisplay.setMap(map);
+
+         document.getElementById('submit').addEventListener('click', function() {
+           calculateAndDisplayRoute(directionsService, directionsDisplay);
+         });
+       }
+
+       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+         var waypts = [];
+         var checkboxArray = document.getElementById('waypoints');
+         for (var i = 0; i < checkboxArray.length; i++) {
+           if (checkboxArray.options[i].selected) {
+             waypts.push({
+               location: checkboxArray[i].value,
+               stopover: true
+             });
+           }
+         }
+
+         directionsService.route({
+           origin: document.getElementById('start').value,
+           destination: document.getElementById('end').value,
+           waypoints: waypts,
+           optimizeWaypoints: true,
+           travelMode: 'DRIVING'
+         }, function(response, status) {
+           if (status === 'OK') {
+             directionsDisplay.setDirections(response);
+             var route = response.routes[0];
+             var summaryPanel = document.getElementById('directions-panel');
+             summaryPanel.innerHTML = '';
+             // For each route, display summary information.
+             for (var i = 0; i < route.legs.length; i++) {
+               var routeSegment = i + 1;
+               summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+                   '</b><br>';
+               summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+               summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+               summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+             }
+           } else {
+             window.alert('Directions request failed due to ' + status);
+           }
+         });
        }
        </script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhbicUDjW_BD72V_mIN4qF2GNH9RViFaM&callback=initMap"></script>		
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8&callback=initMap">
+ </script>
 <c:import url="/WEB-INF/jsp/footer.jsp" />
 		
