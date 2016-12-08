@@ -29,6 +29,18 @@
 			
 		</script>
 		
+		<script type="text/javascript">
+    		$(document).ready(function() {
+        		var newUrl = "";
+        		$("#picksite").change(function() {
+            		$newUrl = $("#picksite option:selected").val();
+        		});
+        		$("#executelink").click(function() {
+            		location = $newUrl ;
+        		});
+    		});
+		</script>
+		
 	</head>
 	<body>
 		<header>
@@ -73,6 +85,23 @@
 				</ul>
 			</div>
 		</nav>
+		
+		<div>
+			<select id="picksite">
+	    		<option value="">Select a Landmark to View its Page!</option>
+	    		<option value="http://localhost:8080/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="http://localhost:8080/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		
+			</select>
+	
+			<button id="executelink">Go To Landmark</button>
+		
+		</div>
+		
+		
+	
+		
+		
 		<c:if test="${not empty currentUser}">
 			<p id="currentUser">Current User: ${currentUser}</p>
 		</c:if>		
