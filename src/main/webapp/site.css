@@ -1,4 +1,4 @@
-header h1 {
+ header h1 {
 	display : inline;
 }
 
@@ -48,4 +48,4 @@ footer {
 #currentUser {
 	text-align : right;
 	font-weight : bold;
-}
+} 
