@@ -30,7 +30,6 @@ public class JDBCLandmarkReviewsDAO implements LandmarkReviewsDAO {
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectReviewsByLandmarkId, landmarkId);
 		while(results.next()) {
 			LandmarkReviews landmarkReview = new LandmarkReviews();
-			landmarkReview.setReviewId(results.getString("review_id"));
 			landmarkReview.setLandmarkId(results.getString("landmark_id"));
 			landmarkReview.setUserName(results.getString("user_name"));
 			landmarkReview.setThumbsUp(results.getBoolean("thumbs_up"));
@@ -43,9 +42,9 @@ public class JDBCLandmarkReviewsDAO implements LandmarkReviewsDAO {
 
 	@Override
 	public void save(LandmarkReviews review) {
-		String sqlInsertReview = "INSERT INTO landmark_reviews(review_id, landmark_id, user_name, thumbs_up, review_text, create_date) "
-								+ "VALUES (?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sqlInsertReview, review.getReviewId(), review.getLandmarkId(), review.getUserName(), review.isThumbsUp(), review.getReviewText(), review.getCreateDate());
+		String sqlInsertReview = "INSERT INTO landmark_reviews(landmark_id, user_name, thumbs_up, review_text, create_date) "
+								+ "VALUES (?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sqlInsertReview, review.getLandmarkId(), review.getUserName(), review.isThumbsUp(), review.getReviewText(), review.getCreateDate());
 	}
 
 }
