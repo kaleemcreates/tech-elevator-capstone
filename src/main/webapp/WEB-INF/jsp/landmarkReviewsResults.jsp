@@ -2,6 +2,24 @@
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("form").validate({
+			debug: true,
+			rules: {
+				thumbsUp: {
+					required: true
+				}
+			},
+			messages: {
+				thumbsUp: "Please choose thumbs up or thumbs down."
+			},
+			errorClass: "error",
+			validClass: "valid"
+		});	
+	});
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,23 +29,22 @@
 
 	<div>
 		<h3>Landmark Feedback</h3>
-			<div>
-				<c:forEach var="landmarkReview" items="${reviewList}">
+			<div class="container">
+				<c:forEach var="review" items="${reviewList}">
 					<div>
-					<h4><c:out value="${landmarkReview.userName} /></h4>
-					</div>
+					<ul class="list-inline">
+						<li><h4><c:out value="${review.userName}" /></h4></li>
+						<li><h4><c:out value="${review.thumbsUp}" /></h4></li>
+					</ul>
+					<ul>
+						<li><c:out value="${review.reviewText}" /></li>
+					</ul>
+				
 				</c:forEach>
+					
 		
 		
 			</div>
-
-
-
-
-
-
-
-
 
 
 	</div>
