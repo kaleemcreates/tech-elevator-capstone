@@ -32,6 +32,14 @@ public class JDBCHotelsDAO implements HotelsDAO {
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForHotel, locationId);
 		mapRowToHotels(results);
 		}
+//	@Override
+//	public void getHotelLatitude(Decimal ) {
+//		String sqlSearchForHotel = "SELECT * "+
+//			      "FROM hotels "+
+//			      "WHERE latitude =?";
+//		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForHotel, locationId);
+//		mapRowToHotels(results);
+//		}
 	
 	public List<Hotels> getHotels(int limit) {
 		String sqlSelectLandmarks = "SELECT * "+
