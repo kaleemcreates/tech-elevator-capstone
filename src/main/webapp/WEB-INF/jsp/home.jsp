@@ -7,8 +7,9 @@
 
 <h3> Please Select Your Hotel as a Starting point</h3>
 
-<div id="map_canvas" style="width: 500px; height: 300px; position: static; background-color: rgb(229, 227, 223);">
+<div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
+    <div id="directions-panel"></div>
     <div id="right-panel" >
     <div>
     <b>Start:</b>
@@ -41,7 +42,7 @@
     <br>
       <input type="submit" id="submit">
     </div>      
-<div id="directions-panel"></div>
+
     </div>
 <!--   </div> 
 </div> -->
@@ -123,7 +124,7 @@
          var directionsService = new google.maps.DirectionsService;
          var directionsDisplay = new google.maps.DirectionsRenderer;
          var map = new google.maps.Map(document.getElementById('map_canvas'), {
-           zoom: 7,
+           zoom: 10,
            center: {lat: 39.965741, lng: -83.002793}
          });
          directionsDisplay.setMap(map);
