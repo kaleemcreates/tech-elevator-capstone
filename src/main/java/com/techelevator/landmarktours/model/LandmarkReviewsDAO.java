@@ -6,6 +6,8 @@ public interface LandmarkReviewsDAO {
 	
 	public List<LandmarkReviews> getLandmarkReviewsByLandmarkId(String landmarkId);
 	public void save(LandmarkReviews review);
+	public int getNumberOfThumbsUpByLandMarkId(String landmarkId);
+	public int getNumberOfThumbsDownByLandMarkId(String landmarkId);
 
 
 }

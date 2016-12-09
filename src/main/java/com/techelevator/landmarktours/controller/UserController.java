@@ -1,6 +1,9 @@
 package com.techelevator.landmarktours.controller;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.techelevator.landmarktours.model.Landmarks;
 import com.techelevator.landmarktours.model.LandmarksDAO;
 import com.techelevator.landmarktours.model.UserDAO;
 
@@ -25,7 +29,10 @@ public class UserController {
 	}
 
 	@RequestMapping(path="/users/new", method=RequestMethod.GET)
-	public String displayNewUserForm() {
+	public String displayNewUserForm(HttpServletRequest request) {
+		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
+		request.setAttribute("landmarkList", landmarkList);
+		
 		return "newUser";
 	}
 	
@@ -36,8 +43,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/users/{userName}", method=RequestMethod.GET)
-	public String displayDashboard(Map<String, Object> model, @PathVariable String userName) {
+	public String displayDashboard(Map<String, Object> model, 
+									HttpServletRequest request,
+									@PathVariable String userName) {
 	//	model.put("conversations", landmarksDAO.getSavedList(userName));
+	
+		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
+		request.setAttribute("landmarkList", landmarkList);
+		
 		return "userDashboard";
 	}
 	
