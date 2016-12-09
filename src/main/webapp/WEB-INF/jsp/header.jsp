@@ -86,17 +86,71 @@
 			</div>
 		</nav>
 		
-		<div>
-			<select id="picksite">
-	    		<option value="">Select a Landmark to View its Page!</option>
-	    		<option value="http://localhost:8080/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="http://localhost:8080/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		
-			</select>
-	
-			<button id="executelink">Go To Landmark</button>
 		
-		</div>
+	
+			
+			
+			
+			<div class="dropdown">
+  				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a Landmark to View its Page!<span class="caret"></span></button>
+  				<ul class="dropdown-menu">
+    				<li>
+    					<c:forEach var="landmark" items="${landmarkList}">
+	    	
+	    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmark_id}">${landmark.name}</a>
+	    			
+	    				</c:forEach>
+    				</li>
+    			
+  				</ul>
+			</div>
+
+			
+	    	
+	    <%-- 	<option value="">Select a Landmark to View its Page!</option>	
+	    		<c:forEach var="landmarkList" items="${landmarkList}">
+	    	
+	    			<option value="/capstone/landmarkDetail?landmark_id=${landmarkList.landmark_id}">${landmarkList.name}</option>
+	    			
+	    		</c:forEach>
+	    			 --%>
+	    		<!--  <option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option> -->
+	    		<!-- <option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option> -->
+	    		<!--<option value="/capstone/landmarkDetail?landmark_id=ZOO">COSI</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Easton Town Center</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Express Live</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Franklin Park Conservatory</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Goodale Park</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
+	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option> -->
+		
+	
+			<!-- <button id="executelink">Go To Landmark</button> -->
+		
+
 		
 		
 	
