@@ -55,9 +55,9 @@
              ['Palace of Westminster, London', 51.499633,-0.124755]
          ];
          
-		<c:forEach var="hotel" items="${hotelList}">
+/* 		<c:forEach var="hotel" items="${hotelList}">
 			markers.push(["${hotel.name}", ${hotel.latitude}, ${hotel.longitude}]);
-		</c:forEach>
+		</c:forEach> */
                              
          // Info Window Content
          var infoWindowContent = [
@@ -139,6 +139,7 @@
            }
          });
        }
+      
        </script>
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8&callback=initMap">
  </script>
