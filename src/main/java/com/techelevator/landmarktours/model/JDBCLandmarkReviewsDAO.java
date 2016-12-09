@@ -25,7 +25,8 @@ public class JDBCLandmarkReviewsDAO implements LandmarkReviewsDAO {
 		List<LandmarkReviews> landmarkReviewsByLandmarkId = new ArrayList<>();
 		String sqlSelectReviewsByLandmarkId = "SELECT * "
 											+ "FROM landmark_reviews "
-											+ "WHERE landmark_id = ? ";
+											+ "WHERE landmark_id = ? "
+											+ "AND review_text!='' ";
 								
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectReviewsByLandmarkId, landmarkId);
 		while(results.next()) {
