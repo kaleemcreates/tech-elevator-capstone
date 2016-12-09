@@ -25,15 +25,28 @@ public class LandmarkController {
 	@Autowired
 	LandmarkReviewsDAO landmarkReviewsDAO;
 	
+	@Autowired
+	public LandmarkController(LandmarksDAO landmarksDAO, LandmarkReviewsDAO landmarkReviewsDAO) {
+		this.landmarksDAO = landmarksDAO;
+		this.landmarkReviewsDAO = landmarkReviewsDAO;
+	}
+	
+	
 	@RequestMapping(path="/landmarkDetail", method=RequestMethod.GET)
-	public String getLandmarkById(HttpServletRequest request) {
-		String landmarkIdParam = request.getParameter("landmark_id");
-		String landmarkId = landmarkIdParam;
+	public String getLandmarkAndReviewsById(HttpServletRequest request) {
+		
+		String landmarkId = request.getParameter("landmark_id");
 	
 		Landmarks landmark = landmarksDAO.getLandmarksById(landmarkId);
 		request.setAttribute("landmark", landmark);
+		
+		List<LandmarkReviews> reviewList = new ArrayList<LandmarkReviews>();
+		reviewList = landmarkReviewsDAO.getLandmarkReviewsByLandmarkId(landmarkId);
+		request.setAttribute("reviewList", reviewList);
+
 		return "landmarkDetail";
 	}
+	
 	
 	@RequestMapping(path="/landmarkDetail", method=RequestMethod.POST)
 	public String processReviewSubmission(@RequestParam String landmark_id,
@@ -48,19 +61,13 @@ public class LandmarkController {
 		review.setCreateDate(LocalDateTime.now());
 		
 		landmarkReviewsDAO.save(review);
-		return "redirect:/landmarkReviewsResults?landmark_id=" + landmark_id;
+		return "landmarkDetail";
 	}
 	
-	@RequestMapping("/landmarkReviewsResults")
-	public String handleLandmarkReviewsResults(HttpServletRequest request,
-												@RequestParam String landmark_id) {
-		List<LandmarkReviews> reviewList = new ArrayList<LandmarkReviews>();
-		reviewList = landmarkReviewsDAO.getLandmarkReviewsByLandmarkId(landmark_id);
-		request.setAttribute("reviewList", reviewList);
-		
-		return "landmarkReviewsResults";
-		
-	}
+
+
+	
+	
 	
 	
 	
