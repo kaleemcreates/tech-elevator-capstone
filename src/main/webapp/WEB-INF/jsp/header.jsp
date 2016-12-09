@@ -116,36 +116,7 @@
 	    			 --%>
 	    		<!--  <option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option> -->
 	    		<!-- <option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option> -->
-	    		<!--<option value="/capstone/landmarkDetail?landmark_id=ZOO">COSI</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Easton Town Center</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Express Live</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Franklin Park Conservatory</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Goodale Park</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option>
-	    		<option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option> -->
+	    	
 		
 	
 			<!-- <button id="executelink">Go To Landmark</button> -->
