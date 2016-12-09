@@ -10,6 +10,10 @@
 <body>
 	<div id="main-content">
 		<h1>Landmark Detail</h1>
+		Thumbs up: ${thumbsUpCount}
+		</br>
+		Thumbs down: ${thumbsDownCount}
+		
 		<c:url var="imagehref" value="/img/${landmark.landmarkId}.jpg" />
 		<img src="${imagehref}" class="img-responsive" alt="Responsive image">
 		<h2><c:out value="${landmark.name}" /></h2>

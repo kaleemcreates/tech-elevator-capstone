@@ -48,4 +48,32 @@ public class JDBCLandmarkReviewsDAO implements LandmarkReviewsDAO {
 		jdbcTemplate.update(sqlInsertReview, review.getLandmarkId(), review.getUserName(), review.isThumbsUp(), review.getReviewText(), review.getCreateDate());
 	}
 
+	@Override
+	public int getNumberOfThumbsUpByLandMarkId(String landmarkId) {
+		String sqlNumberOfThumbsUpByLandMarkId = "SELECT * "
+												+ "FROM landmark_reviews "
+												+ "WHERE landmark_id = ? "
+												+ "AND thumbs_up = 't' ";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlNumberOfThumbsUpByLandMarkId, landmarkId);
+		int thumbsUpCount = 0;
+		while(results.next()) {
+			thumbsUpCount = results.getRow();
+		}
+		return thumbsUpCount;
+	}
+
+	@Override
+	public int getNumberOfThumbsDownByLandMarkId(String landmarkId) {
+		String sqlNumberOfThumbsUpByLandMarkId = "SELECT * "
+												+ "FROM landmark_reviews "
+												+ "WHERE landmark_id = ? "
+												+ "AND thumbs_up = 't' ";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlNumberOfThumbsUpByLandMarkId, landmarkId);
+		int thumbsDownCount = 0;
+		while(results.next()) {
+		thumbsDownCount = results.getRow();
+		}
+		return thumbsDownCount;
+	}
+
 }

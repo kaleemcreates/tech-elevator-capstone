@@ -34,15 +34,23 @@ public class LandmarkController {
 	
 	@RequestMapping(path="/landmarkDetail", method=RequestMethod.GET)
 	public String getLandmarkAndReviewsById(HttpServletRequest request) {
+		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
+		request.setAttribute("landmarkList", landmarkList);
 		
 		String landmarkId = request.getParameter("landmark_id");
-	
 		Landmarks landmark = landmarksDAO.getLandmarksById(landmarkId);
 		request.setAttribute("landmark", landmark);
 		
 		List<LandmarkReviews> reviewList = new ArrayList<LandmarkReviews>();
 		reviewList = landmarkReviewsDAO.getLandmarkReviewsByLandmarkId(landmarkId);
 		request.setAttribute("reviewList", reviewList);
+		
+		
+		int thumbsUpCount = landmarkReviewsDAO.getNumberOfThumbsUpByLandMarkId(landmarkId);
+		request.setAttribute("thumbsUpCount", thumbsUpCount);
+		
+		int thumbsDownCount = landmarkReviewsDAO.getNumberOfThumbsDownByLandMarkId(landmarkId);
+		request.setAttribute("thumbsDownCount", thumbsDownCount);
 
 		return "landmarkDetail";
 	}

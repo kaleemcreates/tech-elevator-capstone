@@ -10,7 +10,21 @@ public class LandmarkReviews {
 	private boolean thumbsUp;
 	private String reviewText;
 	private LocalDateTime createDate;
+	private String thumbsUpCount;
+	private String thumbsDownCount;
 	
+	public String getThumbsUpCount() {
+		return thumbsUpCount;
+	}
+	public void setThumbsUpCount(String thumbsUpCount) {
+		this.thumbsUpCount = thumbsUpCount;
+	}
+	public String getThumbsDownCount() {
+		return thumbsDownCount;
+	}
+	public void setThumbsDownCount(String thumbsDownCount) {
+		this.thumbsDownCount = thumbsDownCount;
+	}
 	public String getReviewId() {
 		return reviewId;
 	}
