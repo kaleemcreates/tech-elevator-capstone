@@ -97,7 +97,7 @@
     				<li>
     					<c:forEach var="landmark" items="${landmarkList}">
 	    	
-	    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmark_id}">${landmark.name}</a>
+	    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmarkId}">${landmark.name}</a>
 	    			
 	    				</c:forEach>
     				</li>
