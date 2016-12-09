@@ -4,14 +4,15 @@ import java.util.List;
 
 public interface LandmarksDAO {
 
-	public List<Landmarks> getLandmarks(int limit);
+	public List<Landmarks> getLandmarks();
 	public Landmarks getLandmarksById(String landmarkId);
 
 	public void saveLandmarks(Landmarks landmark);
 	public Landmarks getLandmarksByType(String type);
 
 	
-	public Landmarks searchLandMarksByRadius(String landmarkId); 
+	public Landmarks searchLandMarksByRadius(String landmarkId);
+	 
 
 
 

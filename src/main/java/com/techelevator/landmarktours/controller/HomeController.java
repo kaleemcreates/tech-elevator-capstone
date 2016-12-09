@@ -16,20 +16,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
+import com.techelevator.landmarktours.model.Hotels;
 import com.techelevator.landmarktours.model.HotelsDAO;
 import com.techelevator.landmarktours.model.LandmarksDAO;
+import com.techelevator.landmarktours.model.Landmarks;
 
 @Controller
 public class HomeController {
 	@Autowired
-    //private GeolocDAO geolocDAO;
 	private HotelsDAO hotelsDAO;
+	
+	@Autowired
+	private LandmarksDAO landmarksDAO;
 
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.GET)
-	public String showHomePage(Map<String, Object> model) {
+	public String showHomePage(Map<String, Object> model, HttpServletRequest request) {
 		//model.put("landmarks", landmarkDAO.getHotels(5));
+		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
+		List <Hotels> hotelList= hotelsDAO.getHotels();
+		
+		request.setAttribute("hotelList", hotelList);
+		request.setAttribute("landmarkList", landmarkList);
 	
 		return "home";
+		
+		
 	}
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
 	public String getAnonymousSearchResults(@RequestParam Double latitude, @RequestParam Double longitude,  

@@ -21,12 +21,12 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	@Override
-	public List<Landmarks> getLandmarks(int limit) {
+	
+	public List<Landmarks> getLandmarks() {
 		String sqlSelectLandmarks = "SELECT * "+
-									"FROM landmarks "+
-									"LIMIT ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarks, limit);
+									"FROM landmarks";
+							;
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarks);
 		return mapRowSetToLandmarks(results);
 	}
 
@@ -99,8 +99,5 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 
 		return landmark;
 	}
-
-
-
 
 }
