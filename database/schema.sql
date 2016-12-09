@@ -49,5 +49,11 @@ CREATE TABLE hotels(
   longitude decimal(9,6) NOT NULL,			-- longitude
   CONSTRAINT pk_hotels_location_id PRIMARY KEY (location_id)
 );
+CREATE TABLE routes (
+	route_id integer 
+	name varchar(64) NOT NULL
+	CONSTRAINT pk_routes_route_id PRIMARY KEY (route_id)
+	
+)
 
 COMMIT;
