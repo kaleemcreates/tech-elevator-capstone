@@ -16,111 +16,30 @@
     <div>
     <b>Start:</b>
     <select id="start">
-      <option value="39.965741,	-83.002793">Courtyard Columbus Downtown</option>
-      <option value="40.143805,	-82.9618">Homewood Suites by Hilton Polaris</option>
-      <option value="40.004871,	-83.016261">The Blackwell</option>
-      <option value="40.025428,	-83.024906">Hampton Inn & Suites University Area</option>
+       <c:forEach var="hotelList" items="${hotelList}">
+    	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
+ 	   </c:forEach>
     </select>
     <br>
     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
     <select multiple id="waypoints">
-      <option value="39.959651,	-83.00659">COSI</option>
-      <option value="40.155399,	-83.109278">Columbus ZooT</option>
-      <option value="40.157562,	-83.120654">Zoombezi Bay</option>
-      <option value="39.941737,	-82.992176">Schiller Park</option>
-      <option value="39.975383,	-83.004769">Goodale Park</option>
-      <option value="39.962509,	-83.00198">LeVeque Tower</option>
-      <option value="40.14147,	-82.978953">Polaris Fashion Place</option>
+    <c:forEach var="landmarkList" items="${landmarkList}">
+    	 	<option value="${landmarkList.latitude}, ${landmarkList.longitude}">${landmarkList.name}</option>
+ 	 </c:forEach>
     </select>
     <br>
     <b>End:</b>
     <select id="end">
-      <option value="39.965741,	-83.002793">Courtyard Columbus Downtown</option>
-      <option value="40.143805,	-82.9618">Homewood Suites by Hilton Polaris</option>
-      <option value="40.004871,	-83.016261">The Blackwell</option>
-      <option value="40.025428,	-83.024906">Hampton Inn & Suites University Area</option>
+      <c:forEach var="hotelList" items="${hotelList}">
+    	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
+ 	   </c:forEach>
     </select>
     <br>
       <input type="submit" id="submit">
     </div>      
 
     </div>
-<!--   </div> 
-</div> -->
-<%-- <div>
-<form method="POST" action="${formAction}">
-	<div class="row">
-		<div class="col-sm-6">	
-			<div class="form-search">
-<!-- 				<label for="statingPoint">Hotel: </label></br>
-					<input type="radio" id="Courtyard Columbus Downtown" name="startingPoint">Courtyard Columbus Downtown</input></br>
-					<input type="radio" id="Homewood Suites by Hilton Polaris" name="startingPoint" />Homewood Suites by Hilton Polaris</input></br>
-					<input type="radio" id="The Blackwell" name="startingPoint" />The Blackwell</input></br>
-					<input type="radio" id="Hampton Inn & Suites University Area" name="startingPoint" />Hampton Inn & Suites University Area</input></br>
-					<input type="radio" id="Drury Inn & Suites Columbus Convention Center" name="startingPoint" />Drury Inn & Suites Columbus Convention Center</input></br>
-					</br> -->
- 
-				<script type="text/javascript">
-    				var miles = ['1 mile','2 mile','10 mile','25 mile'];
-   					var types = ['Sports', 'Museum', 'Entertainment', 'Park', 'Shopping', 'Theater', 'Government', 'Restaurant'];
-    					function setSelect(v) {
-       						var x = document.getElementById("mile");
-        						for (i = 0; i < x.length; ) { 
-            						x.remove(x.length -1);
-        						}
-       						var a;
-						        if (v=='milesdd'){
-						            a = miles;
-						        } else if (v=='typesdd'){
-						            a = types
-						        }
-						        for (i = 0; i < a.length; ++i) {
-						            var option = document.createElement("option");
-						            option.text = a[i];
-						            x.add(option);
-						        }
-						    }
-						    function load() {
-						        setSelect('milesdd');
-						    }
-						    window.onload = load;
-						
-						</script>
-					<input type="radio" name="bb" value="milesearch"   onclick="setSelect('milesdd')" checked > Radius Search <br>
-					<input type="radio" name="bb" value="typesearch" onclick="setSelect('typesdd')" > Type Search <br>
-					<label>Search Option</label>
-				<select name="mile" id="mile" style="color: #8E9092; /*height: 38px;width: 228px;*/"  >
-				</select>
-				<select id="radius_m">
-					 <option value=1>1 mile</option>
-					 <option value=2>2 mile</option>
-					 <option value=5>5 mile</option>
-					 <option value=25>25 mile</option>
-			 	</select>
-			 	</div>
-			 </div>
-			</div>
-
-		
-
-</form>
- 
-			
-			<button type="submit" class="btn btn-default">Enter Starting Point</button>
-			<p> Then Use google APi </p>
-		</div> --%>
-<!-- <div>
-	<p> Stuff we need to implement
-	origin: New York, NY
-	destination: Boston, MA
-	waypoints: optimize:true|Providence, RI|Hartford, CT
-	mode: driving
-	key: AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8
-	</p>
-</div> -->
-
-
        <script>
        function initMap() {
          var directionsService = new google.maps.DirectionsService;
@@ -135,6 +54,10 @@
              ['Columbus, Ohio', 39.965741,-83.002793],
              ['Palace of Westminster, London', 51.499633,-0.124755]
          ];
+         
+		<c:forEach var="hotel" items="${hotelList}">
+			markers.push(["${hotel.name}", ${hotel.latitude}, ${hotel.longitude}]);
+		</c:forEach>
                              
          // Info Window Content
          var infoWindowContent = [
@@ -206,6 +129,7 @@
                var routeSegment = i + 1;
                summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
                    '</b><br>';
+               
                summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
                summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';

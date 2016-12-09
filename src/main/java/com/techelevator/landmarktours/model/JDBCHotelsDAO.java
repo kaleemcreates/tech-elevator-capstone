@@ -40,12 +40,11 @@ public class JDBCHotelsDAO implements HotelsDAO {
 //		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForHotel, locationId);
 //		mapRowToHotels(results);
 //		}
-	
-	public List<Hotels> getHotels(int limit) {
-		String sqlSelectLandmarks = "SELECT * "+
-									"FROM landmarks "+
-									"LIMIT ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarks, limit);
+	@Override
+	public List<Hotels> getHotels() {
+		String sqlSelectHotels = "SELECT * "+
+									"FROM hotels";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectHotels);
 		return mapRowSetToHotels(results);
 	}
 	
@@ -62,7 +61,7 @@ public class JDBCHotelsDAO implements HotelsDAO {
 		Hotels hotel = new Hotels();
 		hotel.setLocationId(results.getString("location_id"));
 		hotel.setName(results.getString("name"));
-		hotel.setStreetAddress(results.getString("streetAddress"));
+		hotel.setStreetAddress(results.getString("street_address"));
 		hotel.setCity(results.getString("city"));
 		hotel.setState(results.getString("state"));
 		hotel.setZip(results.getString("zip"));
