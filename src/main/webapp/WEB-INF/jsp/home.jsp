@@ -24,7 +24,7 @@
     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
     <select multiple id="waypoints">
-    <c:forEach var="landmarkList" items="${landmarkList}">
+    <c:forEach var="landmarkList" items="${landmarks}">
     	 	<option value="${landmarkList.latitude}, ${landmarkList.longitude}">${landmarkList.name}</option>
  	 </c:forEach>
     </select>

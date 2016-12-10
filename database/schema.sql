@@ -20,6 +20,7 @@ CREATE TABLE landmarks (
    CONSTRAINT pk_landmarks_landmark_id PRIMARY KEY (landmark_id),
 	CONSTRAINT ck_landmarks_type CHECK (type IN ('Sports', 'Museum', 'Entertainment', 'Park', 'Shopping', 'Theater', 'Government', 'Restaurant'))
 );
+
 CREATE TABLE users (
   user_name varchar(32) NOT NULL,     -- Username
   password varchar(32) NOT NULL,      -- Password (in plain-text)
