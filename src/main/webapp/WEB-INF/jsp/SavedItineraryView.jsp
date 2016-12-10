@@ -4,11 +4,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
-
-
-
 <h3> Your Itinerary </h3>
 
+    <c:forEach var="hotel" items="${hotelStart}">
+    	 	<ul>
+    	 		<li>${hotel.name}</li>
+    	 	</ul>
+ 
+ 	 </c:forEach>
 
 <c:import url="/WEB-INF/jsp/footer.jsp" />
 		

@@ -1,5 +1,7 @@
 package com.techelevator.landmarktours.controller;
 
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,15 +40,27 @@ public class HomeController {
 		return "home";
 	}
 	
-//	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
-//	public String getSavedItinerary(Map<String, Object> model) {
-//		
-//	
-//		return "redirect: SavedItineraryView";
-//	}
+	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
+	public String getSavedItinerary(Map<String, Object> model) {
+		
+	
+		return "redirect: SavedItineraryView";
+	}
+	
 	@RequestMapping(path={"/SavedItineraryView"}, method=RequestMethod.GET)
-	public String showSavedItineraryView(Map<String, Object> model) {
-		//model.put("landmarks", landmarkDAO.getHotels(5));
+	public String showSavedItineraryView( HttpServletRequest request, @RequestParam String hotelStart,
+												@RequestParam String landmarks,
+												@RequestParam String hotelEnd) {
+		List <String> list = new ArrayList<String>();
+		
+		String startPoint=request.getParameter("hotelStart");
+		String[] landmarkStops= request.getParameterValues("landmarks");
+		String endPoint= request.getParameter("hotelEnd");
+			
+		
+		request.setAttribute("hotelStart", startPoint);
+		request.setAttribute("landmarks", landmarks);
+		request.setAttribute("hotelEnd", hotelEnd);
 	
 		return "SavedItineraryView";
 	}

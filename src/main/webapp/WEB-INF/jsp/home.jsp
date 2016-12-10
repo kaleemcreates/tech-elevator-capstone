@@ -11,11 +11,11 @@
 <div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
     <div id="directions-panel"></div>
-<%--     <form method="POST" action="${formAction}">
- --%>    <div id="right-panel" >
+   <form method="POST" action="${formAction}">
+     <div id="right-panel" >
     <div>
     <b>Start:</b>
-    <select id="start">
+    <select id="start" name="hotelStart">
        <c:forEach var="hotelList" items="${hotelList}">
     	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
  	   </c:forEach>
@@ -23,14 +23,14 @@
     <br>
     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
-    <select multiple id="waypoints">
+    <select multiple id="waypoints" name="landmarks">
     <c:forEach var="landmarkList" items="${landmarks}">
     	 	<option value="${landmarkList.latitude}, ${landmarkList.longitude}">${landmarkList.name}</option>
  	 </c:forEach>
     </select>
     <br>
     <b>End:</b>
-    <select id="end">
+    <select id="end" name="hotelEnd">
       <c:forEach var="hotelList" items="${hotelList}">
     	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
  	   </c:forEach>
