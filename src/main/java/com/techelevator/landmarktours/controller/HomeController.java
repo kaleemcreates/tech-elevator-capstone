@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.RequestParam;
-
-
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
@@ -22,6 +21,7 @@ import com.techelevator.landmarktours.model.LandmarksDAO;
 import com.techelevator.landmarktours.model.Landmarks;
 
 @Controller
+@SessionAttributes("landmarks")
 public class HomeController {
 	@Autowired
 	private HotelsDAO hotelsDAO;
@@ -31,12 +31,9 @@ public class HomeController {
 
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.GET)
 	public String showHomePage(Map<String, Object> model, HttpServletRequest request) {
-		//model.put("landmarks", landmarkDAO.getHotels(5));
-		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
+		model.put("landmarks", landmarksDAO.getLandmarks());
 		List <Hotels> hotelList= hotelsDAO.getHotels();
-		
 		request.setAttribute("hotelList", hotelList);
-		request.setAttribute("landmarkList", landmarkList);
 	
 		return "home";
 		

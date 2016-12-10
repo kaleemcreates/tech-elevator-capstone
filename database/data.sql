@@ -48,4 +48,9 @@ INSERT INTO landmark_reviews (landmark_id, user_name, thumbs_up, review_text) VA
 
 ALTER TABLE landmark_reviews ADD FOREIGN KEY (landmark_id) REFERENCES landmarks(landmark_id);
 ALTER TABLE landmark_reviews ADD FOREIGN KEY (user_name) REFERENCES users(user_name);
+ALTER TABLE users_itinerary  ADD FOREIGN KEY (user_name) REFERENCES users(user_name);
+ALTER TABLE users_itinerary  ADD FOREIGN KEY (itinerary_id) REFERENCES itinerary(itinerary_id);
+ALTER TABLE itinerary_landmarks ADD FOREIGN KEY (itinerary_id) REFERENCES itinerary(itinerary_id);
+ALTER TABLE itinerary_landmarks ADD FOREIGN KEY (landmark_id) REFERENCES landmarks(landmark_id);
+
 COMMIT;

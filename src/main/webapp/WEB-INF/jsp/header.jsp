@@ -92,12 +92,12 @@
 			
 			
 			<div class="dropdown">
-  				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a Landmark to View its Page!<span class="caret"></span></button>
+  				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a landmark to view its page!<span class="caret"></span></button>
   				<ul class="dropdown-menu">
     				<li>
-    					<c:forEach var="landmark" items="${landmarkList}">
+    					<c:forEach var="landmark" items="${landmarks}">
 	    	
-	    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmark_id}">${landmark.name}</a>
+	    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmarkId}">${landmark.name}</a>
 	    			
 	    				</c:forEach>
     				</li>

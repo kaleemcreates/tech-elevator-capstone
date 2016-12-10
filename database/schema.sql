@@ -20,6 +20,7 @@ CREATE TABLE landmarks (
    CONSTRAINT pk_landmarks_landmark_id PRIMARY KEY (landmark_id),
 	CONSTRAINT ck_landmarks_type CHECK (type IN ('Sports', 'Museum', 'Entertainment', 'Park', 'Shopping', 'Theater', 'Government', 'Restaurant'))
 );
+
 CREATE TABLE users (
   user_name varchar(32) NOT NULL,     -- Username
   password varchar(32) NOT NULL,      -- Password (in plain-text)
@@ -38,6 +39,7 @@ CREATE TABLE landmark_reviews (
   create_date timestamp NOT NULL DEFAULT now(), --TimeStamp
   CONSTRAINT pk_landmark_reviews_landmark_id_user_name PRIMARY KEY (landmark_id, user_name)
 );
+
 CREATE TABLE hotels(
   location_id varchar(3) NOT NULL,			--location ID
   name varchar(64) NOT NULL,     -- name
@@ -48,6 +50,24 @@ CREATE TABLE hotels(
   latitude decimal(9,6) NOT NULL,		  -- latitude
   longitude decimal(9,6) NOT NULL,			-- longitude
   CONSTRAINT pk_hotels_location_id PRIMARY KEY (location_id)
+);
+CREATE SEQUENCE seq_itinerary_id;
+
+CREATE TABLE itinerary (
+	itinerary_id integer DEFAULT NEXTVAL('seq_itinerary_id'),						--Auto-generated itinerary id
+	itinerary_name varchar(64) NOT NULL,				--name of itinerary i.e. "travel plans"
+	CONSTRAINT pk_itinerary_itinerary_id PRIMARY KEY (itinerary_id)
+);
+
+CREATE TABLE users_itinerary (
+	user_name varchar(32) NOT NULL,
+	itinerary_id integer NOT NULL,
+	CONSTRAINT pk_users_routes_user_name_itinerary_id PRIMARY KEY (user_name, itinerary_id)
+);
+
+CREATE TABLE itinerary_landmarks (
+	itinerary_id integer NOT NULL,
+	landmark_id varchar(3) NOT NULL
 );
 
 COMMIT;
