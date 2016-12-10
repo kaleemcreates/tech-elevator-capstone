@@ -5,15 +5,14 @@
 
 
 
-<!-- <input type="hidden" id="thisField" name="inputName" value="hiddenValue">
- -->
+
 <h3> Please Select Your Hotel as a Starting point</h3>
 
 <div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
     <div id="directions-panel"></div>
-    <form method="POST" action="${formAction}">
-    <div id="right-panel" >
+<%--     <form method="POST" action="${formAction}">
+ --%>    <div id="right-panel" >
     <div>
     <b>Start:</b>
     <select id="start">
@@ -39,7 +38,7 @@
     <br>
       <input type="submit" id="submit">
     </div>      
-		  
+	
     </div>
     </form>
        <script>
@@ -99,6 +98,7 @@
 
          document.getElementById('submit').addEventListener('click', function() {
            calculateAndDisplayRoute(directionsService, directionsDisplay);
+		
          });
        }
 
@@ -138,6 +138,10 @@
                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
                summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
              }
+             var input = document.createElement("button");        // Create a <button> element
+             var text = document.createTextNode("Save Itinerary")       // Create a text node
+             input.appendChild(text);
+             document.getElementById('directions-panel').appendChild(input);
            } else {
              window.alert('Directions request failed due to ' + status);
            }

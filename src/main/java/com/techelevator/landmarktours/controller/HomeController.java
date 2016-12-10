@@ -38,12 +38,12 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
-	public String getSavedItinerary(Map<String, Object> model) {
-		
-	
-		return "redirect: SavedItineraryView";
-	}
+//	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
+//	public String getSavedItinerary(Map<String, Object> model) {
+//		
+//	
+//		return "redirect: SavedItineraryView";
+//	}
 	@RequestMapping(path={"/SavedItineraryView"}, method=RequestMethod.GET)
 	public String showSavedItineraryView(Map<String, Object> model) {
 		//model.put("landmarks", landmarkDAO.getHotels(5));
