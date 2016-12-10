@@ -36,21 +36,19 @@ public class HomeController {
 		request.setAttribute("hotelList", hotelList);
 	
 		return "home";
-		
-		
 	}
+	
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
-	public String getAnonymousSearchResults(@RequestParam Double latitude, @RequestParam Double longitude,  
-												Map<String, Object> model) {
+	public String getSavedItinerary(Map<String, Object> model) {
 		
 	
-		return "redirect: /anonmyousSearchResults";
+		return "redirect: SavedItineraryView";
 	}
-	@RequestMapping(path={"/anonmyousSearchResults"}, method=RequestMethod.GET)
-	public String showAnonymousSearhResults(Map<String, Object> model) {
+	@RequestMapping(path={"/SavedItineraryView"}, method=RequestMethod.GET)
+	public String showSavedItineraryView(Map<String, Object> model) {
 		//model.put("landmarks", landmarkDAO.getHotels(5));
 	
-		return "anonmyousSearchResults";
+		return "SavedItineraryView";
 	}
 	
 

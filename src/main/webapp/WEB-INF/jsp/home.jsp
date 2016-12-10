@@ -5,13 +5,14 @@
 
 
 
-
-
+<!-- <input type="hidden" id="thisField" name="inputName" value="hiddenValue">
+ -->
 <h3> Please Select Your Hotel as a Starting point</h3>
 
 <div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
     <div id="directions-panel"></div>
+    <form method="POST" action="${formAction}">
     <div id="right-panel" >
     <div>
     <b>Start:</b>
@@ -38,8 +39,9 @@
     <br>
       <input type="submit" id="submit">
     </div>      
-
+		  
     </div>
+    </form>
        <script>
        function initMap() {
          var directionsService = new google.maps.DirectionsService;
