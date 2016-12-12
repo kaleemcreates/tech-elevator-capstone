@@ -47,6 +47,8 @@
 			<c:url var="homePageHref" value="/" />
 			<c:url var="imgSrc" value="/img/landmarkTours.png" />
 			<a href="${homePageHref}"><img src="${imgSrc}" class="img-responsive" /></a>
+			
+			
 		</header>
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
@@ -90,7 +92,7 @@
 	
 			
 			
-			
+			<div class="pull-right">
 			<div class="dropdown">
   				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a landmark to view its page!<span class="caret"></span></button>
   				<ul class="dropdown-menu">
@@ -103,6 +105,7 @@
     				</li>
     			
   				</ul>
+			</div>
 			</div>
 
 			

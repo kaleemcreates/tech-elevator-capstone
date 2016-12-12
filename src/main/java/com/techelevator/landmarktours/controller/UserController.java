@@ -54,8 +54,6 @@ public class UserController {
 		return "userDashboard";
 	}
 	
-
-	
 	@RequestMapping(path="/users/{userName}/changePassword", method=RequestMethod.GET)
 	public String displayChangePasswordForm(Map<String, Object> model, @PathVariable String userName) {
 		model.put("userName", userName);
@@ -67,4 +65,20 @@ public class UserController {
 		userDAO.updatePassword(userName, password);
 		return "userDashboard";
 	}
+	
+//	@RequestMapping(path="/adminLanding", method=RequestMethod.GET)
+//	public String displayNewAdminForm(HttpServletRequest request) {
+//		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
+//		request.setAttribute("landmarkList", landmarkList);
+//		
+//		return "/adminLanding";
+//	}
+//	
+//	@RequestMapping(path="/adminLanding", method=RequestMethod.POST)
+//	public String createAdmin(@RequestParam String userName, @RequestParam String password, @RequestParam String role) {
+//		userDAO.saveUser(userName, password, role);
+//		return "/adminLanding";
+//	}
+	
+
 }

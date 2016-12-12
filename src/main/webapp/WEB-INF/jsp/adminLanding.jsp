@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
-
 <c:url var="pwValidationSrc" value="/passwordValidation.js" />
 <script src="${pwValidationSrc}"></script>
 
@@ -37,6 +36,10 @@
 </script>
 
 <c:url var="formAction" value="/users" />
+<head>
+	<title>Create a New Administrator</title>
+</head>
+<body>
 <form method="POST" action="${formAction}">
 	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 	<div class="row">
@@ -55,7 +58,10 @@
 			</div>
 			<div class="form-group">
 				<label for="role">User Role: </label>
-				<input type="text" id="role" name="role" placeHolder="User-role" class="form-control" />	
+				<select class="form-control" id="role">	
+					<option>cityuser</option>
+					<option>admin</option>
+				</select>
 			</div>
 			<button type="submit" class="btn btn-default">Create User</button>
 		</div>
@@ -76,5 +82,6 @@
 		</div>
 	</div>
 </form>
-		
+</body>
+</html>
 <c:import url="/WEB-INF/jsp/footer.jsp" />
