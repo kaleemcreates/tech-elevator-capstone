@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.techelevator.landmarktours.model.Landmarks;
@@ -20,6 +21,7 @@ import com.techelevator.landmarktours.model.User;
 import com.techelevator.landmarktours.model.UserDAO;
 
 @Controller
+
 public class UserController {
 
 	private UserDAO userDAO;
@@ -56,24 +58,7 @@ public class UserController {
 		
 		return "userDashboard";
 	}
-//	@RequestMapping(value="/redirectToPageDefault",method=RequestMethod.GET)
-//	public ModelAndView redirectToPageDefault(SecurityContextHolder auth){
-//	    Collection<?extends GrantedAuthority> granted = auth.getContext().getAuthentication().getAuthorities();
-//	    String role;
-//	    //set page default to rules common
-//	    ModelAndView mav = new ModelAndView("empty");
-//	    for(int i=0;i<granted.size();i++){
-//	        role = granted.toArray()[i] + "";
-//	        logger.info("role verified" + i + " is -> " + role);
-//	        //verify if user contain role to view dashboard page default
-//	        if(role.equals("ROLE_DASHBOARD")){
-//	            logger.warn("IDENTIFIED: ROLE_DASHBOARD = " + role );
-//	            mav.setViewName("dasboard");
-//	        }               
-//	    }   
-//	    return mav;
-//	}
-//	
+
 
 	
 	@RequestMapping(path="/users/{userName}/changePassword", method=RequestMethod.GET)

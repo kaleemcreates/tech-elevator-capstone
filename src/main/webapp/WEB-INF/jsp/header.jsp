@@ -64,8 +64,9 @@
 							<li><a href="${newLandmarkHref}">Create New Landmark Admin Only</a></li>
 							<c:url var="changeUserAccessHref" value="/users/${currentUser.userName}/adminUser" />
 							<li><a href="${changeUserAccessHref}">Change User Access</a></li>
-							<c:url var="newUserHref" value="/users/new" />
-							<li><a href="${newUserHref}">Sign Up</a></li>
+							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
+							<li><a href="${changePasswordHref}">Change Password</a></li>
+
 						</c:when>
 						<c:when test="${not empty currentUser}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
@@ -76,11 +77,8 @@
 							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
 							<li><a href="${changePasswordHref}">Change Password</a></li>
-							<c:url var="logoutAction" value="/logout" />
-							<form id="logoutForm" action="${logoutAction}" method="POST">
-								<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
-							</form>
-							<li><a id="logoutLink" href="#">Log Out</a></li>
+
+							<!-- <li><a id="logoutLink" href="#">Log Out</a></li> -->
 						</c:when>
 					</c:choose>
 				</ul>

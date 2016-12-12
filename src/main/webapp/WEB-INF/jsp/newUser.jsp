@@ -64,9 +64,9 @@
 				</select>	
 			</div>
 			<div>
-				<c:if test="${sessionScope.user.role == 'admin'}">
+				<c:if test="${currentUser.admin}}">
     			<select name="role">
-					<c:forEach items="user-role" var="id">
+					<c:forEach items="user-role" var="ids">
 					    <option value="cityuser">cityuser</option>
 					    <option value="admin">admin</option>
 					</c:forEach>

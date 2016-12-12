@@ -2,43 +2,12 @@
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
-<c:url var="pwValidationSrc" value="/passwordValidation.js" />
-<script src="${pwValidationSrc}"></script>
 
-<script type="text/javascript">
-	$(document).ready(function () {
-	
-		$("form").validate({
-			rules : {
-				password : {
-					required : true,
-					minlength : 10,
-					maxlength : 128,
-					complexPassword : true,
-					noMoreThan2Duplicates : true
-				},
-				userName : {
-					required : true
-				},
-				confirmPassword : {
-					required : true,		
-					equalTo : "#password"  
-				}
-			},
-			messages : {			
-				confirmPassword : {
-					equalTo : "Passwords do not match"
-				}
-			},
-			errorClass : "error"
-		});
-		
-	});
-</script>
 
-<c:url var="formAction" value="/users" />
+
+<c:url var="formAction" value="/adminUser" />
 <form method="POST" action="${formAction}">
-	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+
 	<div class="row">
 		<div class="col-sm-6">	
 			<div class="form-group">
@@ -54,34 +23,20 @@
 				<input type="password" id="confirmPassword" name="confirmPassword" placeHolder="Re-Type Password" class="form-control" />	
 			</div>
 			<div class="form-group">
-				<c:if test="${sessionScope.user.role == 'admin'}">
+<%-- 				<c:if test="${currentUser.admin}}"> --%>
     			<select name="role">
 					<c:forEach items="user-role" var="id">
 					    <option value="cityuser">cityuser</option>
 					    <option value="admin">admin</option>
 					</c:forEach>
-				</c:if>
+<%-- 				</c:if> --%>
 			</div>
 			<div>
 
 			</div>
 			<button type="submit" class="btn btn-default">Create User</button>
 		</div>
-		<div class="col-sm-6">
-			<strong>Password Rules:</strong>
-			<ul>
-				<li>Must be at least 10 characters long</li>
-				<li>Must contain at least 3 of the following 4 types of characters:
-					<ol>
-						<li>Uppercase letter (A-Z)</li>
-						<li>Lowercase letter (a-z)</li>
-						<li>Number (0-9)</li>
-						<li>A "special" character (#, $, space, etc)</li>
-					</ol>
-				</li>
-				<li>No more than two identical characters in a row</li>
-			</ul>
-		</div>
+
 	</div>
 </form>
 		

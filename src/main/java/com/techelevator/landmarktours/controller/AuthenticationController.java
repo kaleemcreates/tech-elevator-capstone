@@ -1,17 +1,20 @@
 package com.techelevator.landmarktours.controller;
 
+import java.util.List;
 import java.util.Map;
+
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.techelevator.landmarktours.model.Landmarks;
 import com.techelevator.landmarktours.model.User;
 import com.techelevator.landmarktours.model.UserDAO;
 
@@ -30,7 +33,18 @@ public class AuthenticationController {
 	public String displayLoginForm() {
 		return "login";
 	}
-	
+//	@RequestMapping(path="/users/adminUser", method=RequestMethod.GET)
+//	public String displayNewUserFormAdmin(HttpServletRequest request) {
+//		
+//		
+//		
+//		return "adminUser";
+//	}
+	@RequestMapping(path="/users/{userName}/adminUser", method=RequestMethod.GET)
+	public String displayUserInfoChangeAdmin(Map<String, Object> model, @PathVariable String userName) {
+		model.put("userName", userName);
+		return "adminUser";
+	}
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public String login(Map<String, Object> model, 
 						@RequestParam String userName, 
@@ -51,34 +65,7 @@ public class AuthenticationController {
 			return "redirect:/login";
 		}
 	}
-//	@RequestMapping(value="/login",method=RequestMethod.GET)   //Default Method
-//	public  String  doLogin(@ModelAttribute CredentialsBean credentialsBean, HttpSession session)
-//	{   
-//	    String result="";
-//	    if(credentialsBean!=null){
-//	        if(authenticationDao.authenticate(credentialsBean)){
-//	            String userType=authenticationDao.authorize(credentialsBean.getUserID());
-//	            if(userType.equalsIgnoreCase("A")){
-//
-//	                CredentialsBean cBean= authenticationDao.changeLoginStatus(credentialsBean, 1);
-//	                // add object to session
-//	                session.setAttribute("session1",cBean);
-//	                result= "admin";
-//	                //map.put("username",credentialsBean.getProfileBean().getFirstName());
-//	            }
-//	            else{
-//	                CredentialsBean cBean=authenticationDao.changeLoginStatus(credentialsBean, 1);
-//	                session.setAttribute("session1",cBean);
-//	                result= "customer";
-//	            }
-//	        }
-//	        else{
-//	            result="ERROR";
-//	        }
-//	    }
-//
-//	    return result;
-//	}
+
 
 
 	private boolean isValidRedirect(String destination) {
@@ -87,6 +74,9 @@ public class AuthenticationController {
 
 	@RequestMapping(path="/logout", method=RequestMethod.POST)
 	public String logout(Map<String, Object> model, HttpSession session) {
+	//public String logout(Map<String, Object> model, HttpSession session, Object userName) {
+		//User user = userDAO.getUserWithUserName(userName);
+		//model.remove("currentUser", userName);
 		model.remove("currentUser");
 		session.removeAttribute("currentUser");
 		return "redirect:/";
