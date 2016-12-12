@@ -69,7 +69,7 @@ public class LandmarkController {
 		review.setCreateDate(LocalDateTime.now());
 		
 		landmarkReviewsDAO.save(review);
-		return "landmarkDetail";
+		return "redirect:/landmarkDetail?landmark_id="+landmark_id;
 	}
 	
 

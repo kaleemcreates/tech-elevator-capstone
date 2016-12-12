@@ -67,7 +67,7 @@ public class JDBCLandmarkReviewsDAO implements LandmarkReviewsDAO {
 		String sqlNumberOfThumbsUpByLandMarkId = "SELECT * "
 												+ "FROM landmark_reviews "
 												+ "WHERE landmark_id = ? "
-												+ "AND thumbs_up = 't' ";
+												+ "AND thumbs_up = 'f' ";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlNumberOfThumbsUpByLandMarkId, landmarkId);
 		int thumbsDownCount = 0;
 		while(results.next()) {
