@@ -3,10 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/WEB-INF/jsp/header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8&callback"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHnTrqf_-ymPuHiz1UhbRUJCblHG2X3a8&callback&libraries=geometry"></script>
+<!-- <script type="text/javascript">
         google.load("maps", "3",{other_params:"sensor=false&libraries=geometry"});
-      </script>
+      </script> -->
 
 
 
