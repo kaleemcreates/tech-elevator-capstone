@@ -23,11 +23,11 @@ public class JDBCUserDAO implements UserDAO {
 	}
 	
 	@Override
-	public void saveUser(String userName, String password, String role) {
+	public void saveUser(User user, String password) {
 		byte[] salt = passwordHasher.generateRandomSalt();
 		String hashedPassword = passwordHasher.computeHash(password, salt);
 		String saltString = new String(Base64.encode(salt));
-		jdbcTemplate.update("INSERT INTO users(user_name, password, salt, user_role) VALUES (?, ?, ?, ?)", userName, hashedPassword, saltString, role);
+		jdbcTemplate.update("INSERT INTO users(user_name, password, salt, user_role) VALUES (?, ?, ?, ?)", user.getUserName(), hashedPassword, saltString, user.getRole());
 	}
 
 	@Override
@@ -45,6 +45,12 @@ public class JDBCUserDAO implements UserDAO {
 		} else {
 			return false;
 		}
+	}
+	
+	@Override
+	public User getUserWithUserName(String userName) {
+		String role = "Get this from the Database";
+		return new User(userName, role);
 	}
 
 	@Override

@@ -32,7 +32,7 @@
 		<c:url var="formResult" value="/landmarkDetail" /></c>
 		<form action="${formResult}" method="POST">
 		<input type="hidden" name="landmark_id" value="${param.landmark_id}" />
-		<input type="hidden" name="userName" value="${currentUser}" />
+		<input type="hidden" name="userName" value="${currentUser.userName}" />
 		
 			<div class="radio">
 				<label>
