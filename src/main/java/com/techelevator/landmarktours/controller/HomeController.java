@@ -1,5 +1,7 @@
 package com.techelevator.landmarktours.controller;
 
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.techelevator.landmarktours.model.Hotels;
 import com.techelevator.landmarktours.model.HotelsDAO;
+import com.techelevator.landmarktours.model.Itinerary;
+import com.techelevator.landmarktours.model.ItineraryDAO;
 import com.techelevator.landmarktours.model.LandmarksDAO;
 import com.techelevator.landmarktours.model.Landmarks;
 
@@ -25,9 +29,16 @@ import com.techelevator.landmarktours.model.Landmarks;
 public class HomeController {
 	@Autowired
 	private HotelsDAO hotelsDAO;
-	
 	@Autowired
 	private LandmarksDAO landmarksDAO;
+	@Autowired
+	private ItineraryDAO itineraryDAO;
+	
+	public HomeController (HotelsDAO hotelsDAO, LandmarksDAO landmarksDAO, ItineraryDAO itineraryDAO) {
+		this.landmarksDAO= landmarksDAO;
+		this.hotelsDAO= hotelsDAO;
+		this.itineraryDAO= itineraryDAO;
+	}
 
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.GET)
 	public String showHomePage(Map<String, Object> model, HttpServletRequest request) {
@@ -36,21 +47,32 @@ public class HomeController {
 		request.setAttribute("hotelList", hotelList);
 	
 		return "home";
-		
-		
 	}
+	
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
-	public String getAnonymousSearchResults(@RequestParam Double latitude, @RequestParam Double longitude,  
-												Map<String, Object> model) {
+	public String getSavedItinerary(@RequestParam String itineraryName,
+									@RequestParam String landmarkId
+									) {
 		
+		Itinerary itinerary = new Itinerary();
+		itinerary.setItineraryName(itineraryName);
+		
+		itineraryDAO.saveItinerary(itinerary);
 	
-		return "redirect: /anonmyousSearchResults";
+		return "redirect: SavedItineraryView";
 	}
-	@RequestMapping(path={"/anonmyousSearchResults"}, method=RequestMethod.GET)
-	public String showAnonymousSearhResults(Map<String, Object> model) {
-		//model.put("landmarks", landmarkDAO.getHotels(5));
 	
-		return "anonmyousSearchResults";
+	@RequestMapping(path="/SavedItineraryView", method=RequestMethod.GET)
+	public String showSavedItineraryView( HttpServletRequest request ) {
+		
+		String[] savedLandmarks = request.getParameterValues("landmarkId");
+		String itineraryName= request.getParameter("itineraryName");
+		Itinerary itinerary= itineraryDAO.getItineraryByName(itineraryName);
+		
+		request.setAttribute("itinerary", itinerary);
+		request.setAttribute("savedLandmarks", savedLandmarks);
+		
+		return "SavedItineraryView";
 	}
 	
 

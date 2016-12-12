@@ -5,7 +5,8 @@
 BEGIN;
 
 CREATE TABLE landmarks (
-	name varchar(64) NOT NULL,		  -- name
+	name varchar(64) NOT NULL, -- name
+	place_id varchar(64) NOT NULL, --google place id
    landmark_id varchar(3) NOT NULL,     -- landmark ID
    type varchar(13) NOT NULL,      -- type
    latitude decimal(9,6) NOT NULL,		  -- latitude
@@ -42,6 +43,7 @@ CREATE TABLE landmark_reviews (
 
 CREATE TABLE hotels(
   location_id varchar(3) NOT NULL,			--location ID
+  place_id varchar(64) NOT NULL, --google place id
   name varchar(64) NOT NULL,     -- name
   street_address varchar(256) NOT NULL, 				-- street address
   city varchar(32) NOT NULL, 				-- City

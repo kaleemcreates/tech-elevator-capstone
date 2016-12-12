@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class Landmarks {
 
 	private String name;
+	private String placeId;
 	private String landmarkId;
 	private String type;
 	private Double latitude;
@@ -22,6 +23,12 @@ public class Landmarks {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getplaceId() {
+		return placeId;
+	}
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
 	}
 	public String getLandmarkId() {
 		return landmarkId;
