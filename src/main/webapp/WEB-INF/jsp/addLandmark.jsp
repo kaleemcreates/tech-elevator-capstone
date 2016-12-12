@@ -27,6 +27,7 @@
 					required: true
 				}
 			},
+			
 			errorClass : "error"
 		});
 	});
@@ -36,6 +37,8 @@
 </head>
 <body>
 <h3>Suggest a Landmark</h3>
+<c:url var="formAction" value="/addLandmark" />
+<form method="POST" action="${formAction}">
 <div class="form-group">
 	<label for="name">Landmark Name</label>
 	<input class="form-control" id="name" placeholder="Landmark Name">
@@ -66,7 +69,7 @@
 	<input class="btn btn-primary" type="submit" value="Submit!">
 </div>
 
-
+</form>
 </body>
 </html>
 <c:import url="/WEB-INF/jsp/footer.jsp" />

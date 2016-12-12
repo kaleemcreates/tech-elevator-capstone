@@ -81,9 +81,10 @@ CREATE SEQUENCE landmark_suggestions_suggestion_id_seq
 CREATE TABLE landmark_suggestions (
 	suggestion_id integer DEFAULT nextval('landmark_suggestions_suggestion_id_seq'::regclass) NOT NULL,
 	name varchar(64) NOT NULL,
-	tye varchar(13) NOT NULL,
+	type varchar(13) NOT NULL,
 	zip char(5) NOT NULL,
 	description varchar NOT NULL,
+	CONSTRAINT pk_landmark_suggestions_suggestion_id PRIMARY KEY (suggestion_id)
 	
 );
 
