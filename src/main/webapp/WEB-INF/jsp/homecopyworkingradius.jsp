@@ -3,12 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/WEB-INF/jsp/header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8&callback"></script>
-<script type="text/javascript">
-        google.load("maps", "3",{other_params:"sensor=false&libraries=geometry"});
-      </script>
 
 
+DELETE FROM landmarks
+  WHERE name = SuperChef's;
 
 <h3> Please Select Your Hotel as a Starting point</h3>
 
@@ -23,45 +21,11 @@
 	 <option value=5>5 miles</option>
 	 <option value=30>30 miles</option>
  </select>
-     <b>Waypoints:</b> <br>
-    <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
-<%--     <select multiple id="waypoints" name="landmarkId">
-    <c:forEach var="landmarkList" items="${landmarks}">
-    	 	<option value="${landmarkList.landmarkId}">${landmarkList.name}</option>
- 	 </c:forEach>
-    <select multiple id="waypoints" name="type">
-    <c:forEach var="landmarkType" items="${landmarks}">
-    	 	<option value="${landmarkType.type}">"${landmarkType.type}"</option>
- 	 </c:forEach>
-    </select> --%>
-    <br>
  <button onClick="showCloseLocations()">Show Locations In Radius</button>
 
 <div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
-    <div>
-  <form method="POST" action="${formAction}">
- 	
-   <div id="save Itinerary" style="float: left;" >
-    <div>
-    <div>
-    	<b>Enter Name To Save Itinerary:</b><br>
-    	 <input name="itineraryName" >
-    </div>
-    <b>Waypoints:</b> <br>
-    <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
-    <select multiple id="waypoints" name="landmarkId">
-    <c:forEach var="landmarkList" items="${landmarks}">
-    	 	<option value="${landmarkList.landmarkId}">${landmarkList.name}</option>
- 	 </c:forEach>
-    </select>
-    <br>
-      <input type="submit" id="submit" value="Save Itinerary" >
-    </div>      
-	
-    </div>
-    </form>
-    </div>
+ 
        <script>
        var map = null;
        var radius_circle = null;
@@ -78,15 +42,13 @@
      	  {type: "School", name: "School 3", lat: 40.732056, lng: -73.998683}
        ]; */
        //all_locations is just a sample, you will probably load those from database
-       var z;
        var all_locations = [
-     	 <c:forEach var="landmarkList" items="${landmarks}">
-			{type: '${landmarkList.type}', name: '${landmarkList.name}', lat: ${landmarkList.latitude}, lng: ${landmarkList.longitude} },
-		</c:forEach>
+     	  {type: "Restaurant", name: "Restaurant 1", lat: 39.965741, lng: -83.002793},
+     	  {type: "School", name: "School 1", lat: 40.724705, lng: -73.986611},
+     	  {type: "School", name: "School 2", lat: 40.724165, lng: -73.983883},
+     	  {type: "Restaurant", name: "Restaurant 2", lat: 40.721819, lng: -73.991358},
+     	  {type: "School", name: "School 3", lat: 40.732056, lng: -73.998683}
        ];
-
-
-
        //initialize map on document ready
        $(document).ready(function(){
            var latlng = new google.maps.LatLng(39.965741, -83.002793); 
@@ -171,8 +133,8 @@
        	}
        }
        </script>
-<!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8&callback=initMap">
- </script> -->
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8&callback=initMap">
+ </script>
 
 <c:import url="/WEB-INF/jsp/footer.jsp" />
 		
