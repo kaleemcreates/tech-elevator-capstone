@@ -60,12 +60,10 @@
 							<p>I'm an admin!!</p>
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
 							<li><a href="${dashboardHref}">My Account</a></li>
-							<c:url var="newMessageHref" value="/users/${currentUser.userName}/landmark/list" />
-							<li><a href="${savedList}">Saved List</a></li>
-							<c:url var="sentMessagesHref" value="/users/${currentUser.userName}/search" />
-							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
-							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
-							<li><a href="${changePasswordHref}">Change Password</a></li>
+							<c:url var="newLandmarkHref" value="/users/${currentUser.userName}/landmark/addlist" />
+							<li><a href="${newLandmarkHref}">Create New Landmark Admin Only</a></li>
+							<c:url var="changeUserAccessHref" value="/users/${currentUser.userName}/adminUser" />
+							<li><a href="${changeUserAccessHref}">Change User Access</a></li>
 							<c:url var="newUserHref" value="/users/new" />
 							<li><a href="${newUserHref}">Sign Up</a></li>
 						</c:when>

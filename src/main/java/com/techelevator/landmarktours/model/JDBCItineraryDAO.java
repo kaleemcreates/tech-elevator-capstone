@@ -1,5 +1,6 @@
 package com.techelevator.landmarktours.model;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,26 +33,39 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		}
 		return itineraries;
 	}
-	public void saveItinerary(Itinerary itinerary) {
-		
-		jdbcTemplate.update("INSERT INTO itinerary(itinerary_name) VALUES (?)",
-				itinerary.getItineraryName());
-		
-	}
 	
-	public Itinerary getItineraryByName(String itineraryName) {
-		Itinerary itinerary=null;
-		String sqlSelectItineraryByName = "SELECT * "
-											+ "FROM itinerary "
-											+ "WHERE itinerary_name = ?";
+	public Itinerary saveItineraryAndLandmark(Itinerary itineraryName, Landmarks landmarkId) {
+		Itinerary itinerary = null;
 		
-		SqlRowSet results =jdbcTemplate.queryForRowSet(sqlSelectItineraryByName, itineraryName);
+		String sqlInsertItineraryName= "INSERT INTO itinerary (itinerary_name) VALUES (?)";
+		jdbcTemplate.update(sqlInsertItineraryName, itineraryName);
+		String sqlGetCurrentItineraryId= "SELECT currval(pg_get_serial_sequence('itinerary','itinerary_id'))";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlInsertItineraryName, itineraryName, sqlGetCurrentItineraryId);
 		if(results.next()) {
-			itinerary = mapRowToItinerary(results);
+			itinerary=mapRowToItinerary(results);
 		}
 		
+		String sqlInsertItineraryandLandmark = "INSERT INTO itinerary_landmark(itinerary_id, landmark_id ) VALUES (?,?)";
 		
+		jdbcTemplate.update(sqlInsertItineraryandLandmark, itinerary.getitineraryId(), landmarkId);
+			
 		return itinerary;
+	}
+	
+	public List <Itinerary> getItineraryByIdAndLandmarks(Itinerary itineraryId) {
+		Itinerary itinerary=null;
+		List <Itinerary> list= new ArrayList<Itinerary>();
+		String sqlSelectItineraryByName = "SELECT * "
+											+ "FROM itinerary_landmark "
+											+ "WHERE itinerary_id = ?";
+		
+		SqlRowSet results =jdbcTemplate.queryForRowSet(sqlSelectItineraryByName, itineraryId);
+		if(results.next()) {
+			itinerary = mapRowToItinerary(results);
+			list.add(itinerary);
+		}
+		return list;
 	}
 	
 	
@@ -61,6 +75,18 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		itinerary.setItineraryName("itinerary_name");
 		
 		return itinerary;
+	}
+
+	@Override
+	public Itinerary saveItinerary(Itinerary itineraryName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Itinerary getItineraryByName(String itinerary) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

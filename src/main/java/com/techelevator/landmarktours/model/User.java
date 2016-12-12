@@ -26,7 +26,7 @@ public class User {
 	}
 	
 	public boolean isAdmin() {
-//		return role.equals("admin");
-		return true;
+		return role.equals("admin");
+//		return true;
 	}
 }
