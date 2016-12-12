@@ -7,9 +7,9 @@ BEGIN;
 CREATE TABLE landmarks (
 	name varchar(64) NOT NULL, -- name
 	place_id varchar(64) NOT NULL, --google place id
-   landmark_id varchar(3) NOT NULL,     -- landmark ID
-   type varchar(13) NOT NULL,      -- type
-   latitude decimal(9,6) NOT NULL,		  -- latitude
+   	landmark_id varchar(3) NOT NULL,     -- landmark ID
+   	type varchar(13) NOT NULL,      -- type
+   	latitude decimal(9,6) NOT NULL,		  -- latitude
 	longitude decimal(9,6) NOT NULL,			-- longitude
 	street_address varchar(256) NOT NULL, 				-- street address
 	city varchar(32) NOT NULL, 				-- City
@@ -70,6 +70,21 @@ CREATE TABLE users_itinerary (
 CREATE TABLE itinerary_landmarks (
 	itinerary_id integer NOT NULL,
 	landmark_id varchar(3) NOT NULL
+);
+
+CREATE SEQUENCE landmark_suggestions_suggestion_id_seq
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+  
+CREATE TABLE landmark_suggestions (
+	suggestion_id integer DEFAULT nextval('landmark_suggestions_suggestion_id_seq'::regclass) NOT NULL,
+	name varchar(64) NOT NULL,
+	tye varchar(13) NOT NULL,
+	zip char(5) NOT NULL,
+	description varchar NOT NULL,
+	
 );
 
 COMMIT;
