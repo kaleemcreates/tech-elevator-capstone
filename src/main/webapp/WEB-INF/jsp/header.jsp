@@ -47,22 +47,42 @@
 			<c:url var="homePageHref" value="/" />
 			<c:url var="imgSrc" value="/img/landmarkTours.png" />
 			<a href="${homePageHref}"><img src="${imgSrc}" class="img-responsive" /></a>
+			
+			
 		</header>
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<ul class="nav navbar-nav">
 					<c:url var="homePageHref" value="/home" />
 					<li><a href="${homePageHref}">Home</a></li>
-					<c:if test="${not empty currentUser}">
-						<c:url var="dashboardHref" value="/users/${currentUser}" />
-						<li><a href="${dashboardHref}">My Account</a></li>
-						<c:url var="newMessageHref" value="/users/${currentUser}/landmark/list" />
-						<li><a href="${savedList}">Saved List</a></li>
-						<c:url var="sentMessagesHref" value="/users/${currentUser}/search" />
-						<li><a href="${searchLandmarks}">Search Landmarks</a></li>
-						<c:url var="changePasswordHref" value="/users/${currentUser}/changePassword" />
-						<li><a href="${changePasswordHref}">Change Password</a></li>
-					</c:if>
+					<c:choose>
+						<c:when test="${ currentUser.admin}">
+							<p>I'm an admin!!</p>
+							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
+							<li><a href="${dashboardHref}">My Account</a></li>
+							<c:url var="newLandmarkHref" value="/users/${currentUser.userName}/landmark/addlist" />
+							<li><a href="${newLandmarkHref}">Create New Landmark Admin Only</a></li>
+							<c:url var="changeUserAccessHref" value="/users/${currentUser.userName}/adminUser" />
+							<li><a href="${changeUserAccessHref}">Change User Access</a></li>
+							<c:url var="newUserHref" value="/users/new" />
+							<li><a href="${newUserHref}">Sign Up</a></li>
+						</c:when>
+						<c:when test="${not empty currentUser}">
+							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
+							<li><a href="${dashboardHref}">My Account</a></li>
+							<c:url var="newMessageHref" value="/users/${currentUser.userName}/landmark/list" />
+							<li><a href="${savedList}">Saved List</a></li>
+							<c:url var="sentMessagesHref" value="/users/${currentUser.userName}/search" />
+							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
+							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
+							<li><a href="${changePasswordHref}">Change Password</a></li>
+							<c:url var="logoutAction" value="/logout" />
+							<form id="logoutForm" action="${logoutAction}" method="POST">
+								<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+							</form>
+							<li><a id="logoutLink" href="#">Log Out</a></li>
+						</c:when>
+					</c:choose>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<c:choose>
@@ -90,7 +110,7 @@
 	
 			
 			
-			
+			<div class="pull-right">
 			<div class="dropdown">
   				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a landmark to view its page!<span class="caret"></span></button>
   				<ul class="dropdown-menu">
@@ -103,6 +123,7 @@
     				</li>
     			
   				</ul>
+			</div>
 			</div>
 
 			
@@ -128,6 +149,6 @@
 		
 		
 		<c:if test="${not empty currentUser}">
-			<p id="currentUser">Current User: ${currentUser}</p>
+			<p id="currentUser">Current User: ${currentUser.userName}</p>
 		</c:if>		
 		<div class="container">

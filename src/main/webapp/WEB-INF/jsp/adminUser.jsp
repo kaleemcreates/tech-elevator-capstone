@@ -54,16 +54,6 @@
 				<input type="password" id="confirmPassword" name="confirmPassword" placeHolder="Re-Type Password" class="form-control" />	
 			</div>
 			<div class="form-group">
-				<label for="role">User Role: </label>
-				<!-- <input type="text" id="role" name="role" placeHolder="user-role" class="form-control" default="cityuser"/> -->
-				<select name="role">
-				<c:forEach items="user-role" var="id">
-<!-- 				    <option value="admin">admin</option> -->
-				    <option value="cityuser">cityuser</option>
-				</c:forEach>
-				</select>	
-			</div>
-			<div>
 				<c:if test="${sessionScope.user.role == 'admin'}">
     			<select name="role">
 					<c:forEach items="user-role" var="id">
@@ -71,6 +61,9 @@
 					    <option value="admin">admin</option>
 					</c:forEach>
 				</c:if>
+			</div>
+			<div>
+
 			</div>
 			<button type="submit" class="btn btn-default">Create User</button>
 		</div>

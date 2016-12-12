@@ -122,7 +122,26 @@
 		
          });
        }
+       var widgetDiv = document.getElementById('save-widget');
+       map.controls[google.maps.ControlPosition.TOP_LEFT].push(widgetDiv);
 
+       // Append a Save Control to the existing save-widget div.
+       var saveWidget = new google.maps.SaveWidget(widgetDiv, {
+         place: {
+           // ChIJN1t_tDeuEmsRUsoyG83frY4 is the place Id for CourtYard.
+           placeId: 'ChIJyY9c6S-POIgRlMVLdUiH6Cc',
+           location: {lat: -33.866647, lng: 151.195886}
+         },
+         attribution: {
+           source: 'Google Maps JavaScript API',
+           webUrl: 'https://developers.google.com/maps/'
+         }
+       });
+
+       var marker = new google.maps.Marker({
+         map: map,
+         position: saveWidget.getPlace().location
+       });
        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
          var waypts = [];
          var checkboxArray = document.getElementById('waypoints');
@@ -167,6 +186,7 @@
              window.alert('Directions request failed due to ' + status);
            }
          });
+
        }
 
        </script>
