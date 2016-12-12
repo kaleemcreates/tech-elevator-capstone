@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.landmarktours.model.LandmarkReviews;
 import com.techelevator.landmarktours.model.LandmarkReviewsDAO;
+import com.techelevator.landmarktours.model.LandmarkSuggestions;
+import com.techelevator.landmarktours.model.LandmarkSuggestionsDAO;
 import com.techelevator.landmarktours.model.Landmarks;
 import com.techelevator.landmarktours.model.LandmarksDAO;
 
@@ -24,11 +26,14 @@ public class LandmarkController {
 	LandmarksDAO landmarksDAO;
 	@Autowired
 	LandmarkReviewsDAO landmarkReviewsDAO;
+	@Autowired 
+	LandmarkSuggestionsDAO landmarkSuggestionsDAO;
 	
 	@Autowired
-	public LandmarkController(LandmarksDAO landmarksDAO, LandmarkReviewsDAO landmarkReviewsDAO) {
+	public LandmarkController(LandmarksDAO landmarksDAO, LandmarkReviewsDAO landmarkReviewsDAO, LandmarkSuggestionsDAO landmarkSuggestionsDAO) {
 		this.landmarksDAO = landmarksDAO;
 		this.landmarkReviewsDAO = landmarkReviewsDAO;
+		this.landmarkSuggestionsDAO = landmarkSuggestionsDAO;
 	}
 	
 	
@@ -75,6 +80,21 @@ public class LandmarkController {
 	public String showAddLandmark(HttpServletRequest request) {
 
 		return "addLandmark";
+	}
+	
+	@RequestMapping(path="/addLandmark", method=RequestMethod.POST)
+	public String processSuggestLandmark(@RequestParam String name,
+											@RequestParam String type,
+											@RequestParam String zip,
+											@RequestParam String description) {
+		LandmarkSuggestions suggestion = new LandmarkSuggestions();
+		suggestion.setName(name);
+		suggestion.setType(type);
+		suggestion.setZip(zip);
+		suggestion.setDescription(description);
+		
+		landmarkSuggestionsDAO.save(suggestion);
+		return "redirect:/home";
 	}
 
 
