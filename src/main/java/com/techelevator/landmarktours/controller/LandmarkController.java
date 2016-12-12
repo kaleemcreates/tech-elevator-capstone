@@ -71,7 +71,11 @@ public class LandmarkController {
 		landmarkReviewsDAO.save(review);
 		return "redirect:/landmarkDetail?landmark_id="+landmark_id;
 	}
-	
+	@RequestMapping(path="/addLandmark", method=RequestMethod.GET)
+	public String showAddLandmark(HttpServletRequest request) {
+
+		return "addLandmark";
+	}
 
 
 	
