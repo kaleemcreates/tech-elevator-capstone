@@ -38,4 +38,10 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 		return landmarkSuggestions;
 	}
 
+	@Override
+	public void save(LandmarkSuggestions suggestion) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
