@@ -55,16 +55,36 @@
 				<ul class="nav navbar-nav">
 					<c:url var="homePageHref" value="/home" />
 					<li><a href="${homePageHref}">Home</a></li>
-					<c:if test="${not empty currentUser}">
-						<c:url var="dashboardHref" value="/users/${currentUser}" />
-						<li><a href="${dashboardHref}">My Account</a></li>
-						<c:url var="newMessageHref" value="/users/${currentUser}/landmark/list" />
-						<li><a href="${savedList}">Saved List</a></li>
-						<c:url var="sentMessagesHref" value="/users/${currentUser}/search" />
-						<li><a href="${searchLandmarks}">Search Landmarks</a></li>
-						<c:url var="changePasswordHref" value="/users/${currentUser}/changePassword" />
-						<li><a href="${changePasswordHref}">Change Password</a></li>
-					</c:if>
+					<c:choose>
+						<c:when test="${ currentUser.admin}">
+							<p>I'm an admin!!</p>
+							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
+							<li><a href="${dashboardHref}">My Account</a></li>
+							<c:url var="newMessageHref" value="/users/${currentUser.userName}/landmark/list" />
+							<li><a href="${savedList}">Saved List</a></li>
+							<c:url var="sentMessagesHref" value="/users/${currentUser.userName}/search" />
+							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
+							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
+							<li><a href="${changePasswordHref}">Change Password</a></li>
+							<c:url var="newUserHref" value="/users/new" />
+							<li><a href="${newUserHref}">Sign Up</a></li>
+						</c:when>
+						<c:when test="${not empty currentUser}">
+							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
+							<li><a href="${dashboardHref}">My Account</a></li>
+							<c:url var="newMessageHref" value="/users/${currentUser.userName}/landmark/list" />
+							<li><a href="${savedList}">Saved List</a></li>
+							<c:url var="sentMessagesHref" value="/users/${currentUser.userName}/search" />
+							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
+							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
+							<li><a href="${changePasswordHref}">Change Password</a></li>
+							<c:url var="logoutAction" value="/logout" />
+							<form id="logoutForm" action="${logoutAction}" method="POST">
+								<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+							</form>
+							<li><a id="logoutLink" href="#">Log Out</a></li>
+						</c:when>
+					</c:choose>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<c:choose>
@@ -131,6 +151,6 @@
 		
 		
 		<c:if test="${not empty currentUser}">
-			<p id="currentUser">Current User: ${currentUser}</p>
+			<p id="currentUser">Current User: ${currentUser.userName}</p>
 		</c:if>		
 		<div class="container">

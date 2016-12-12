@@ -6,11 +6,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.techelevator.landmarktours.model.User;
 import com.techelevator.landmarktours.model.UserDAO;
 
 @Controller
@@ -38,7 +40,8 @@ public class AuthenticationController {
 		
 		if(userDAO.searchForUsernameAndPassword(userName, password)) {
 			session.invalidate();
-			model.put("currentUser", userName);
+			User user = userDAO.getUserWithUserName(userName);
+			model.put("currentUser", user);
 			if(isValidRedirect(destination)) {
 				return "redirect:"+destination;
 			} else {
@@ -48,6 +51,35 @@ public class AuthenticationController {
 			return "redirect:/login";
 		}
 	}
+//	@RequestMapping(value="/login",method=RequestMethod.GET)   //Default Method
+//	public  String  doLogin(@ModelAttribute CredentialsBean credentialsBean, HttpSession session)
+//	{   
+//	    String result="";
+//	    if(credentialsBean!=null){
+//	        if(authenticationDao.authenticate(credentialsBean)){
+//	            String userType=authenticationDao.authorize(credentialsBean.getUserID());
+//	            if(userType.equalsIgnoreCase("A")){
+//
+//	                CredentialsBean cBean= authenticationDao.changeLoginStatus(credentialsBean, 1);
+//	                // add object to session
+//	                session.setAttribute("session1",cBean);
+//	                result= "admin";
+//	                //map.put("username",credentialsBean.getProfileBean().getFirstName());
+//	            }
+//	            else{
+//	                CredentialsBean cBean=authenticationDao.changeLoginStatus(credentialsBean, 1);
+//	                session.setAttribute("session1",cBean);
+//	                result= "customer";
+//	            }
+//	        }
+//	        else{
+//	            result="ERROR";
+//	        }
+//	    }
+//
+//	    return result;
+//	}
+
 
 	private boolean isValidRedirect(String destination) {
 		return destination != null && destination.startsWith("http://localhost");
