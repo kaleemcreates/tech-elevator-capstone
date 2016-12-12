@@ -60,6 +60,7 @@ public class JDBCHotelsDAO implements HotelsDAO {
 	private Hotels mapRowToHotels(SqlRowSet results) {
 		Hotels hotel = new Hotels();
 		hotel.setLocationId(results.getString("location_id"));
+		hotel.setPlaceId(results.getString("place_id"));
 		hotel.setName(results.getString("name"));
 		hotel.setStreetAddress(results.getString("street_address"));
 		hotel.setCity(results.getString("city"));

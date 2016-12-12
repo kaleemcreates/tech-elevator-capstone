@@ -3,6 +3,7 @@ package com.techelevator.landmarktours.model;
 public class Hotels {
 	
 	private String locationId;
+	private String placeId;
 	private String name;
 	private String streetAddress;
 	private String city;
@@ -17,6 +18,12 @@ public class Hotels {
 	}
 	public void setLocationId(String locationId) {
 		this.locationId = locationId;
+	}
+	public String getplaceId() {
+		return placeId;
+	}
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
 	}
 	public String getName() {
 		return name;

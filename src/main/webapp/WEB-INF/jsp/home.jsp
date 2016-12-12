@@ -11,7 +11,7 @@
 <div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
     <div id="directions-panel"></div>
-   <form method="POST" action="${formAction}">
+  
      <div id="right-panel" >
     <div>
     <b>Start:</b>
@@ -37,6 +37,27 @@
     </select>
     <br>
       <input type="submit" id="submit">
+    </div>      
+	
+    </div> <br>
+    
+ <form method="POST" action="${formAction}">
+ 	
+   <div id="save Itinerary" style="float: left;" >
+    <div>
+    <div>
+    	<b>Enter Name To Save Itinerary:</b><br>
+    	 <input name="itineraryName" >
+    </div>
+    <b>Waypoints:</b> <br>
+    <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
+    <select multiple id="waypoints" name="landmarkId">
+    <c:forEach var="landmarkList" items="${landmarks}">
+    	 	<option value="${landmarkList.landmarkId}">${landmarkList.name}</option>
+ 	 </c:forEach>
+    </select>
+    <br>
+      <input type="submit" id="submit" value="Save Itinerary" >
     </div>      
 	
     </div>

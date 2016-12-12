@@ -5,13 +5,20 @@
 
 
 <h3> Your Itinerary </h3>
-
-    <c:forEach var="hotel" items="${hotelStart}">
+	<div>
+    <c:forEach var="itinerary" items="${itinerary}">
     	 	<ul>
-    	 		<li>${hotel.name}</li>
+    	 		<li>${itinerary.itineraryName}</li>
     	 	</ul>
- 
- 	 </c:forEach>
-
+ 	</c:forEach>
+ 	   <c:forEach var="landmarks" items="${savedLandmarks}">
+    	 	<ul>
+    	 		<li>${landmarks.landmarkName}</li>
+    	 		<li><img src="/img/${landmarks.landmarkId}.png"></li>
+    	 		<li>${landmarks.descrtiption}</li>
+    	 	</ul>
+ 	</c:forEach>
+ 	
+	</div>
 <c:import url="/WEB-INF/jsp/footer.jsp" />
 		

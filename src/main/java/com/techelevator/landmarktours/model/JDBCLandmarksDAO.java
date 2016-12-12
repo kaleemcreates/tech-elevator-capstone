@@ -87,6 +87,7 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 	private Landmarks mapRowToLandmarks(SqlRowSet results) {
 		Landmarks landmark = new Landmarks();
 		landmark.setName(results.getString("name"));
+		landmark.setPlaceId(results.getString("place_id"));
 		landmark.setLandmarkId(results.getString("landmark_id"));
 		landmark.setType(results.getString("type"));
 		landmark.setLatitude(results.getDouble("latitude"));

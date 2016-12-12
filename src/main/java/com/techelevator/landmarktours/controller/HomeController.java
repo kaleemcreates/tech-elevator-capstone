@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.techelevator.landmarktours.model.Hotels;
 import com.techelevator.landmarktours.model.HotelsDAO;
+import com.techelevator.landmarktours.model.Itinerary;
+import com.techelevator.landmarktours.model.ItineraryDAO;
 import com.techelevator.landmarktours.model.LandmarksDAO;
 import com.techelevator.landmarktours.model.Landmarks;
 
@@ -27,9 +29,16 @@ import com.techelevator.landmarktours.model.Landmarks;
 public class HomeController {
 	@Autowired
 	private HotelsDAO hotelsDAO;
-	
 	@Autowired
 	private LandmarksDAO landmarksDAO;
+	@Autowired
+	private ItineraryDAO itineraryDAO;
+	
+	public HomeController (HotelsDAO hotelsDAO, LandmarksDAO landmarksDAO, ItineraryDAO itineraryDAO) {
+		this.landmarksDAO= landmarksDAO;
+		this.hotelsDAO= hotelsDAO;
+		this.itineraryDAO= itineraryDAO;
+	}
 
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.GET)
 	public String showHomePage(Map<String, Object> model, HttpServletRequest request) {
@@ -41,27 +50,28 @@ public class HomeController {
 	}
 	
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
-	public String getSavedItinerary(Map<String, Object> model) {
+	public String getSavedItinerary(@RequestParam String itineraryName,
+									@RequestParam String landmarkId
+									) {
 		
+		Itinerary itinerary = new Itinerary();
+		itinerary.setItineraryName(itineraryName);
+		
+		itineraryDAO.saveItinerary(itinerary);
 	
 		return "redirect: SavedItineraryView";
 	}
 	
-	@RequestMapping(path={"/SavedItineraryView"}, method=RequestMethod.GET)
-	public String showSavedItineraryView( HttpServletRequest request, @RequestParam String hotelStart,
-												@RequestParam String landmarks,
-												@RequestParam String hotelEnd) {
-		List <String> list = new ArrayList<String>();
+	@RequestMapping(path="/SavedItineraryView", method=RequestMethod.GET)
+	public String showSavedItineraryView( HttpServletRequest request ) {
 		
-		String startPoint=request.getParameter("hotelStart");
-		String[] landmarkStops= request.getParameterValues("landmarks");
-		String endPoint= request.getParameter("hotelEnd");
-			
+		String[] savedLandmarks = request.getParameterValues("landmarkId");
+		String itineraryName= request.getParameter("itineraryName");
+		Itinerary itinerary= itineraryDAO.getItineraryByName(itineraryName);
 		
-		request.setAttribute("hotelStart", startPoint);
-		request.setAttribute("landmarks", landmarks);
-		request.setAttribute("hotelEnd", hotelEnd);
-	
+		request.setAttribute("itinerary", itinerary);
+		request.setAttribute("savedLandmarks", savedLandmarks);
+		
 		return "SavedItineraryView";
 	}
 	
