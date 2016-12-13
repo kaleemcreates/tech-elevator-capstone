@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
   <display-name>Capstone Project</display-name>
   <servlet>
     <servlet-name>springmvc</servlet-name>
@@ -18,22 +22,19 @@
     <url-pattern>*.jpg</url-pattern>
     <url-pattern>*.gif</url-pattern>
   </servlet-mapping>
-<!--   <filter>
+  <filter>
   	<filter-name>authorizationFilter</filter-name>
   	<filter-class>com.techelevator.landmarktours.security.AuthorizationFilter</filter-class>
   </filter>
-  
-  <filter-mapping>
+<!--   <filter-mapping>
   	<filter-name>authorizationFilter</filter-name>
   	<servlet-name>springmvc</servlet-name>
-  </filter-mapping>
-  
+  </filter-mapping> -->
   <filter>
   	<filter-name>csrfFilter</filter-name>
   	<filter-class>com.techelevator.landmarktours.security.CSRFFilter</filter-class>
   </filter>
-  
-  <filter-mapping>
+<!--   <filter-mapping>
   	<filter-name>csrfFilter</filter-name>
   	<servlet-name>springmvc</servlet-name>
   </filter-mapping> -->
