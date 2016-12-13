@@ -56,6 +56,8 @@
 				<ul class="nav navbar-nav">
 					<c:url var="homePageHref" value="/home" />
 					<li><a href="${homePageHref}">Home</a></li>
+					<c:url var="typeSearchHref" value="/searchLandmarksByType" />
+					<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
 					<c:choose>
 						<c:when test="${ currentUser.admin}">
 							<p>I'm an admin!!</p>
