@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,11 +22,13 @@ import com.techelevator.landmarktours.model.Hotels;
 import com.techelevator.landmarktours.model.HotelsDAO;
 import com.techelevator.landmarktours.model.Itinerary;
 import com.techelevator.landmarktours.model.ItineraryDAO;
+import com.techelevator.landmarktours.model.ItineraryLandmarks;
+import com.techelevator.landmarktours.model.JDBCItineraryLandmarksDAO;
 import com.techelevator.landmarktours.model.LandmarksDAO;
 import com.techelevator.landmarktours.model.Landmarks;
 
 @Controller
-@SessionAttributes("landmarks")
+@SessionAttributes({"landmarks", "landmarkListByItineraryId"})
 public class HomeController {
 	@Autowired
 	private HotelsDAO hotelsDAO;
@@ -33,6 +36,8 @@ public class HomeController {
 	private LandmarksDAO landmarksDAO;
 	@Autowired
 	private ItineraryDAO itineraryDAO;
+	@Autowired
+	private JDBCItineraryLandmarksDAO itineraryLandmarksDAO;
 	
 	public HomeController (HotelsDAO hotelsDAO, LandmarksDAO landmarksDAO, ItineraryDAO itineraryDAO) {
 		this.landmarksDAO= landmarksDAO;
@@ -58,29 +63,34 @@ public class HomeController {
 	}
 	
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
-	public String getSavedItinerary(@RequestParam String itineraryName,
-									@RequestParam String landmarkId
-									) {
+	public String postSavedItinerary(@RequestParam String itineraryName,
+									@RequestParam String [] landmarkId,
+									ModelMap  model) {
 		
-		Itinerary itinerary = new Itinerary();
-		itinerary.setItineraryName(itineraryName);
 		
-		itineraryDAO.saveItinerary(itinerary);
-	
-		return "redirect: SavedItineraryView";
+		itineraryDAO.saveItineraryToItinerary(itineraryName);
+		
+		int itineraryId=itineraryDAO.getItineraryId();
+		
+		for (int i=0; i < landmarkId.length; i++) {
+			String landmarkid =landmarkId[i];
+			itineraryDAO.saveItineraryAndLandmark(itineraryId, landmarkid);
+			
+		}
+		
+		List<ItineraryLandmarks> landmarkList= itineraryLandmarksDAO.getItineraryByIdAndLandmarks(itineraryId);
+		model.addAttribute("landmarkListByItineraryId", landmarkList);
+		
+		
+		return "redirect: savedItineraryView";
 	}
 	
-	@RequestMapping(path="/SavedItineraryView", method=RequestMethod.GET)
+	@RequestMapping(path="/savedItineraryView", method=RequestMethod.GET)
 	public String showSavedItineraryView( HttpServletRequest request ) {
 		
-		String[] savedLandmarks = request.getParameterValues("landmarkId");
-		String itineraryName= request.getParameter("itineraryName");
-		Itinerary itinerary= itineraryDAO.getItineraryByName(itineraryName);
 		
-		request.setAttribute("itinerary", itinerary);
-		request.setAttribute("savedLandmarks", savedLandmarks);
 		
-		return "SavedItineraryView";
+		return "savedItineraryView";
 	}
 	
 

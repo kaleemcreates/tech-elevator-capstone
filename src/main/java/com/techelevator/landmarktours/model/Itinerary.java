@@ -2,13 +2,13 @@ package com.techelevator.landmarktours.model;
 
 public class Itinerary {
 	
-	private String itineraryId;
+	private int itineraryId;
 	private String itineraryName;
 	
-	public String getitineraryId() {
+	public int getItineraryId() {
 		return itineraryId;
 	}
-	public void setItineraryId(String itineraryId) {
+	public void setItineraryId(int itineraryId) {
 		this.itineraryId = itineraryId;
 	}
 	public String getItineraryName() {

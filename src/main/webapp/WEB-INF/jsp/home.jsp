@@ -35,6 +35,7 @@
  	 </c:forEach>
     </select> --%>
     <br>
+
  <button onClick="showCloseLocations()">Show Locations In Radius</button>
 
 <div id="map_canvas" style="width: 500px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">

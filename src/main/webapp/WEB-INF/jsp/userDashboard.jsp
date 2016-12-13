@@ -24,7 +24,7 @@
     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
     <select multiple id="waypoints" name="landmarks">
-    <c:forEach var="landmarkList" items="${landmarks}">
+    <c:forEach var="landmarkList" items="${landmarkList}">
     	 	<option value="${landmarkList.latitude}, ${landmarkList.longitude}">${landmarkList.name}</option>
  	 </c:forEach>
     </select>
@@ -40,7 +40,8 @@
     </div>      
 	
     </div> <br>
-    
+ 
+ <c:url var="formAction" value="{userName}"/>   
  <form method="POST" action="${formAction}">
  	
    <div id="save Itinerary" style="float: left;" >
@@ -52,7 +53,7 @@
     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
     <select multiple id="waypoints" name="landmarkId">
-    <c:forEach var="landmarkList" items="${landmarks}">
+    <c:forEach var="landmarkList" items="${landmarkList}">
     	 	<option value="${landmarkList.landmarkId}">${landmarkList.name}</option>
  	 </c:forEach>
     </select>

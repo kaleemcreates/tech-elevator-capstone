@@ -1,25 +1,9 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHnTrqf_-ymPuHiz1UhbRUJCblHG2X3a8&cv=3.0&callback=initialize"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHnTrqf_-ymPuHiz1UhbRUJCblHG2X3a8&callback=initMap">
 </script> -->
-<!--  <script type="text/javascript">
-        google.load("maps", "3",{other_params:"sensor=false&libraries=geometry"});
-      </script> -->
 
-
-
-
-
-
-<!--  <select id="type" onchange="filterMarkers(this.value);">
- 	 <option value="">Please select category</option>
-	 <option value="Sports">Sports</option>
-	 <option value="Entertainment">Entertainment</option>
-	 <option value="Shopping">Shopping</option>
-	 <option value="Restaurant">Restaurant</option>
- </select> -->
 <c:import url="/WEB-INF/jsp/header.jsp" /> 
        <script>
        var gmarkers1 = [];
@@ -134,8 +118,5 @@
 </select>
 </div>
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHnTrqf_-ymPuHiz1UhbRUJCblHG2X3a8&callback=initMap">
- </script>  -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHnTrqf_-ymPuHiz1UhbRUJCblHG2X3a8&cv=3.0&callback=initialize" async defer></script>
 <c:import url="/WEB-INF/jsp/footer.jsp" />
-		

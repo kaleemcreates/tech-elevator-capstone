@@ -62,6 +62,8 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 		} 
 		return id;
 
+
+		// TODO Auto-generated method stub
 		
 	}
 

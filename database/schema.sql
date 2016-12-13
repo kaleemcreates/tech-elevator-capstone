@@ -1,94 +1,4 @@
- 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
+ 
 -- *************************************************************************************************
 -- This script creates all of the database objects (tables, sequences, etc) for the database
 -- *************************************************************************************************
@@ -147,7 +57,7 @@ CREATE TABLE hotels(
 CREATE SEQUENCE seq_itinerary_id;
 
 CREATE TABLE itinerary (
-	itinerary_id integer DEFAULT NEXTVAL('seq_itinerary_id'),						--Auto-generated itinerary id
+	itinerary_id serial NOT NULL,						--Auto-generated itinerary id
 	itinerary_name varchar(64) NOT NULL,				--name of itinerary i.e. "travel plans"
 	CONSTRAINT pk_itinerary_itinerary_id PRIMARY KEY (itinerary_id)
 );
@@ -155,12 +65,13 @@ CREATE TABLE itinerary (
 CREATE TABLE users_itinerary (
 	user_name varchar(32) NOT NULL,
 	itinerary_id integer NOT NULL,
-	CONSTRAINT pk_users_routes_user_name_itinerary_id PRIMARY KEY (user_name, itinerary_id)
+	CONSTRAINT pk_users_itinerary_user_name_itinerary_id PRIMARY KEY (user_name, itinerary_id)
 );
 
 CREATE TABLE itinerary_landmarks (
 	itinerary_id integer NOT NULL,
-	landmark_id varchar(3) NOT NULL
+	landmark_id varchar(3) NOT NULL,
+	CONSTRAINT pk_itinerary_landmarks_itinerary_id_landmark_id PRIMARY KEY (itinerary_id, landmark_id)
 );
 
 CREATE SEQUENCE landmark_suggestions_suggestion_id_seq;
