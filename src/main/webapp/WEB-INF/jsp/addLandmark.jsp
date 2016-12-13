@@ -3,10 +3,6 @@
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
 
-
-<!DOCTYPE html>
-<html>
-
 <script type="text/javascript">
 	$(document).ready(function () {
 	
@@ -27,25 +23,39 @@
 					required: true
 				}
 			},
+			messages: {
+				name: {
+					required: "Name is required",
+					maxlength: "Name cannot be more that 64 characters"
+				}, 
+				type: {
+					required: "Type is required"
+				},
+				zip: {
+					required: "Zip code is required",
+					maxlength: "Zip code cannot be more than 5 digits"
+				}
+				description: {
+					required: "Description is required"
+				}
+			},
 			
 			errorClass : "error"
 		});
 	});
 </script>
-<head>
-<title>Add a Landmark</title>
-</head>
-<body>
+
+
 <h3>Suggest a Landmark</h3>
 <c:url var="formAction" value="/addLandmark" />
 <form method="POST" action="${formAction}">
 <div class="form-group">
 	<label for="name">Landmark Name</label>
-	<input class="form-control" id="name" placeholder="Landmark Name">
+	<input class="form-control" id= "name" name="name" placeholder="Landmark Name">
 </div>
 <div class="form-group">
 	<label for="type">Landmark Type</label>
-	<select class="form-control" id="type">
+	<select class="form-control" name="type" id="type">
 		<option>Entertainment</option>
 		<option>Government</option>
 		<option>Museum</option>
@@ -58,11 +68,11 @@
 </div>
 <div class="form-group">
 	<label for="zip">Landmark Zip Code</label>
-	<input class="form-control" id="zip" placeholder="Landmark Zip Code">
+	<input class="form-control" id="zip" name="zip" placeholder="Landmark Zip Code">
 </div>
 <div class="form-group">
 	<label for="description">Landmark Description</label>
-	<textarea class="form-control" id="descriptionText" name="descriptionText" placeholder="Description goes here!"></textarea>
+	<textarea class="form-control" id="description" name="description" placeholder="Description goes here!"></textarea>
 </div>
 
 <div class="form-group">
@@ -70,6 +80,5 @@
 </div>
 
 </form>
-</body>
-</html>
+
 <c:import url="/WEB-INF/jsp/footer.jsp" />

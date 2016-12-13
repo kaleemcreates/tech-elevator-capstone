@@ -37,7 +37,7 @@ CREATE TABLE landmark_reviews (
   landmark_id varchar(3) NOT NULL,     -- landmark ID
   user_name varchar(32) NOT NULL,     -- Username
   thumbs_up boolean NOT NULL,      -- Thumps Up Rating
-  review_text varchar(256) NOT NULL, 		-- Review Text
+  review_text varchar(256), 		-- Review Text
   create_date timestamp NOT NULL DEFAULT now(), --TimeStamp
   CONSTRAINT pk_landmark_reviews_landmark_id_user_name PRIMARY KEY (landmark_id, user_name)
 );
@@ -74,20 +74,16 @@ CREATE TABLE itinerary_landmarks (
 	CONSTRAINT pk_itinerary_landmarks_itinerary_id_landmark_id PRIMARY KEY (itinerary_id, landmark_id)
 );
 
-CREATE SEQUENCE landmark_suggestions_suggestion_id_seq
-  INCREMENT BY 1
-  NO MAXVALUE
-  NO MINVALUE
-  CACHE 1;
+CREATE SEQUENCE landmark_suggestions_suggestion_id_seq;
   
 CREATE TABLE landmark_suggestions (
-	suggestion_id integer DEFAULT nextval('landmark_suggestions_suggestion_id_seq'::regclass) NOT NULL,
+	suggestion_id integer PRIMARY KEY DEFAULT NEXTVAL('landmark_suggestions_suggestion_id_seq') NOT NULL,
 	name varchar(64) NOT NULL,
 	type varchar(13) NOT NULL,
 	zip char(5) NOT NULL,
 	description varchar NOT NULL,
 	date_requested timestamp NOT NULL DEFAULT now(),
-	CONSTRAINT pk_landmark_suggestions_suggestion_id PRIMARY KEY (suggestion_id)
+	CONSTRAINT ck_landmark_suggestions_type CHECK (type IN ('Sports', 'Museum', 'Entertainment', 'Park', 'Shopping', 'Theater', 'Government', 'Restaurant'))
 	
 );
 

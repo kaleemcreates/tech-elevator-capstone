@@ -40,6 +40,7 @@
 	<title>Create a New Administrator</title>
 </head>
 <body>
+<h3>Create a New Administrator or City Visitor</h3>
 <form method="POST" action="${formAction}">
 	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 	<div class="row">

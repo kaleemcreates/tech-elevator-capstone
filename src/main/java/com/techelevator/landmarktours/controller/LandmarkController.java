@@ -91,10 +91,11 @@ public class LandmarkController {
 		suggestion.setName(name);
 		suggestion.setType(type);
 		suggestion.setZip(zip);
+		suggestion.setDateRequested(LocalDateTime.now());
 		suggestion.setDescription(description);
 		
 		landmarkSuggestionsDAO.save(suggestion);
-		return "redirect:/home";
+		return "redirect:/adminLanding";
 	}
 
 
