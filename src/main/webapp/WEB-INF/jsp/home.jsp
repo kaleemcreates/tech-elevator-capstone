@@ -1,48 +1,47 @@
 
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/WEB-INF/jsp/header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHnTrqf_-ymPuHiz1UhbRUJCblHG2X3a8&callback=initMap&libraries=geometry"></script>
+<!-- <script type="text/javascript">
+        google.load("maps", "3",{other_params:"sensor=false&libraries=geometry"});
+      </script> -->
 
 
 
 <h3> Please Select Your Hotel as a Starting point</h3>
 
-<div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
-    </div>
-    <div id="directions-panel"></div>
-  
-     <div id="right-panel" >
-    <div>
-    <b>Start:</b>
-    <select id="start" name="hotelStart">
-       <c:forEach var="hotelList" items="${hotelList}">
+ <select id="address" name="address" placeholder="Columbus OH">
+ <c:forEach var="hotelList" items="${hotelList}">
     	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
  	   </c:forEach>
-    </select>
-    <br>
-    <b>Waypoints:</b> <br>
+ </select>
+ <select id="radius_km">
+	 <option value=1>1 mile</option>
+	 <option value=2>2 miles</option>
+	 <option value=5>5 miles</option>
+	 <option value=30>30 miles</option>
+ </select>
+     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
-    <select multiple id="waypoints" name="landmarks">
+<%--     <select multiple id="waypoints" name="landmarkId">
     <c:forEach var="landmarkList" items="${landmarks}">
-    	 	<option value="${landmarkList.latitude}, ${landmarkList.longitude}">${landmarkList.name}</option>
+    	 	<option value="${landmarkList.landmarkId}">${landmarkList.name}</option>
  	 </c:forEach>
-    </select>
+    <select multiple id="waypoints" name="type">
+    <c:forEach var="landmarkType" items="${landmarks}">
+    	 	<option value="${landmarkType.type}">"${landmarkType.type}"</option>
+ 	 </c:forEach>
+    </select> --%>
     <br>
-    <b>End:</b>
-    <select id="end" name="hotelEnd">
-      <c:forEach var="hotelList" items="${hotelList}">
-    	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
- 	   </c:forEach>
-    </select>
-    <br>
-      <input type="submit" id="submit">
-    </div>      
-	
-    </div> <br>
- 
- <c:url var="formAction" value="/home"/>   
- <form method="POST" action="${formAction}">
+
+ <button onClick="showCloseLocations()">Show Locations In Radius</button>
+
+<div id="map_canvas" style="width: 500px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
+    </div>
+    <div>
+  <form method="POST" action="${formAction}">
  	
    <div id="save Itinerary" style="float: left;" >
     <div>
@@ -63,136 +62,118 @@
 	
     </div>
     </form>
+    </div>
        <script>
-       function initMap() {
-         var directionsService = new google.maps.DirectionsService;
-         var directionsDisplay = new google.maps.DirectionsRenderer;
-         var map = new google.maps.Map(document.getElementById('map_canvas'), {
-           zoom: 10,
-           center: {lat: 39.965741, lng: -83.002793}
-         });
-         directionsDisplay.setMap(map);
-         // Multiple Markers
-         var markers = [
-             ['Columbus, Ohio', 39.965741,-83.002793],
-             ['Palace of Westminster, London', 51.499633,-0.124755]
-         ];
-         
+       var map = null;
+       var radius_circle = null;
+       var markers_on_map = [];
+       var geocoder = null;
+       var infowindow = null;
+       
+       //all_locations is just a sample, you will probably load those from database
+/*        var all_locations = [
+     	  {type: "Restaurant", name: "Restaurant 1", lat: 40.723080, lng: -73.984340},
+     	  {type: "School", name: "School 1", lat: 40.724705, lng: -73.986611},
+     	  {type: "School", name: "School 2", lat: 40.724165, lng: -73.983883},
+     	  {type: "Restaurant", name: "Restaurant 2", lat: 40.721819, lng: -73.991358},
+     	  {type: "School", name: "School 3", lat: 40.732056, lng: -73.998683}
+       ]; */
+       //all_locations is just a sample, you will probably load those from database
+       var z;
+       var all_locations = [
+     	 <c:forEach var="landmarkList" items="${landmarks}">
+			{type: '${landmarkList.type}', name: '${landmarkList.name}', lat: ${landmarkList.latitude}, lng: ${landmarkList.longitude} },
+		</c:forEach>
+       ];
 
-/* 		<c:forEach var="hotel" items="${hotelList}">
-			markers.push(["${hotel.name}", ${hotel.latitude}, ${hotel.longitude}]);
-		</c:forEach> */
-                             
 
-         // Info Window Content
-         var infoWindowContent = [
-             ['<div class="info_content">' +
-             '<h3>Columbus, Ohio</h3>' +
-             '<div><img src="http://www.columbussports.org/wp-content/uploads/2012/01/Columbus-Skyline-South-e1332361914545.jpg" style="width: 75%; margin-right: 0px;"</div>' +
-             '<p>Home of the Buckeyes and everything else. OH---IO!! <br>Come get your eat on, drink on, art on, sports on, chill on!</p>' + '</div>'],
-             ['<div class="info_content">' +
-             '<h3>Palace of Westminster</h3>' +
-             '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
-             '</div>']
-         ];
-             
-         // Display multiple markers on a map
-         var infoWindow = new google.maps.InfoWindow(), marker, i;
-         
-         // Loop through our array of markers & place each one on the map  
-         for( i = 0; i < markers.length; i++ ) {
-             var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-             
-             marker = new google.maps.Marker({
-                 position: position,
-                 map: map,
-                 title: markers[i][0]
-             });
-             
-             // Allow each marker to have an info window    
-             google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                 return function() {
-                     infoWindow.setContent(infoWindowContent[i][0]);
-                     infoWindow.open(map, marker);
-                 }
-             })(marker, i));
-         }
 
-         document.getElementById('submit').addEventListener('click', function() {
-           calculateAndDisplayRoute(directionsService, directionsDisplay);
-		
-         });
-       }
-       var widgetDiv = document.getElementById('save-widget');
-       map.controls[google.maps.ControlPosition.TOP_LEFT].push(widgetDiv);
-
-       // Append a Save Control to the existing save-widget div.
-       var saveWidget = new google.maps.SaveWidget(widgetDiv, {
-         place: {
-           // ChIJN1t_tDeuEmsRUsoyG83frY4 is the place Id for CourtYard.
-           placeId: 'ChIJyY9c6S-POIgRlMVLdUiH6Cc',
-           location: {lat: -33.866647, lng: 151.195886}
-         },
-         attribution: {
-           source: 'Google Maps JavaScript API',
-           webUrl: 'https://developers.google.com/maps/'
-         }
+       //initialize map on document ready
+       $(document).ready(function(){
+           var latlng = new google.maps.LatLng(39.965741, -83.002793); 
+           var myOptions = {
+             zoom: 10,
+             center: latlng,
+             mapTypeControl: true,
+             mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+             navigationControl: true,
+             mapTypeId: google.maps.MapTypeId.ROADMAP
+           };
+           map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+     	  geocoder = new google.maps.Geocoder();
+           google.maps.event.addListener(map, 'click', function(){
+                if(infowindow){
+                  infowindow.setMap(null);
+                  infowindow = null;
+                }
+           });
        });
+       
+       function showCloseLocations() {
+       	var i;
+       	var radius_km = $('#radius_km').val();
+       	var address = $('#address').val();
 
-       var marker = new google.maps.Marker({
-         map: map,
-         position: saveWidget.getPlace().location
-       });
-       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-         var waypts = [];
-         var checkboxArray = document.getElementById('waypoints');
-         for (var i = 0; i < checkboxArray.length; i++) {
-           if (checkboxArray.options[i].selected) {
-             waypts.push({
-               location: checkboxArray[i].value,
-               stopover: true
-             });
-           }
-         }
-     
-         
+       	//remove all radii and markers from map before displaying new ones
+       	if (radius_circle) {
+       		radius_circle.setMap(null);
+       		radius_circle = null;
+       	}
+       	for (i = 0; i < markers_on_map.length; i++) {
+       		if (markers_on_map[i]) {
+       			markers_on_map[i].setMap(null);
+       			markers_on_map[i] = null;
+       		}
+       	}
 
-         directionsService.route({
-           origin: document.getElementById('start').value,
-           destination: document.getElementById('end').value,
-           waypoints: waypts,
-           optimizeWaypoints: true,
-           travelMode: 'DRIVING'
-         }, function(response, status) {
-           if (status === 'OK') {
-             directionsDisplay.setDirections(response);
-             var route = response.routes[0];
-             var summaryPanel = document.getElementById('directions-panel');
-             summaryPanel.innerHTML = '';
-             // For each route, display summary information.
-             for (var i = 0; i < route.legs.length; i++) {
-               var routeSegment = i + 1;
-               summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-                   '</b><br>';
-               
-               summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-               summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-               summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-             }
-             var input = document.createElement("button");        // Create a <button> element
-             var text = document.createTextNode("Save Itinerary")       // Create a text node
-             input.appendChild(text);
-             document.getElementById('directions-panel').appendChild(input);
-           } else {
-             window.alert('Directions request failed due to ' + status);
-           }
-         });
-
+       	if (geocoder) {
+       		geocoder.geocode({'address': address}, function (results, status) {
+       			if (status == google.maps.GeocoderStatus.OK) {
+       				if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+       					var address_lat_lng = results[0].geometry.location;
+       					radius_circle = new google.maps.Circle({
+       						center: address_lat_lng,
+       						radius: radius_km * 1000,
+       						clickable: false,
+     						map: map
+       					});
+                         if (radius_circle) map.fitBounds(radius_circle.getBounds());
+       					for (var j = 0; j < all_locations.length; j++) {
+       						(function (location) {
+       							var marker_lat_lng = new google.maps.LatLng(location.lat, location.lng);
+       							var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng); //distance in meters between your location and the marker
+       							if (distance_from_location <= radius_km * 1000) {
+       								var new_marker = new google.maps.Marker({
+       									position: marker_lat_lng,
+       									map: map,
+       									title: location.name
+       								});      								google.maps.event.addListener(new_marker, 'click', function () {
+                                         if(infowindow){
+                  infowindow.setMap(null);
+                  infowindow = null;
+                }
+       									infowindow = new google.maps.InfoWindow(
+                 { content: '<div style="color:red">'+location.name +'</div>' + " is " + distance_from_location + " meters from my location",
+                   size: new google.maps.Size(150,50),
+                   pixelOffset: new google.maps.Size(0, -30)
+                 , position: marker_lat_lng, map: map});
+       								});
+       								markers_on_map.push(new_marker);
+       							}
+       						})(all_locations[j]);
+       					}
+       				} else {
+       					alert("No results found while geocoding!");
+       				}
+       			} else {
+       				alert("Geocode was not successful: " + status);
+       			}
+       		});
+       	}
        }
-
        </script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8&callback=initMap">
- </script>
+<!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr5ShZL1BRiM_fdvx6wHIKpe48McMYqb8&callback=initMap">
+ </script> -->
 
 <c:import url="/WEB-INF/jsp/footer.jsp" />
 		

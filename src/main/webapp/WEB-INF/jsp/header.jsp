@@ -48,6 +48,7 @@
 			<c:url var="imgSrc" value="/img/landmarkTours.png" />
 			<a href="${homePageHref}"><img src="${imgSrc}" class="img-responsive" /></a>
 			
+
 			
 		</header>
 		<nav class="navbar navbar-default">
@@ -64,8 +65,9 @@
 							<li><a href="${newLandmarkHref}">Create New Landmark Admin Only</a></li>
 							<c:url var="changeUserAccessHref" value="/users/${currentUser.userName}/adminUser" />
 							<li><a href="${changeUserAccessHref}">Change User Access</a></li>
-							<c:url var="newUserHref" value="/users/new" />
-							<li><a href="${newUserHref}">Sign Up</a></li>
+							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
+							<li><a href="${changePasswordHref}">Change Password</a></li>
+
 						</c:when>
 						<c:when test="${not empty currentUser}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
@@ -76,11 +78,8 @@
 							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
 							<li><a href="${changePasswordHref}">Change Password</a></li>
-							<c:url var="logoutAction" value="/logout" />
-							<form id="logoutForm" action="${logoutAction}" method="POST">
-								<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
-							</form>
-							<li><a id="logoutLink" href="#">Log Out</a></li>
+
+							<!-- <li><a id="logoutLink" href="#">Log Out</a></li> -->
 						</c:when>
 					</c:choose>
 				</ul>
@@ -105,49 +104,26 @@
 				</ul>
 			</div>
 		</nav>
-		
-		
-	
-			
-			
-			<div class="pull-right">
+		<div class="page-header">
+ 		<div class="pull-right">
+			<form action="http://localhost:8080/capstone/addLandmark">
+				<input type="submit" class="btn btn-primary" value="Select here to suggest a landmark!">
+			</form>
+			<br>
 			<div class="dropdown">
-  				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a landmark to view its page!<span class="caret"></span></button>
-  				<ul class="dropdown-menu">
-    				<li>
-    					<c:forEach var="landmark" items="${landmarks}">
-	    	
-	    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmarkId}">${landmark.name}</a>
-	    			
-	    				</c:forEach>
-    				</li>
-    			
-  				</ul>
+	 				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a landmark to view its page!<span class="caret"></span></button>
+	 				<ul class="dropdown-menu">
+		   				<li>
+		   					<c:forEach var="landmark" items="${landmarks}">
+		    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmarkId}">${landmark.name}</a>
+		    				</c:forEach>
+		   				</li>
+	 				</ul>
 			</div>
-			</div>
+		</div>
+		</div>
 
-			
-	    	
-	    <%-- 	<option value="">Select a Landmark to View its Page!</option>	
-	    		<c:forEach var="landmarkList" items="${landmarkList}">
-	    	
-	    			<option value="/capstone/landmarkDetail?landmark_id=${landmarkList.landmark_id}">${landmarkList.name}</option>
-	    			
-	    		</c:forEach>
-	    			 --%>
-	    		<!--  <option value="/capstone/landmarkDetail?landmark_id=ZOO">Columbus Zoo</option> -->
-	    		<!-- <option value="/capstone/landmarkDetail?landmark_id=SKI">Skillet</option> -->
-	    	
-		
-	
-			<!-- <button id="executelink">Go To Landmark</button> -->
-		
 
-		
-		
-	
-		
-		
 		<c:if test="${not empty currentUser}">
 			<p id="currentUser">Current User: ${currentUser.userName}</p>
 		</c:if>		

@@ -12,7 +12,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JDBCItineraryLandmarksDAO implements ItineraryLandmarksDA0   {
+public class JDBCItineraryLandmarksDAO implements ItineraryLandmarksDAO   {
 
 	private JdbcTemplate jdbcTemplate;
 

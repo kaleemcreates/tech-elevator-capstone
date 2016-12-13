@@ -11,7 +11,8 @@
     <c:forEach var="landmark" items="${landmarkListByItineraryId}">
     	 	<ul>
     	 		
-    	 		<li><img src="img/${landmark.landmarkId}.jpg" class="img-responsive" ></li>
+				<c:url var="imgSrc" value="/img/${landmark.landmarkId}.jpg" />
+    	 		<li><img src="${imgSrc}" class="img-responsive" ></li>
     	 		
     	 	</ul>
  	</c:forEach>

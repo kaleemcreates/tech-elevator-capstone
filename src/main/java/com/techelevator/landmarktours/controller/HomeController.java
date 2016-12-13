@@ -53,6 +53,14 @@ public class HomeController {
 	
 		return "home";
 	}
+	@RequestMapping(path={"/homecopyworkingradius"}, method=RequestMethod.GET)
+	public String showHomePageCopy(Map<String, Object> model, HttpServletRequest request) {
+		model.put("landmarks", landmarksDAO.getLandmarks());
+		List <Hotels> hotelList= hotelsDAO.getHotels();
+		request.setAttribute("hotelList", hotelList);
+	
+		return "homecopyworkingradius";
+	}
 	
 	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
 	public String postSavedItinerary(@RequestParam String itineraryName,
