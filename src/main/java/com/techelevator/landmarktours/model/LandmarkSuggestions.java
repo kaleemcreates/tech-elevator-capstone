@@ -1,5 +1,7 @@
 package com.techelevator.landmarktours.model;
 
+import java.time.LocalDateTime;
+
 public class LandmarkSuggestions {
 	
 	private int suggestionId;
@@ -7,7 +9,15 @@ public class LandmarkSuggestions {
 	private String type;
 	private String zip;
 	private String description;
-	public int getSuggestionId() {
+	private LocalDateTime dateRequested;
+	
+	public LocalDateTime getDateRequested() {
+		return dateRequested;
+	}
+	public void setDateRequested(LocalDateTime dateRequested) {
+		this.dateRequested = dateRequested;
+	}
+	public int getSuggestionId(int suggestionId) {
 		return suggestionId;
 	}
 	public void setSuggestionId(int suggestionId) {

@@ -84,6 +84,7 @@ CREATE TABLE landmark_suggestions (
 	type varchar(13) NOT NULL,
 	zip char(5) NOT NULL,
 	description varchar NOT NULL,
+	date_requested timestamp NOT NULL DEFAULT now(),
 	CONSTRAINT pk_landmark_suggestions_suggestion_id PRIMARY KEY (suggestion_id)
 	
 );
