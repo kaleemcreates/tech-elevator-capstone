@@ -43,9 +43,15 @@ public class JDBCLandmarkReviewsDAO implements LandmarkReviewsDAO {
 
 	@Override
 	public void save(LandmarkReviews review) {
-		String sqlInsertReview = "INSERT INTO landmark_reviews(landmark_id, user_name, thumbs_up, review_text, create_date) "
-								+ "VALUES (?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sqlInsertReview, review.getLandmarkId(), review.getUserName(), review.isThumbsUp(), review.getReviewText(), review.getCreateDate());
+		String sqlInsertReviewWithText = "INSERT INTO landmark_reviews(landmark_id, user_name, thumbs_up, review_text, create_date) "
+										+ "VALUES (?, ?, ?, ?, ?)";
+		String sqlInsertReviewWithoutText = "INSERT INTO landmark_reviews(landmark_id, user_name, thumbs_up, create_date) "
+										+ "VALUES (?, ?, ?, ?)";
+		if (review.getReviewText() == "") {
+			jdbcTemplate.update(sqlInsertReviewWithoutText, review.getLandmarkId(), review.getUserName(), review.isThumbsUp(), review.getCreateDate());
+		} else {
+			jdbcTemplate.update(sqlInsertReviewWithText, review.getLandmarkId(), review.getUserName(), review.isThumbsUp(), review.getReviewText(), review.getCreateDate());
+		}
 	}
 
 	@Override
