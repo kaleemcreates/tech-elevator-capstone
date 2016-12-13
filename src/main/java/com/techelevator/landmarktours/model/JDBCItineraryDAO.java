@@ -64,6 +64,13 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		
 	}
 	
+	@Override
+	public void saveItineraryAndUser(String userName, int itineraryId ) {
+		String sqlInsertItineraryandUser = "INSERT INTO users_itinerary (user_name, itinerary_id ) VALUES (?,?)";
+		jdbcTemplate.update(sqlInsertItineraryandUser,  userName, itineraryId );
+		
+	}
+	
 	
 	private Itinerary mapRowToItinerary(SqlRowSet results) {
 		Itinerary itinerary = new Itinerary();

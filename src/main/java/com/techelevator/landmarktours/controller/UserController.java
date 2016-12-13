@@ -81,14 +81,17 @@ public class UserController {
 		
 		
 		itineraryDAO.saveItineraryToItinerary(itineraryName);
-		
+		System.out.println(userName);
 		int itineraryId=itineraryDAO.getItineraryId();
+		
+//		itineraryDAO.saveItineraryAndUser(userName, itineraryId);
 		
 		for (int i=0; i < landmarkId.length; i++) {
 			String landmarkid =landmarkId[i];
 			itineraryDAO.saveItineraryAndLandmark(itineraryId, landmarkid);
 			
 		}
+			
 		
 		List<ItineraryLandmarks> landmarkList= itineraryLandmarksDAO.getItineraryByIdAndLandmarks(itineraryId);
 		model.addAttribute("landmarkListByItineraryId", landmarkList);
