@@ -56,7 +56,7 @@ CREATE TABLE hotels(
 CREATE SEQUENCE seq_itinerary_id;
 
 CREATE TABLE itinerary (
-	itinerary_id integer DEFAULT NEXTVAL('seq_itinerary_id'),						--Auto-generated itinerary id
+	itinerary_id serial NOT NULL,						--Auto-generated itinerary id
 	itinerary_name varchar(64) NOT NULL,				--name of itinerary i.e. "travel plans"
 	CONSTRAINT pk_itinerary_itinerary_id PRIMARY KEY (itinerary_id)
 );
@@ -64,12 +64,13 @@ CREATE TABLE itinerary (
 CREATE TABLE users_itinerary (
 	user_name varchar(32) NOT NULL,
 	itinerary_id integer NOT NULL,
-	CONSTRAINT pk_users_routes_user_name_itinerary_id PRIMARY KEY (user_name, itinerary_id)
+	CONSTRAINT pk_users_itinerary_user_name_itinerary_id PRIMARY KEY (user_name, itinerary_id)
 );
 
 CREATE TABLE itinerary_landmarks (
 	itinerary_id integer NOT NULL,
-	landmark_id varchar(3) NOT NULL
+	landmark_id varchar(3) NOT NULL,
+	CONSTRAINT pk_itinerary_landmarks_itinerary_id_landmark_id PRIMARY KEY (itinerary_id, landmark_id)
 );
 
 COMMIT;

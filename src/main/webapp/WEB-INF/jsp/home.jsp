@@ -40,7 +40,8 @@
     </div>      
 	
     </div> <br>
-    
+ 
+ <c:url var="formAction" value="/home"/>   
  <form method="POST" action="${formAction}">
  	
    <div id="save Itinerary" style="float: left;" >

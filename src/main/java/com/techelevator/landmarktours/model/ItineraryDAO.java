@@ -5,7 +5,8 @@ import java.util.List;
 public interface ItineraryDAO {
 	
 	public List<Itinerary> getItinerary();
-	public Itinerary saveItinerary(Itinerary itineraryName);
-	public Itinerary getItineraryByName(String itinerary);
-
+	public int getItineraryId();
+	public void saveItineraryToItinerary(String itineraryName);
+	public void saveItineraryAndLandmark(int itineraryId, String landmarkId);
+	
 }

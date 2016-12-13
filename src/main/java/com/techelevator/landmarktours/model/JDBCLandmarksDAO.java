@@ -50,6 +50,7 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 		}
 		return landmark;
 	}
+
 	@Override
 	public Landmarks searchLandMarksByRadius(String locationId ) {
 		Landmarks landmark = null;
@@ -100,5 +101,6 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 
 		return landmark;
 	}
+
 
 }

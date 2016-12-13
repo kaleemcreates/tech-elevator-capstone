@@ -21,6 +21,8 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
+	
+	
 	public List<Itinerary> getItinerary() {
 		List <Itinerary> itineraries = new ArrayList<Itinerary>();
 		String sqlGetAllItineraries= "SELECT * "
@@ -34,60 +36,44 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		return itineraries;
 	}
 	
-	public Itinerary saveItineraryAndLandmark(Itinerary itineraryName, Landmarks landmarkId) {
-		Itinerary itinerary = null;
+	@Override
+	public void saveItineraryToItinerary(String itineraryName) {
 		
 		String sqlInsertItineraryName= "INSERT INTO itinerary (itinerary_name) VALUES (?)";
 		jdbcTemplate.update(sqlInsertItineraryName, itineraryName);
-		String sqlGetCurrentItineraryId= "SELECT currval(pg_get_serial_sequence('itinerary','itinerary_id'))";
 
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlInsertItineraryName, itineraryName, sqlGetCurrentItineraryId);
-		if(results.next()) {
-			itinerary=mapRowToItinerary(results);
-		}
-		
-		String sqlInsertItineraryandLandmark = "INSERT INTO itinerary_landmark(itinerary_id, landmark_id ) VALUES (?,?)";
-		
-		jdbcTemplate.update(sqlInsertItineraryandLandmark, itinerary.getitineraryId(), landmarkId);
-			
-		return itinerary;
 	}
 	
-	public List <Itinerary> getItineraryByIdAndLandmarks(Itinerary itineraryId) {
-		Itinerary itinerary=null;
-		List <Itinerary> list= new ArrayList<Itinerary>();
-		String sqlSelectItineraryByName = "SELECT * "
-											+ "FROM itinerary_landmark "
-											+ "WHERE itinerary_id = ?";
+	@Override
+	public int getItineraryId() {
+		int id=0;
+		String sqlGetCurrentItineraryId= "SELECT currval(pg_get_serial_sequence('itinerary','itinerary_id'))";
 		
-		SqlRowSet results =jdbcTemplate.queryForRowSet(sqlSelectItineraryByName, itineraryId);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetCurrentItineraryId);
 		if(results.next()) {
-			itinerary = mapRowToItinerary(results);
-			list.add(itinerary);
+				 id= results.getInt(1);
+				 
 		}
-		return list;
+		return id;
+	}
+	
+	@Override
+	public void saveItineraryAndLandmark(int itineraryId, String landmarkId) {
+		String sqlInsertItineraryandLandmark = "INSERT INTO itinerary_landmarks (itinerary_id, landmark_id ) VALUES (?,?)";
+		jdbcTemplate.update(sqlInsertItineraryandLandmark, itineraryId, landmarkId);
+		
 	}
 	
 	
 	private Itinerary mapRowToItinerary(SqlRowSet results) {
 		Itinerary itinerary = new Itinerary();
-		itinerary.setItineraryId("itinerary_id");
-		itinerary.setItineraryName("itinerary_name");
+		itinerary.setItineraryId(results.getInt("itinerary_id"));
+		itinerary.setItineraryName(results.getString("itinerary_name"));
 		
 		return itinerary;
 	}
 
-	@Override
-	public Itinerary saveItinerary(Itinerary itineraryName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Itinerary getItineraryByName(String itinerary) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 }
