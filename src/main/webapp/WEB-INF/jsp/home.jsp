@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/WEB-INF/jsp/header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHnTrqf_-ymPuHiz1UhbRUJCblHG2X3a8&callback&libraries=geometry"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHnTrqf_-ymPuHiz1UhbRUJCblHG2X3a8&callback=initMap&libraries=geometry"></script>
 <!-- <script type="text/javascript">
         google.load("maps", "3",{other_params:"sensor=false&libraries=geometry"});
       </script> -->
@@ -37,7 +37,7 @@
     <br>
  <button onClick="showCloseLocations()">Show Locations In Radius</button>
 
-<div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
+<div id="map_canvas" style="width: 500px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
     <div>
   <form method="POST" action="${formAction}">
