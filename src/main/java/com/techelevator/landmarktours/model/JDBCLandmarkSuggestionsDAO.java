@@ -42,6 +42,7 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 
 	@Override
 	public void save(LandmarkSuggestions suggestion) {
+<<<<<<< HEAD
 		int suggestionId = getNextId();
 		String sqlInsertLandmarkSuggestion = "INSERT INTO landmark_suggestions(suggestion_id, name, type, zip, description, date_requested) "
 											+ "VALUES (?, ?, ?, ?, ?, ?)";
@@ -60,6 +61,9 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 			throw new RuntimeException("Something strange happened, unable to select next landmark suggestion id from sequence");
 		} 
 		return id;
+=======
+		// TODO Auto-generated method stub
+>>>>>>> 6d8a2d81cf08d38b83d3cf7715c63dcd7038e2a4
 		
 	}
 

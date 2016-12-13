@@ -34,7 +34,7 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 	public void saveLandmarks(Landmarks landmarks) {
 
 		jdbcTemplate.update("INSERT INTO landmarks(name, landmark_id, type, latitude, longitude, street_address, city, state, zip, description) VALUES (?,?,?,?,?,?,?,?,?,?)",
-							landmarks.getName(), landmarks.getLandmarkId(), landmarks.getLatitude(), landmarks.getLongitude(), landmarks.getStreetAddress(), landmarks.getCity(),
+							landmarks.getName(), landmarks.getLandmarkId(), landmarks.getType(), landmarks.getLatitude(), landmarks.getLongitude(), landmarks.getStreetAddress(), landmarks.getCity(),
 							landmarks.getState(), landmarks.getZip(), landmarks.getDescription());
 	}
 	
