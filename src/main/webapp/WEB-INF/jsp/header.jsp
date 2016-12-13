@@ -56,15 +56,16 @@
 				<ul class="nav navbar-nav">
 					<c:url var="homePageHref" value="/home" />
 					<li><a href="${homePageHref}">Home</a></li>
+					<c:url var="typeSearchHref" value="/searchLandmarksByType" />
+					<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
 					<c:choose>
 						<c:when test="${ currentUser.admin}">
-							<p>I'm an admin!!</p>
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
-							<li><a href="${dashboardHref}">My Account</a></li>
-							<c:url var="newLandmarkHref" value="/users/${currentUser.userName}/landmark/addlist" />
-							<li><a href="${newLandmarkHref}">Create New Landmark Admin Only</a></li>
-							<c:url var="changeUserAccessHref" value="/users/${currentUser.userName}/adminUser" />
-							<li><a href="${changeUserAccessHref}">Change User Access</a></li>
+							<li><a href="${dashboardHref}">Admin Account</a></li>
+							<c:url var="newAdminHref" value="/users/${currentUser.userName}/adminLanding" />
+							<li><a href="${newAdminHref}">Create/ Edit Users</a></li>
+							<c:url var="adminAddLandmarksHref" value="/users/${currentUser.userName}/addLandmark" />
+							<li><a href="${adminAddLandmarksHref}">Add Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
 							<li><a href="${changePasswordHref}">Change Password</a></li>
 

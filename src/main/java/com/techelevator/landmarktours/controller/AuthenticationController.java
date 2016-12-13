@@ -40,11 +40,11 @@ public class AuthenticationController {
 //		
 //		return "adminUser";
 //	}
-	@RequestMapping(path="/users/{userName}/adminUser", method=RequestMethod.GET)
-	public String displayUserInfoChangeAdmin(Map<String, Object> model, @PathVariable String userName) {
-		model.put("userName", userName);
-		return "adminUser";
-	}
+//	@RequestMapping(path="/users/{userName}/adminUser", method=RequestMethod.GET)
+//	public String displayUserInfoChangeAdmin(Map<String, Object> model, @PathVariable String userName) {
+//		model.put("userName", userName);
+//		return "adminUser";
+//	}
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public String login(Map<String, Object> model, 
 						@RequestParam String userName, 
