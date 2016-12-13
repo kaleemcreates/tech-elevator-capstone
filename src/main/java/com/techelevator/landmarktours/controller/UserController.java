@@ -21,6 +21,8 @@ import com.techelevator.landmarktours.model.HotelsDAO;
 import com.techelevator.landmarktours.model.ItineraryDAO;
 import com.techelevator.landmarktours.model.ItineraryLandmarks;
 import com.techelevator.landmarktours.model.ItineraryLandmarksDAO;
+import com.techelevator.landmarktours.model.LandmarkSuggestions;
+import com.techelevator.landmarktours.model.LandmarkSuggestionsDAO;
 import com.techelevator.landmarktours.model.Landmarks;
 import com.techelevator.landmarktours.model.LandmarksDAO;
 import com.techelevator.landmarktours.model.User;
@@ -35,16 +37,19 @@ public class UserController {
 	private ItineraryLandmarksDAO itineraryLandmarksDAO;
 	private ItineraryDAO itineraryDAO;
 	private HotelsDAO hotelsDAO;
+	private LandmarkSuggestionsDAO landmarkSuggestionsDAO;
 
 	@Autowired
 	public UserController(UserDAO userDAO, LandmarksDAO landmarksDAO,
 						ItineraryLandmarksDAO itineraryLandmarksDAO,
-						HotelsDAO hotelsDAO, ItineraryDAO itineraryDAO) {
+						HotelsDAO hotelsDAO, ItineraryDAO itineraryDAO,
+						LandmarkSuggestionsDAO landmarkSuggestionsDAO) {
 		this.userDAO = userDAO;
 		this.landmarksDAO = landmarksDAO;
 		this.itineraryLandmarksDAO = itineraryLandmarksDAO;
 		this.hotelsDAO = hotelsDAO;
 		this.itineraryDAO= itineraryDAO;
+		this.landmarkSuggestionsDAO= landmarkSuggestionsDAO;
 	}
 
 	@RequestMapping(path="/users/new", method=RequestMethod.GET)
@@ -105,14 +110,7 @@ public class UserController {
 		return "savedItineraryView";
 	}
 	
-	@RequestMapping(path={"/users/{userName}/homecopyworkingradius"}, method=RequestMethod.GET)
-	public String showHomePageCopy(Map<String, Object> model, HttpServletRequest request) {
-		model.put("landmarks", landmarksDAO.getLandmarks());
-		List <Hotels> hotelList= hotelsDAO.getHotels();
-		request.setAttribute("hotelList", hotelList);
-	
-		return "homecopyworkingradius";
-	}
+
 	
 //	@RequestMapping(path={"/users/{userName}/userDashboard"}, method=RequestMethod.GET)
 //	public String showHomePage(Map<String, Object> model, HttpServletRequest request) {
@@ -136,18 +134,32 @@ public class UserController {
 		return "userDashboard";
 	}
 	
-	@RequestMapping(path="/adminLanding", method=RequestMethod.GET)
+	@RequestMapping(path="/users/{userName}/adminLanding", method=RequestMethod.GET)
 	public String displayNewAdminForm(HttpServletRequest request) {
 		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
 		request.setAttribute("landmarkList", landmarkList);
 		
-		return "/adminLanding";
+		return "adminLanding";
 	}
 	
-	@RequestMapping(path="/adminLanding", method=RequestMethod.POST)
+	@RequestMapping(path="/users/{userName}/adminLanding", method=RequestMethod.POST)
 	public String createAdmin(@RequestParam User user, @RequestParam String password) {
 		userDAO.saveUser(user, password);
-		return "/adminLanding";
+		return "adminLanding";
+	}
+	@RequestMapping(path="/users/{userName}/addLandmark", method=RequestMethod.GET)
+	public String displayAddLandmarksAdmin(HttpServletRequest request) {
+//		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
+//		request.setAttribute("landmarkList", landmarkList);
+		List <LandmarkSuggestions>landmarkSuggestionList= landmarkSuggestionsDAO.getLandmarkSuggestions();
+		request.setAttribute("landmarkSuggestionList", landmarkSuggestionList);
+		
+		return "addLandmark";
+	}
+	@RequestMapping(path="/users/{userName}/addLandmark", method=RequestMethod.POST)
+	public String createNewLandmarkAdmin(@RequestParam LandmarkSuggestions suggestion ) {
+		landmarkSuggestionsDAO.save(suggestion);
+		return "addLandmark";
 	}
 	
 
