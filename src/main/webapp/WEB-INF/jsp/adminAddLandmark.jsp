@@ -81,7 +81,7 @@ Landmark Description: <c:out value="${landmarkSuggestion.description}" />
 </div>
 
 <h3>Fill In this Form to Approve The Landmark Above</h3>
-<c:url var="formAction" value="/adminAddLandmark" />
+<c:url var="formAction" value="/users/${currentUser.userName}/adminAddLandmark" />
 <form method="POST" action="${formAction}">
 <input type="hidden" name="suggestionId" value="${landmarkSuggestion.suggestionId}">
 <div class="form-group">

@@ -137,7 +137,7 @@ public class LandmarkController {
 		
 		landmarksDAO.saveLandmarks(landmark);
 		landmarkSuggestionsDAO.removeSuggestion(suggestionId);
-		return "users/{userName}/adminAddLandmark";
+		return "redirect:/users/{userName}/adminAddLandmark";
 	}
 
 
