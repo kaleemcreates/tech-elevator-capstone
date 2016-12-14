@@ -71,9 +71,16 @@
 		});
 	});
 </script>
+<h3>Landmarks to Approve</h3>
+<div>
+Landmark Name: <c:out value="${landmarkSuggestion.name}" /><br>
+Landmark Type:<c:out value="${landmarkSuggestion.type}" /><br>
+Landmark Zip Code: <c:out value="${landmarkSuggestion.zip}" /><br>
+Landmark Description: <c:out value="${landmarkSuggestion.description}" />
 
+</div>
 
-<h3>Suggest a Landmark</h3>
+<h3>Fill In this Form to Approve The Landmark Above</h3>
 <c:url var="formAction" value="/adminAddLandmark" />
 <form method="POST" action="${formAction}">
 <input type="hidden" name="suggestionId" value="${landmarkSuggestion.suggestionId}">

@@ -83,16 +83,7 @@
 		</div>
 	</div>
 </form>
-<h3>Landmarks to Approve</h3>
-<div>
-Landmark Name: <c:out value="${landmarkSuggestion.name}" />
-Landmark Type:<c:out value="${landmarkSuggestion.type}" />
-Landmark Zip Code: <c:out value="${landmarkSuggestion.zip}" />
-Landmark Description: <c:out value="${landmarkSuggestion.description}" />
-<form action="http://localhost:8080/capstone/users/${currentUser.userName}/adminAddLandmark">
-	<input type="submit" class="btn btn-primary" value="Click here to add this landmark to the database">
-</form>
-</div>
+
 </body>
 </html>
 <c:import url="/WEB-INF/jsp/footer.jsp" />
