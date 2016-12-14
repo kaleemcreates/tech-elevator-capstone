@@ -24,7 +24,8 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 	public List<LandmarkSuggestions> getLandmarkSuggestions() {
 		List<LandmarkSuggestions> landmarkSuggestions = new ArrayList<>();
 		String sqlSelectLandmarkSuggestions = "SELECT * "
-											+ "FROM landmark_suggestions";
+											+ "FROM landmark_suggestions "
+											+ "ORDER BY date_requested DESC LIMIT 1";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarkSuggestions);
 		while(results.next()) {
 			LandmarkSuggestions landmarkSuggestion = new LandmarkSuggestions();
@@ -51,6 +52,13 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 		
 	}
 	
+//	@Override 
+//	public void adminSaveSuggestedLandmark(LandmarkSuggestions landmarkSuggestions) {
+//		String sqlAdminSaveSuggestedLandmark = "INSERT INTO landmarks(name, place_id, landmark_id, type, latitude, longitude, street_address, city, state, zip, description, create_time) "
+//												+ "VALUES ("
+//		jdbcTemplate.update
+//	}
+//	
 	private int getNextId() {
 		String sqlSelectNextId = "SELECT NEXTVAL ('landmark_suggestions_suggestion_id_seq')";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectNextId);
@@ -61,10 +69,15 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 			throw new RuntimeException("Something strange happened, unable to select next landmark suggestion id from sequence");
 		} 
 		return id;
+		
+	}
 
-
+	@Override
+	public void adminSaveSuggestedLandmark(LandmarkSuggestions landmarkSuggestions) {
 		// TODO Auto-generated method stub
 		
 	}
+	
+
 
 }

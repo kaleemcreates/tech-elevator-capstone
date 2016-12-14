@@ -34,7 +34,7 @@
 				zip: {
 					required: "Zip code is required",
 					maxlength: "Zip code cannot be more than 5 digits"
-				}
+				},
 				description: {
 					required: "Description is required"
 				}
