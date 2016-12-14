@@ -62,36 +62,7 @@ public class HomeController {
 		return "searchLandmarksByType";
 	}
 	
-	@RequestMapping(path={"/", "/home"}, method=RequestMethod.POST)
-	public String postSavedItinerary(@RequestParam String itineraryName,
-									@RequestParam String [] landmarkId,
-									ModelMap  model) {
-		
-		
-		itineraryDAO.saveItineraryToItinerary(itineraryName);
-		
-		int itineraryId=itineraryDAO.getItineraryId();
-		
-		for (int i=0; i < landmarkId.length; i++) {
-			String landmarkid =landmarkId[i];
-			itineraryDAO.saveItineraryAndLandmark(itineraryId, landmarkid);
-			
-		}
-		
-		List<ItineraryLandmarks> landmarkList= itineraryLandmarksDAO.getItineraryByIdAndLandmarks(itineraryId);
-		model.addAttribute("landmarkListByItineraryId", landmarkList);
-		
-		
-		return "redirect: savedItineraryView";
-	}
 	
-	@RequestMapping(path="/savedItineraryView", method=RequestMethod.GET)
-	public String showSavedItineraryView( HttpServletRequest request ) {
-		
-		
-		
-		return "savedItineraryView";
-	}
 	
 
 //    @RequestMapping(value = "/map", method = RequestMethod.GET)

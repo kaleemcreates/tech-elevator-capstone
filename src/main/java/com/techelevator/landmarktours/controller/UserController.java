@@ -86,10 +86,10 @@ public class UserController {
 		
 		
 		itineraryDAO.saveItineraryToItinerary(itineraryName);
-		System.out.println(userName);
+		
 		int itineraryId=itineraryDAO.getItineraryId();
 		
-//		itineraryDAO.saveItineraryAndUser(userName, itineraryId);
+		itineraryDAO.saveItineraryAndUser(userName, itineraryId);
 		
 		for (int i=0; i < landmarkId.length; i++) {
 			String landmarkid =landmarkId[i];

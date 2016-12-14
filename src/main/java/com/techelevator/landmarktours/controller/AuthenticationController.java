@@ -81,4 +81,4 @@ public class AuthenticationController {
 		session.removeAttribute("currentUser");
 		return "redirect:/";
 	}
-}
+} 
