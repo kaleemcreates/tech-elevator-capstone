@@ -6,17 +6,17 @@
 
 
 
-<h3> Your Itinerary </h3>
+
 	<div>
-    <c:forEach var="landmark" items="${landmarkListByItineraryId}">
-    	 	<ul>
-    	 		
-				<c:url var="imgSrc" value="/img/${landmark.landmarkId}.jpg" />
-    	 		<li><img src="${imgSrc}" class="img-responsive" ></li>
-    	 		
-    	 	</ul>
- 	</c:forEach>
+	
+	<h3> Your Confirmation Number is : <b>${param.itineraryId }</b><br>
+		Your Itinerary Name is: <b>${param.itineraryName} </b><br></h3>
+	
+	<h1>Thank You For Saving Your Itinerary With Arch City Adventures!</h1> 
+	<br>
+
  	
 	</div>
+
 <c:import url="/WEB-INF/jsp/footer.jsp" />
 		

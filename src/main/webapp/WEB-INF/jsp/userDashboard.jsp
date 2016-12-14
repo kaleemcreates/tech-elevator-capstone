@@ -41,7 +41,7 @@
 	
     </div> <br>
  
- <c:url var="formAction" value="{userName}"/>   
+ <c:url var="formAction" value="/users/${userName}"/>   
  <form method="POST" action="${formAction}">
  	
    <div id="save Itinerary" style="float: left;" >

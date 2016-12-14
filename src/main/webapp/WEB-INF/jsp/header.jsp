@@ -75,6 +75,8 @@
 							<li><a href="${dashboardHref}">My Account</a></li>
 							<c:url var="newMessageHref" value="/users/${currentUser.userName}/landmark/list" />
 							<li><a href="${savedList}">Saved List</a></li>
+							<c:url var="newMessageHref" value="/users/${currentUser.userName}/savedItineraryView" />
+							<li><a href="${Itinerary}">Saved Itinerary</a></li>
 							<c:url var="sentMessagesHref" value="/users/${currentUser.userName}/search" />
 							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />

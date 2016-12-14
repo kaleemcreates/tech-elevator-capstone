@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.techelevator.landmarktours.model.Hotels;
 import com.techelevator.landmarktours.model.HotelsDAO;
+import com.techelevator.landmarktours.model.Itinerary;
 import com.techelevator.landmarktours.model.ItineraryDAO;
 import com.techelevator.landmarktours.model.ItineraryLandmarks;
 import com.techelevator.landmarktours.model.ItineraryLandmarksDAO;
@@ -70,11 +71,12 @@ public class UserController {
 	public String displayDashboard(Map<String, Object> model, 
 									HttpServletRequest request,
 									@PathVariable String userName) {
-	//	model.put("conversations", landmarksDAO.getSavedList(userName));
+		
 		List <Hotels> hotelList= hotelsDAO.getHotels();
 		request.setAttribute("hotelList", hotelList);
 		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
 		request.setAttribute("landmarkList", landmarkList);
+		
 		
 		return "userDashboard";
 	}
@@ -89,6 +91,8 @@ public class UserController {
 		
 		int itineraryId=itineraryDAO.getItineraryId();
 		
+
+
 		itineraryDAO.saveItineraryAndUser(userName, itineraryId);
 		
 		for (int i=0; i < landmarkId.length; i++) {
@@ -98,8 +102,10 @@ public class UserController {
 		}
 			
 		
+		model.put("itineraryName", itineraryName);
+		model.put("itineraryId", itineraryId);
 		List<ItineraryLandmarks> landmarkList= itineraryLandmarksDAO.getItineraryByIdAndLandmarks(itineraryId);
-		model.addAttribute("landmarkListByItineraryId", landmarkList);
+		model.put("landmarkListByItineraryId", landmarkList);
 		
 		
 		return "redirect: {userName}/savedItineraryView";
