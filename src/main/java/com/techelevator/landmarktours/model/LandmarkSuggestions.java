@@ -17,7 +17,7 @@ public class LandmarkSuggestions {
 	public void setDateRequested(LocalDateTime dateRequested) {
 		this.dateRequested = dateRequested;
 	}
-	public int getSuggestionId(int suggestionId) {
+	public int getSuggestionId() {
 		return suggestionId;
 	}
 	public void setSuggestionId(int suggestionId) {

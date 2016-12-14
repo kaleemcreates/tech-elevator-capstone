@@ -21,13 +21,12 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 	}
 
 	@Override
-	public List<LandmarkSuggestions> getLandmarkSuggestions() {
-		List<LandmarkSuggestions> landmarkSuggestions = new ArrayList<>();
+	public LandmarkSuggestions getLandmarkSuggestions() {
 		String sqlSelectLandmarkSuggestions = "SELECT * "
 											+ "FROM landmark_suggestions "
 											+ "ORDER BY date_requested DESC LIMIT 1";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarkSuggestions);
-		while(results.next()) {
+		if(results.next()) {
 			LandmarkSuggestions landmarkSuggestion = new LandmarkSuggestions();
 			landmarkSuggestion.setSuggestionId(results.getInt("suggestion_id"));
 			landmarkSuggestion.setName(results.getString("name"));
@@ -35,10 +34,10 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 			landmarkSuggestion.setZip(results.getString("zip"));
 			landmarkSuggestion.setDescription(results.getString("description"));
 			landmarkSuggestion.setDateRequested(results.getTimestamp("date_requested").toLocalDateTime());
-			landmarkSuggestions.add(landmarkSuggestion);
+			return landmarkSuggestion;
 		}
 		
-		return landmarkSuggestions;
+		return null;
 	}
 
 	@Override
@@ -48,17 +47,17 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 		String sqlInsertLandmarkSuggestion = "INSERT INTO landmark_suggestions(suggestion_id, name, type, zip, description, date_requested) "
 											+ "VALUES (?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sqlInsertLandmarkSuggestion, suggestionId, suggestion.getName(), suggestion.getType(), suggestion.getZip(), suggestion.getDescription(), suggestion.getDateRequested());
-		suggestion.getSuggestionId(suggestionId);
+		suggestion.setSuggestionId(suggestionId);
 		
 	}
 	
-//	@Override 
-//	public void adminSaveSuggestedLandmark(LandmarkSuggestions landmarkSuggestions) {
-//		String sqlAdminSaveSuggestedLandmark = "INSERT INTO landmarks(name, place_id, landmark_id, type, latitude, longitude, street_address, city, state, zip, description, create_time) "
-//												+ "VALUES ("
-//		jdbcTemplate.update
-//	}
-//	
+	@Override 
+	public void removeSuggestion(int suggestionId) {
+		String sqlAdminDeleteLandmarkSuggestion = "DELETE FROM landmark_suggestions "
+												+ "WHERE suggestion_id = ?";
+		jdbcTemplate.update(sqlAdminDeleteLandmarkSuggestion, suggestionId);
+	}
+	
 	private int getNextId() {
 		String sqlSelectNextId = "SELECT NEXTVAL ('landmark_suggestions_suggestion_id_seq')";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectNextId);
@@ -72,11 +71,6 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 		
 	}
 
-	@Override
-	public void adminSaveSuggestedLandmark(LandmarkSuggestions landmarkSuggestions) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 
 

@@ -74,8 +74,9 @@
 
 
 <h3>Suggest a Landmark</h3>
-<c:url var="formAction" value="/addLandmark" />
+<c:url var="formAction" value="/adminAddLandmark" />
 <form method="POST" action="${formAction}">
+<input type="hidden" name="suggestionId" value="${landmarkSuggestion.suggestionId}">
 <div class="form-group">
 	<label for="name">Landmark Name</label>
 	<input class="form-control" id= "name" name="name" value="${landmarkSuggestion.name}">

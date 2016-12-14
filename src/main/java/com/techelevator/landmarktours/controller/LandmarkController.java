@@ -95,7 +95,49 @@ public class LandmarkController {
 		suggestion.setDescription(description);
 		
 		landmarkSuggestionsDAO.save(suggestion);
-		return "redirect:/adminLanding";
+		return "redirect:/home";
+	}
+	
+	@RequestMapping(path="/adminAddLandmark", method=RequestMethod.GET)
+	public String getLandmarkSuggestions(HttpServletRequest request) {
+		LandmarkSuggestions landmarkSuggestion = landmarkSuggestionsDAO.getLandmarkSuggestions();
+		request.setAttribute("landmarkSuggestion", landmarkSuggestion);
+
+		return "adminAddLandmark";
+	}
+	
+	@RequestMapping(path="/adminAddLandmark", method=RequestMethod.POST)
+	public String processAdminAddLandmark(@RequestParam String name,
+											@RequestParam String placeId,
+											@RequestParam String landmarkId,
+											@RequestParam String type,
+											@RequestParam Double latitude,
+											@RequestParam Double longitude,
+											@RequestParam String streetAddress,
+											@RequestParam String city,
+											@RequestParam String state,
+											@RequestParam String zip,
+											@RequestParam String description,
+											@RequestParam int suggestionId) {
+		
+		System.out.println("Got here");
+		Landmarks landmark = new Landmarks();
+		landmark.setName(name);
+		landmark.setPlaceId(placeId);
+		landmark.setLandmarkId(landmarkId);
+		landmark.setType(type);
+		landmark.setLatitude(latitude);
+		landmark.setLongitude(longitude);
+		landmark.setStreetAddress(streetAddress);
+		landmark.setCity(city);
+		landmark.setState(state);
+		landmark.setZip(zip);
+		landmark.setDescription(description);
+		landmark.setCreateTime(LocalDateTime.now());
+		
+		landmarksDAO.saveLandmarks(landmark);
+		landmarkSuggestionsDAO.removeSuggestion(suggestionId);
+		return "redirect:/admin";
 	}
 
 
