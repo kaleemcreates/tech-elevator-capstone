@@ -36,8 +36,7 @@ public class HomeController {
 	private LandmarksDAO landmarksDAO;
 	@Autowired
 	private ItineraryDAO itineraryDAO;
-	@Autowired
-	private JDBCItineraryLandmarksDAO itineraryLandmarksDAO;
+
 	
 	public HomeController (HotelsDAO hotelsDAO, LandmarksDAO landmarksDAO, ItineraryDAO itineraryDAO) {
 		this.landmarksDAO= landmarksDAO;
