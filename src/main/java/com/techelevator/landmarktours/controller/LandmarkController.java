@@ -98,7 +98,7 @@ public class LandmarkController {
 		return "redirect:/home";
 	}
 	
-	@RequestMapping(path="/adminAddLandmark", method=RequestMethod.GET)
+	@RequestMapping(path="/users/{userName}/adminAddLandmark", method=RequestMethod.GET)
 	public String getLandmarkSuggestions(HttpServletRequest request) {
 		LandmarkSuggestions landmarkSuggestion = landmarkSuggestionsDAO.getLandmarkSuggestions();
 		request.setAttribute("landmarkSuggestion", landmarkSuggestion);
@@ -106,7 +106,7 @@ public class LandmarkController {
 		return "adminAddLandmark";
 	}
 	
-	@RequestMapping(path="/adminAddLandmark", method=RequestMethod.POST)
+	@RequestMapping(path="/users/{userName}/adminAddLandmark", method=RequestMethod.POST)
 	public String processAdminAddLandmark(@RequestParam String name,
 											@RequestParam String placeId,
 											@RequestParam String landmarkId,
@@ -120,7 +120,6 @@ public class LandmarkController {
 											@RequestParam String description,
 											@RequestParam int suggestionId) {
 		
-		System.out.println("Got here");
 		Landmarks landmark = new Landmarks();
 		landmark.setName(name);
 		landmark.setPlaceId(placeId);

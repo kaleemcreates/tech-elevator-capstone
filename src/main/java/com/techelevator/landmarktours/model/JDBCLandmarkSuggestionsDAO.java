@@ -24,7 +24,7 @@ public class JDBCLandmarkSuggestionsDAO implements LandmarkSuggestionsDAO {
 	public LandmarkSuggestions getLandmarkSuggestions() {
 		String sqlSelectLandmarkSuggestions = "SELECT * "
 											+ "FROM landmark_suggestions "
-											+ "ORDER BY date_requested DESC LIMIT 1";
+											+ "ORDER BY date_requested ASC LIMIT 1";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarkSuggestions);
 		if(results.next()) {
 			LandmarkSuggestions landmarkSuggestion = new LandmarkSuggestions();

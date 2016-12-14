@@ -87,7 +87,7 @@
 	<input class="form-control" id="placeId" name="placeId" placeholder="Place Id">
 </div>
 <div class="form-group">
-	<label for="landmarkId">Place Id</label>
+	<label for="landmarkId">Landmark Id</label>
 	<input class="form-control" id="landmarkId" name="landmarkId" placeholder="Landmark Id">
 </div>
 
