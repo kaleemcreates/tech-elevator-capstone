@@ -25,7 +25,6 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 	public List<Landmarks> getLandmarks() {
 		String sqlSelectLandmarks = "SELECT * "+
 									"FROM landmarks";
-							;
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarks);
 		return mapRowSetToLandmarks(results);
 	}
@@ -33,8 +32,8 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 	@Override
 	public void saveLandmarks(Landmarks landmarks) {
 
-		jdbcTemplate.update("INSERT INTO landmarks(name, landmark_id, type, latitude, longitude, street_address, city, state, zip, description) VALUES (?,?,?,?,?,?,?,?,?,?)",
-							landmarks.getName(), landmarks.getLandmarkId(), landmarks.getType(), landmarks.getLatitude(), landmarks.getLongitude(), landmarks.getStreetAddress(), landmarks.getCity(),
+		jdbcTemplate.update("INSERT INTO landmarks(name, place_id, landmark_id, type, latitude, longitude, street_address, city, state, zip, description) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+							landmarks.getName(), landmarks.getplaceId(), landmarks.getLandmarkId(), landmarks.getType(), landmarks.getLatitude(), landmarks.getLongitude(), landmarks.getStreetAddress(), landmarks.getCity(),
 							landmarks.getState(), landmarks.getZip(), landmarks.getDescription());
 	}
 	
@@ -101,6 +100,12 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 
 		return landmark;
 	}
+
+
+
+
+
+	
 
 
 }

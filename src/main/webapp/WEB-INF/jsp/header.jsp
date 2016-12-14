@@ -64,7 +64,7 @@
 							<li><a href="${dashboardHref}">Admin Account</a></li>
 							<c:url var="newAdminHref" value="/users/${currentUser.userName}/adminLanding" />
 							<li><a href="${newAdminHref}">Create/ Edit Users</a></li>
-							<c:url var="adminAddLandmarksHref" value="/users/${currentUser.userName}/addLandmark" />
+							<c:url var="adminAddLandmarksHref" value="/users/${currentUser.userName}/adminAddLandmark" />
 							<li><a href="${adminAddLandmarksHref}">Add Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
 							<li><a href="${changePasswordHref}">Change Password</a></li>

@@ -165,15 +165,7 @@ public class UserController {
 		userDAO.saveUser(user, password);
 		return "adminLanding";
 	}
-	@RequestMapping(path="/users/{userName}/addLandmark", method=RequestMethod.GET)
-	public String displayAddLandmarksAdmin(HttpServletRequest request) {
-//		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();
-//		request.setAttribute("landmarkList", landmarkList);
-		List <LandmarkSuggestions>landmarkSuggestionList= landmarkSuggestionsDAO.getLandmarkSuggestions();
-		request.setAttribute("landmarkSuggestionList", landmarkSuggestionList);
-		
-		return "addLandmark";
-	}
+
 	@RequestMapping(path="/users/{userName}/addLandmark", method=RequestMethod.POST)
 	public String createNewLandmarkAdmin(@RequestParam LandmarkSuggestions suggestion ) {
 		landmarkSuggestionsDAO.save(suggestion);

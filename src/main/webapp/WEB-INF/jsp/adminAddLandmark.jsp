@@ -74,8 +74,9 @@
 
 
 <h3>Suggest a Landmark</h3>
-<c:url var="formAction" value="/addLandmark" />
+<c:url var="formAction" value="/adminAddLandmark" />
 <form method="POST" action="${formAction}">
+<input type="hidden" name="suggestionId" value="${landmarkSuggestion.suggestionId}">
 <div class="form-group">
 	<label for="name">Landmark Name</label>
 	<input class="form-control" id= "name" name="name" value="${landmarkSuggestion.name}">
@@ -86,7 +87,7 @@
 	<input class="form-control" id="placeId" name="placeId" placeholder="Place Id">
 </div>
 <div class="form-group">
-	<label for="landmarkId">Place Id</label>
+	<label for="landmarkId">Landmark Id</label>
 	<input class="form-control" id="landmarkId" name="landmarkId" placeholder="Landmark Id">
 </div>
 
