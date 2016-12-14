@@ -112,11 +112,20 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/users/{userName}/savedItineraryView", method=RequestMethod.GET)
-	public String showSavedItineraryView1( HttpServletRequest request, @PathVariable String userName ) {
+	public String showSavedItineraryView(Map<String, Object> model, HttpServletRequest request, @PathVariable String userName ) {
 		
-		
+		model.put("userName", userName);
 		
 		return "savedItineraryView";
+	}
+	
+	@RequestMapping(path="/users/{userName}/savedItineraryList", method=RequestMethod.GET) 
+	public String showSavedItineraryList(HttpServletRequest request, @PathVariable String userName) {
+		
+		itineraryDAO.getItineraryAndLandmarkByUserName(userName);
+	
+		return "savedItineraryList";
+		
 	}
 	
 

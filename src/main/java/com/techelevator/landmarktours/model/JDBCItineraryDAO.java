@@ -58,6 +58,23 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 	
 	@Override
+	public List <ItineraryNameLandmark> getItineraryAndLandmarkByUserName(String userName) {
+		List <ItineraryNameLandmark> itineraryNameLandmark= new ArrayList<ItineraryNameLandmark>();
+		
+		String sqlgetItineraryAndLandmarkByUserName= "SELECT i.itinerary_name, il.landmark_id "
+													+ "FROM itinerary i "
+													+ "INNER JOIN itinerary_landmarks il ON i.itinerary_id=il.itinerary_id "
+													+ "INNER JOIN users_itinerary ui ON i.itinerary_id=ui.itinerary_id "
+													+ "WHERE ui.user_name= ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlgetItineraryAndLandmarkByUserName, userName);
+		if(results.next()) {
+			itineraryNameLandmark.addAll(mapRowSetToItineraryNameAndLandmark(results));
+		}
+		
+		return itineraryNameLandmark;
+	}
+	
+	@Override
 	public void saveItineraryAndLandmark(int itineraryId, String landmarkId) {
 		String sqlInsertItineraryandLandmark = "INSERT INTO itinerary_landmarks (itinerary_id, landmark_id ) VALUES (?,?)";
 		jdbcTemplate.update(sqlInsertItineraryandLandmark, itineraryId, landmarkId);
@@ -78,6 +95,22 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		itinerary.setItineraryName(results.getString("itinerary_name"));
 		
 		return itinerary;
+	}
+	private List <ItineraryNameLandmark> mapRowSetToItineraryNameAndLandmark(SqlRowSet results) {
+		List <ItineraryNameLandmark> itineraryNameLandmark = new ArrayList<ItineraryNameLandmark>();
+		while(results.next()) {
+			itineraryNameLandmark.add(mapRowToItineraryNameAndLandmark(results));
+		}
+		return itineraryNameLandmark;
+	}
+	
+	private ItineraryNameLandmark mapRowToItineraryNameAndLandmark(SqlRowSet results) {
+		ItineraryNameLandmark itineraryNameLandmark = new ItineraryNameLandmark();
+		
+		itineraryNameLandmark.setItineraryName(results.getString("itinerary_name"));
+		itineraryNameLandmark.setLandmarkId(results.getNString("landmark_id"));
+		
+		return itineraryNameLandmark;
 	}
 
 
