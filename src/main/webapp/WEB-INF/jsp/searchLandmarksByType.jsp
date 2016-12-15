@@ -104,19 +104,32 @@
        // Init map
      //  initialize();
        </script>
+<div class="row">
+	<div class="col-md-10 offset 2"><h4> Search By Landmark Type</h4> </div>
+</div>
+<div class="row">
+	<div class="col-md-4 offset 1">
+		<select id="type" onchange="filterMarkers(this.value);">
+		    <option value="">Please select category</option>
+		    <option value="Sports">sports</option>
+		    <option value="Museum">Museum</option>
+		    <option value="Theater">Theater</option>
+		    <option value="Shopping">Shopping</option>
+		    <option value="Entertainment">Entertainment</option>
+			<option value="Shopping">Shopping</option>
+			<option value="Restaurant">Restaurant</option>
+		</select>
+	</div>
+</div>
 <div>
 <div id="map-canvas" style="width: 70%; height: 350px; position: relative; background-color: rgb(229, 227, 223);"></div>
-<select id="type" onchange="filterMarkers(this.value);">
-    <option value="">Please select category</option>
-    <option value="Sports">sports</option>
-    <option value="Museum">Museum</option>
-    <option value="Theater">Theater</option>
-    <option value="Shopping">Shopping</option>
-    <option value="Entertainment">Entertainment</option>
-	 <option value="Shopping">Shopping</option>
-	 <option value="Restaurant">Restaurant</option>
-</select>
-</div>
 
+</div>
+<div class="row">
+		<div class= "col-md-2 "></div>
+	    <div class= "col-md-10 .col-md-offset-2">
+	    	<h3>To Save Itinery, see Reviews and, Optimized Travel Path Please log In </h3>
+	    </div>
+</div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHnTrqf_-ymPuHiz1UhbRUJCblHG2X3a8&cv=3.0&callback=initialize" async defer></script>
 <c:import url="/WEB-INF/jsp/footer.jsp" />
