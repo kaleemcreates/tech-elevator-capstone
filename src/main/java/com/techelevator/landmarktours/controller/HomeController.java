@@ -53,12 +53,20 @@ public class HomeController {
 		return "home";
 	}
 	@RequestMapping(path={"/searchLandmarksByType"}, method=RequestMethod.GET)
-	public String showHomePageCopy(Map<String, Object> model, HttpServletRequest request) {
+	public String searchByType(Map<String, Object> model, HttpServletRequest request) {
 		model.put("landmarks", landmarksDAO.getLandmarks());
 		List <Hotels> hotelList= hotelsDAO.getHotels();
 		request.setAttribute("hotelList", hotelList);
 	
 		return "searchLandmarksByType";
+	}
+	@RequestMapping(path={"/searchLandmarksByRadius"}, method=RequestMethod.GET)
+	public String showHomePageCopy(Map<String, Object> model, HttpServletRequest request) {
+		model.put("landmarks", landmarksDAO.getLandmarks());
+		List <Hotels> hotelList= hotelsDAO.getHotels();
+		request.setAttribute("hotelList", hotelList);
+	
+		return "searchLandmarksByRadius";
 	}
 	
 	
