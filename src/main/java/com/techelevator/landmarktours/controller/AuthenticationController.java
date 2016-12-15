@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.techelevator.landmarktours.model.Landmarks;
+import com.techelevator.landmarktours.model.LandmarksDAO;
 import com.techelevator.landmarktours.model.User;
 import com.techelevator.landmarktours.model.UserDAO;
 
@@ -23,11 +24,14 @@ import com.techelevator.landmarktours.model.UserDAO;
 public class AuthenticationController {
 
 	private UserDAO userDAO;
+	private LandmarksDAO landmarksDAO;
 
 	@Autowired
-	public AuthenticationController(UserDAO userDAO) {
+	public AuthenticationController(UserDAO userDAO, LandmarksDAO landmarksDAO) {
 		this.userDAO = userDAO;
+		this.landmarksDAO = landmarksDAO;
 	}
+
 
 	@RequestMapping(path="/login", method=RequestMethod.GET)
 	public String displayLoginForm() {
@@ -53,6 +57,7 @@ public class AuthenticationController {
 						HttpSession session) {
 		
 		if(userDAO.searchForUsernameAndPassword(userName, password)) {
+			model.put("landmarks", landmarksDAO.getLandmarks());
 			session.invalidate();
 			User user = userDAO.getUserWithUserName(userName);
 			model.put("currentUser", user);
