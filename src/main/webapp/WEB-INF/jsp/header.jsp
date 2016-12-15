@@ -46,16 +46,36 @@
 	</head>
 	<body>
 		<header>
-			<c:url var="homePageHref" value="/" />
-			<c:url var="imgSrc" value="/img/landmarkTours.png" />
-			<a href="${homePageHref}"><img src="${imgSrc}" class="img-responsive" /></a>
+			<div class="row">
+				<div class="col-md-9">
+					<c:url var="homePageHref" value="/" />
+					<c:url var="imgSrc" value="/img/landmarkTours.png" />
+					<a href="${homePageHref}"><img src="${imgSrc}" class="img-responsive" /></a>
+				</div>
+				<div class="col-md-3">
+				<form action="http://localhost:8080/capstone/addLandmark">
+					<input type="submit" class="btn btn-primary" value="Select here to suggest a landmark!">
+				</form>
+				<br>
+					<div class="dropdown">
+			 				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a landmark to view its page!<span class="caret"></span></button>
+			 				<ul class="dropdown-menu">
+				   				<li>
+				   					<c:forEach var="landmark" items="${landmarks}">
+				    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmarkId}">${landmark.name}</a>
+				    				</c:forEach>
+				   				</li>
+			 				</ul>
+					</div>
+				</div>
+			</div>
 			
 
 			
 		</header>
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
-				<ul class="nav nav-pills nav-justified">
+				<ul class="nav nav-pills ">
 					<c:url var="homePageHref" value="/home" />
 					<li role="presentation" class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="${homePageHref}" role="button" aria-haspopup="true" aria-expanded="false">Home
@@ -96,9 +116,10 @@
 							<!-- <li><a id="logoutLink" href="#">Log Out</a></li> -->
 						</c:when>
 					</c:choose>
-				</ul>
+				
+
 				<ul class="nav navbar-nav navbar-right">
-					<ul class="nav nav-pills nav-justified">
+					<!-- <ul class="nav nav-pills"> -->
 					<c:choose>
 						<c:when test="${empty currentUser}">
 							<c:url var="newUserHref" value="/users/new" />
@@ -111,31 +132,20 @@
 							<li role="presentation"><a id="logoutLink" href="${logoutAction}">Log Out</a></li>
 						</c:otherwise>
 					</c:choose>
-					</ul>
+					
+				</ul>
 				</ul>
 			</div>
 		</nav>
-		<div class="page-header">
- 		<div class="pull-right">
-			<form action="http://localhost:8080/capstone/addLandmark">
-				<input type="submit" class="btn btn-primary" value="Select here to suggest a landmark!">
-			</form>
-			<br>
-			<div class="dropdown">
-	 				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a landmark to view its page!<span class="caret"></span></button>
-	 				<ul class="dropdown-menu">
-		   				<li>
-		   					<c:forEach var="landmark" items="${landmarks}">
-		    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmarkId}">${landmark.name}</a>
-		    				</c:forEach>
-		   				</li>
-	 				</ul>
-			</div>
+		<div class="page">
+ 				<div class="row">
+			<div class="col-md-4"></div>
+				<div class="col-md-8"><c:if test="${not empty currentUser}">
+					<p id="currentUser">Current User: ${currentUser.userName}</p>
+				</c:if>
+				</div>
 		</div>
 		</div>
 
-
-		<c:if test="${not empty currentUser}">
-			<p id="currentUser">Current User: ${currentUser.userName}</p>
-		</c:if>		
+		
 		<div class="container">

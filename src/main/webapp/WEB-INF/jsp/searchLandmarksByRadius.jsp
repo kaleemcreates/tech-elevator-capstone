@@ -12,7 +12,7 @@
 <div class="row">
 	<div class="col-md-4"><h4> Please Select Your Hotel as a Starting point</h4>
 
- 	<select id="address" name="address" placeholder="Columbus OH">
+ 	<select class="form-control input-sm" id="address" name="address" placeholder="Columbus OH">
 		 <c:forEach var="hotelList" items="${hotelList}">
 		    	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
 		 	   </c:forEach>
@@ -20,7 +20,8 @@
  	</div>
   <h4> Please Select Radius Search Distance:</h4>
   <div class="col-md-4">
- <select id="radius_km">
+  <br>
+ <select class="form-control input-sm" id="radius_km">
 	 <option value=1>1 mile</option>
 	 <option value=2>2 miles</option>
 	 <option value=5>5 miles</option>
@@ -31,7 +32,7 @@
  	<div class ="col-md-4">
  	</div>
  <div class="row">
-	<div class="col-sm-4"> <button onClick="showCloseLocations()">Show Locations In Radius</button>
+	<div class="col-sm-4"> <button class="btn btn-primary" type="submit" onClick="showCloseLocations()">Show Locations In Radius</button>
 	<br>
 	<div class="col-sm-4"></div>
 	</div>
