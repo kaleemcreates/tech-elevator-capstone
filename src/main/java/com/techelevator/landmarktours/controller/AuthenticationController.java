@@ -72,13 +72,30 @@ public class AuthenticationController {
 		return destination != null && destination.startsWith("http://localhost");
 	}
 
-	@RequestMapping(path="/logout", method=RequestMethod.POST)
+//	@RequestMapping(path="/logout", method=RequestMethod.POST)
+//	public String logout(Map<String, Object> model, HttpSession session) {
+//	//public String logout(Map<String, Object> model, HttpSession session, Object userName) {
+//		//User user = userDAO.getUserWithUserName(userName);
+//		//model.remove("currentUser", userName);
+//		model.remove("currentUser");
+//		session.removeAttribute("currentUser");
+//		return "redirect:/";
+//	}
+	@RequestMapping(path="/logout", method=RequestMethod.GET)
 	public String logout(Map<String, Object> model, HttpSession session) {
 	//public String logout(Map<String, Object> model, HttpSession session, Object userName) {
 		//User user = userDAO.getUserWithUserName(userName);
 		//model.remove("currentUser", userName);
 		model.remove("currentUser");
 		session.removeAttribute("currentUser");
-		return "redirect:/";
+		return "redirect:/login";
 	}
+//	@RequestMapping(value="/logout", method = RequestMethod.GET)
+//	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+////	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+////	    if (auth != null){    
+////	        new SecurityContextLogoutHandler().logout(request, response, auth);
+////	    }
+//	    return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+//	}
 } 

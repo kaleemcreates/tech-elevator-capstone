@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 	
-		$("form").validate({
+		$("#newUserForm").validate({
 			rules : {
 				password : {
 					required : true,
@@ -37,7 +37,7 @@
 </script>
 
 <c:url var="formAction" value="/users" />
-<form method="POST" action="${formAction}">
+<form id="newUserForm" method="POST" action="${formAction}">
 	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 	<div class="row">
 		<div class="col-sm-6">	
