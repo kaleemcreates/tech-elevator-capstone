@@ -57,7 +57,7 @@
 					<c:url var="homePageHref" value="/home" />
 					<li><a href="${homePageHref}">Home</a></li>
 					<c:url var="typeSearchHref" value="/searchLandmarksByType" />
-					<li><a href="${typeSearchHref}">Search Landmarks by Type</a></li>
+					<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
 					<c:choose>
 						<c:when test="${ currentUser.admin}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
