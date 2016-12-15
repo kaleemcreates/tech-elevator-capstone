@@ -68,12 +68,12 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 												+ "INNER JOIN users_itinerary ui ON ui.user_name=ui.user_name "
 												+ "WHERE i.itinerary_id= ?";
 		
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlgetItineraryAndLandmarkById, itineraryId);
-		if(results.next()) {
-			return mapRowSetToItineraryNameAndLandmark(results);
-		}
 		
-		return null;
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlgetItineraryAndLandmarkById, itineraryId);
+		
+		
+		return  mapRowSetToItineraryNameAndLandmark(results);
+
 	}
 	
 	@Override
@@ -120,7 +120,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		ItineraryNameLandmark itineraryNameLandmark = new ItineraryNameLandmark();
 		
 		itineraryNameLandmark.setItineraryName(results.getString("itinerary_name"));
-		itineraryNameLandmark.setlandmarkName(results.getString("name"));
+		itineraryNameLandmark.setLandmarkName(results.getString("name"));
 		
 		return itineraryNameLandmark;
 	}

@@ -15,7 +15,7 @@ public class ItineraryNameLandmark {
 	public String getLandmarkName() {
 		return landmarkName;
 	}
-	public void setlandmarkName(String landmarkName) {
+	public void setLandmarkName(String landmarkName) {
 		this.landmarkName = landmarkName;
 	}
 

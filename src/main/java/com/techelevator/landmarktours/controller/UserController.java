@@ -112,7 +112,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/users/{userName}/savedItineraryList", method=RequestMethod.GET) 
-	public String showSavedItineraryList(Map<String, Object> model, ModelMap map, @PathVariable String userName) {
+	public String showSavedItineraryList(Map<String, Object> model, HttpServletRequest request, @PathVariable String userName) {
 		
 		Itinerary itinerary = itineraryDAO.getLatestItinerary(userName);
 		
@@ -120,16 +120,10 @@ public class UserController {
 			return "noItineraryView";
 		}
 		
-		List <ItineraryNameLandmark> list=itineraryDAO.getItineraryAndLandmarkById(itinerary.getItineraryId());
+		List <ItineraryNameLandmark> newList=itineraryDAO.getItineraryAndLandmarkById(itinerary.getItineraryId());
 		
 		
-
-		for (int i=0; i <= list.size(); i++) {
-			ItineraryNameLandmark itineraryNameLandmark=list.get(0);
-			model.put("itineraryName", itineraryNameLandmark.getItineraryName().toUpperCase());
-			
-		}
-		model.put("list", list);
+		request.setAttribute("list", newList);
 		
 		
 	
