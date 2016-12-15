@@ -57,7 +57,7 @@
 					<c:url var="homePageHref" value="/home" />
 					<li><a href="${homePageHref}">Home</a></li>
 					<c:url var="typeSearchHref" value="/searchLandmarksByType" />
-					<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
+					<li><a href="${typeSearchHref}">Search Landmarks by Type</a></li>
 					<c:choose>
 						<c:when test="${ currentUser.admin}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
@@ -65,7 +65,7 @@
 							<c:url var="newAdminHref" value="/users/${currentUser.userName}/adminLanding" />
 							<li><a href="${newAdminHref}">Create/ Edit Users</a></li>
 							<c:url var="adminAddLandmarksHref" value="/users/${currentUser.userName}/adminAddLandmark" />
-							<li><a href="${adminAddLandmarksHref}">Add Landmarks</a></li>
+							<li><a href="${adminAddLandmarksHref}">Approve Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
 							<li><a href="${changePasswordHref}">Change Password</a></li>
 

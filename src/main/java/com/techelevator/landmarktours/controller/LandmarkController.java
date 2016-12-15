@@ -96,7 +96,7 @@ public class LandmarkController {
 		suggestion.setDescription(description);
 		
 		landmarkSuggestionsDAO.save(suggestion);
-		return "redirect:/home";
+		return "redirect:/addLandmarkLanding";
 	}
 	
 	@RequestMapping(path="/users/{userName}/adminAddLandmark", method=RequestMethod.GET)
@@ -137,22 +137,17 @@ public class LandmarkController {
 		
 		landmarksDAO.saveLandmarks(landmark);
 		landmarkSuggestionsDAO.removeSuggestion(suggestionId);
-		return "redirect:/users/{userName}/adminAddLandmark";
+		return "redirect:/users/{userName}/adminAddLandmarkLanding";
 	}
+	@RequestMapping(path="/addLandmarkLanding", method=RequestMethod.GET)
+	public String addLandmarkLanding(HttpServletRequest request) {
+//		LandmarkSuggestions landmarkSuggestion = landmarkSuggestionsDAO.getLandmarkSuggestions();
+//		request.setAttribute("landmarkSuggestion", landmarkSuggestion);
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+		return "addLandmarkLanding";
+	}
+	@RequestMapping(path="/users/{userName}/adminAddLandmarkLanding", method=RequestMethod.GET)
+	public String adminAddLandmarkLanding(HttpServletRequest request) {
+		return "adminAddLandmarkLanding";
+	}
 }

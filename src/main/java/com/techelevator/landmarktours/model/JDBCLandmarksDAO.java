@@ -74,6 +74,16 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 		}
 		return landmark;
 	}
+	
+//	@Override
+//	public Landmarks getMostRecentLandmark() {
+//		Landmarks landmark = null;
+//		String sqlSelectLandmarks = "SELECT * "+
+//									"FROM landmarks";
+//		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectLandmarks);
+//		
+//		return null;
+//	}
 
 	private List<Landmarks> mapRowSetToLandmarks(SqlRowSet results) {
 		ArrayList<Landmarks> landmarkList = new ArrayList<>();
@@ -100,6 +110,9 @@ public class JDBCLandmarksDAO implements LandmarksDAO {
 
 		return landmark;
 	}
+
+
+
 
 
 
