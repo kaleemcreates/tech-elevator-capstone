@@ -4,8 +4,6 @@
 <html>
 	<head>
 		<title>Landmark Tours</title>
-		<meta name="viewport" content="width=device-width">
-		<meta name="description" content="Ca">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
@@ -76,42 +74,34 @@
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<ul class="nav nav-pills ">
+				<ul class="nav navbar-nav">
 					<c:url var="homePageHref" value="/home" />
-					<li role="presentation" class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="${homePageHref}" role="button" aria-haspopup="true" aria-expanded="false">Home
-					<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-						<c:url var="radiusSearchHref" value="/searchLandmarksByRadius" />
-						<li><a href="${radiusSearchHref}">Search Landmarks By Radius</a></li>
-						<c:url var="typeSearchHref" value="/searchLandmarksByType" />
-						<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
-						</ul>
-					</li>
+					<li><a href="${homePageHref}">Home</a></li>
 					<c:url var="typeSearchHref" value="/searchLandmarksByType" />
 					<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
 					<c:choose>
 						<c:when test="${ currentUser.admin}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
-							<li role="presentation"><a href="${dashboardHref}">Admin Account</a></li>
+							<li><a href="${dashboardHref}">Admin Account</a></li>
 							<c:url var="newAdminHref" value="/users/${currentUser.userName}/adminLanding" />
-							<li role="presentation"><a href="${newAdminHref}">Create/ Edit Users</a></li>
+							<li><a href="${newAdminHref}">Create/ Edit Users</a></li>
 							<c:url var="adminAddLandmarksHref" value="/users/${currentUser.userName}/adminAddLandmark" />
-							<li role="presentation"><a href="${adminAddLandmarksHref}">Add Landmarks</a></li>
+							<li><a href="${adminAddLandmarksHref}">Approve Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
-							<li role="presentation"><a href="${changePasswordHref}">Change Password</a></li>
+							<li><a href="${changePasswordHref}">Change Password</a></li>
 
 						</c:when>
 						<c:when test="${not empty currentUser}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
-							<li role="presentation"><a href="${dashboardHref}">My Account</a></li>
+							<li><a href="${dashboardHref}">My Account</a></li>
 							<c:url var="savedList" value="/users/${currentUser.userName}/landmark/list" />
-							<li role="presentation"><a href="${savedList}">Saved List</a></li>
+							<li><a href="${savedList}">Saved List</a></li>
 							<c:url var="itinerary" value="/users/${currentUser.userName}/savedItineraryList" />
-							<li role="presentation"><a href="${itinerary}">Saved Itinerary </a></li>
+							<li><a href="${itinerary}">Saved Itinerary </a></li>
 							<c:url var="sentMessagesHref" value="/users/${currentUser.userName}/search" />
-							<li role="presentation"><a href="${searchLandmarks}">Search Landmarks</a></li>
+							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
-							<li role="presentation"><a href="${changePasswordHref}">Change Password</a></li>
+							<li><a href="${changePasswordHref}">Change Password</a></li>
 
 							<!-- <li><a id="logoutLink" href="#">Log Out</a></li> -->
 						</c:when>
@@ -119,21 +109,22 @@
 				
 
 				<ul class="nav navbar-nav navbar-right">
-					<!-- <ul class="nav nav-pills"> -->
+
 					<c:choose>
 						<c:when test="${empty currentUser}">
 							<c:url var="newUserHref" value="/users/new" />
-							<li role="presentation"><a href="${newUserHref}">Sign Up</a></li>
+							<li><a href="${newUserHref}">Sign Up</a></li>
 							<c:url var="loginHref" value="/login" />
-							<li role="presentation"><a href="${loginHref}">Log In</a></li>
+							<li><a href="${loginHref}">Log In</a></li>
 						</c:when>
 						<c:otherwise>
 							<c:url var="logoutAction" value="/logout" />
-							<li role="presentation"><a id="logoutLink" href="${logoutAction}">Log Out</a></li>
+							<li><a id="logoutLink" href="${logoutAction}">Log Out</a></li>
 						</c:otherwise>
 					</c:choose>
-					
+
 				</ul>
+
 				</ul>
 			</div>
 		</nav>

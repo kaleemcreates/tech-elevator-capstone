@@ -12,4 +12,5 @@ public interface LandmarksDAO {
 
 	
 	public Landmarks searchLandMarksByRadius(String landmarkId);
+//	public Landmarks getMostRecentLandmark(); 
 }

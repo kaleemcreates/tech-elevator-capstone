@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 	
-		$("form").validate({
+		$("#addLandmarkForm").validate({
 			rules : {
 				name : {
 					required : true,
@@ -23,23 +23,7 @@
 					required: true
 				}
 			},
-			messages: {
-				name: {
-					required: "Name is required",
-					maxlength: "Name cannot be more that 64 characters"
-				}, 
-				type: {
-					required: "Type is required"
-				},
-				zip: {
-					required: "Zip code is required",
-					maxlength: "Zip code cannot be more than 5 digits"
-				},
-				description: {
-					required: "Description is required"
-				}
-			},
-			
+	
 			errorClass : "error"
 		});
 	});
@@ -48,7 +32,7 @@
 
 <h3>Suggest a Landmark</h3>
 <c:url var="formAction" value="/addLandmark" />
-<form method="POST" action="${formAction}">
+<form id="addLandmarkForm" method="POST" action="${formAction}">
 <div class="form-group">
 	<label for="name">Landmark Name</label>
 	<input class="form-control" id= "name" name="name" placeholder="Landmark Name">
