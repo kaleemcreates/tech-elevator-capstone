@@ -74,7 +74,7 @@ public class UserController {
 	public String displayDashboard(Map<String, Object> model, 
 									HttpServletRequest request,
 									@PathVariable String userName) {
-		
+		model.put("landmarks", landmarksDAO.getLandmarks());
 		List <Hotels> hotelList= hotelsDAO.getHotels();
 		request.setAttribute("hotelList", hotelList);
 		List <Landmarks>landmarkList= landmarksDAO.getLandmarks();

@@ -1,4 +1,22 @@
-body {
-    background-image: url("Columbus.jpg");
-    color: white;
+img.bg {
+
+  min-height: 100%;
+  min-width: 100%;
+	
+
+  width: 100%;
+  height: auto;
+
+  position: fixed;
+  top: 0;
+  left: 0;
 }
+
+@media screen {
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+}
+
+
