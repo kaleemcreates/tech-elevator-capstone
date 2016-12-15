@@ -33,7 +33,7 @@ import com.techelevator.landmarktours.model.User;
 import com.techelevator.landmarktours.model.UserDAO;
 
 @Controller
-@SessionAttributes({"landmarkListByItineraryId"})
+@SessionAttributes({"landmarkListByItineraryId", "itineraryId"})
 public class UserController {
 
 	private UserDAO userDAO;
@@ -87,15 +87,10 @@ public class UserController {
 	@RequestMapping(path="/users/{userName}", method=RequestMethod.POST)
 	public String postSavedItinerary(@RequestParam String itineraryName,
 									@RequestParam String [] landmarkId,
-									ModelMap model, @PathVariable String userName) {
+									ModelMap model, @PathVariable String userName, HttpServletRequest request) {
 		
 		
-		itineraryDAO.saveItineraryToItinerary(itineraryName);
-		
-		int itineraryId=itineraryDAO.getItineraryId();
-		
-
-
+		int itineraryId=itineraryDAO.saveItineraryToItinerary(itineraryName);
 		itineraryDAO.saveItineraryAndUser(userName, itineraryId);
 		
 		for (int i=0; i < landmarkId.length; i++) {
@@ -103,47 +98,50 @@ public class UserController {
 			itineraryDAO.saveItineraryAndLandmark(itineraryId, landmarkid);
 			
 		}
-			
-		
-		model.put("itineraryName", itineraryName.toUpperCase());
-		model.put("itineraryId", itineraryId);
-		
-		List<ItineraryLandmarks> landmarkList= itineraryLandmarksDAO.getItineraryByIdAndLandmarks(itineraryId);
-		model.put("landmarkListByItineraryId", landmarkList);
-		
-		
+
 		return "redirect: {userName}/savedItineraryView";
 	}
 	
 	@RequestMapping(path="/users/{userName}/savedItineraryView", method=RequestMethod.GET)
-	public String showSavedItineraryView(Map<String, Object> model, HttpServletRequest request, @PathVariable String userName ) {
-		
-		model.put("userName", userName);
+	public String showSavedItineraryView(HttpServletRequest request,
+										 @PathVariable String userName) {
+		Itinerary itinerary = itineraryDAO.getLatestItinerary(userName);
+		request.setAttribute("itinerary", itinerary);
 		
 		return "savedItineraryView";
 	}
 	
 	@RequestMapping(path="/users/{userName}/savedItineraryList", method=RequestMethod.GET) 
-	public String showSavedItineraryList(Map<String, Object> model, @PathVariable String userName) {
+	public String showSavedItineraryList(Map<String, Object> model, ModelMap map, @PathVariable String userName) {
 		
-		int itineraryId=itineraryDAO.getItineraryId();
-
-	
+		Itinerary itinerary = itineraryDAO.getLatestItinerary(userName);
 		
-		List <ItineraryNameLandmark> list=itineraryDAO.getItineraryAndLandmarkById(itineraryId);
-		
-		
-		for (int i=0; i < list.size(); i++) {
-			ItineraryNameLandmark itineraryNameLandmark=list.get(0);
-			model.put("itineraryName", itineraryNameLandmark.getItineraryName().toUpperCase());
+		if (itinerary==null) {
+			return "noItineraryView";
 		}
 		
+		List <ItineraryNameLandmark> list=itineraryDAO.getItineraryAndLandmarkById(itinerary.getItineraryId());
+		
+		
+
+		for (int i=0; i <= list.size(); i++) {
+			ItineraryNameLandmark itineraryNameLandmark=list.get(0);
+			model.put("itineraryName", itineraryNameLandmark.getItineraryName().toUpperCase());
+			
+		}
 		model.put("list", list);
+		
+		
+	
 	
 		return "savedItineraryList";
 		
+	} 
+	@RequestMapping(path="/users/{userName}/noItineraryView", method=RequestMethod.GET) 
+	public String noItineraryView(@PathVariable String userName) {
+		
+		return "noItineraryView";
 	}
-	
 
 	
 //	@RequestMapping(path={"/users/{userName}/userDashboard"}, method=RequestMethod.GET)

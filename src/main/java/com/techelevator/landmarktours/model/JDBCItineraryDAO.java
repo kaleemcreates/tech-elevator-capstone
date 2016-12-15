@@ -1,6 +1,8 @@
 package com.techelevator.landmarktours.model;
 
 import java.sql.Statement;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,10 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
@@ -23,54 +29,51 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	
 	
 	
-	public List<Itinerary> getItinerary() {
-		List <Itinerary> itineraries = new ArrayList<Itinerary>();
-		String sqlGetAllItineraries= "SELECT * "
-									+ "FROM itinerary";
+	public Itinerary getLatestItinerary(String userName) {
+		String sqlGetCurrentItineraryId = "SELECT * "
+										+ "FROM itinerary i "
+										+ "INNER JOIN users_itinerary ui "
+										+ "ON ui.itinerary_id=i.itinerary_id "
+										+ "WHERE ui.user_name=? ORDER BY i.create_date DESC LIMIT 1";
 		
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetAllItineraries);
-		while (results.next()) {
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetCurrentItineraryId, userName);
+		if (results.next()) {
 			Itinerary itinerary = mapRowToItinerary(results);
-			itineraries.add(itinerary);
+			return itinerary;
 		}
-		return itineraries;
+		return null;
 	}
 	
 	@Override
-	public void saveItineraryToItinerary(String itineraryName) {
-		
-		String sqlInsertItineraryName= "INSERT INTO itinerary (itinerary_name) VALUES (?)";
-		jdbcTemplate.update(sqlInsertItineraryName, itineraryName);
+	public int saveItineraryToItinerary(String itineraryName) {
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("itinerary_name", itineraryName);
 
+        String sqlInsertItineraryName= "INSERT INTO itinerary (itinerary_name) VALUES (:itinerary_name)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        NamedParameterJdbcTemplate namedJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        int nb = namedJdbcTemplate.update(sqlInsertItineraryName, parameters, keyHolder, new String[]{"itinerary_id"});
+        
+        return keyHolder.getKey().intValue();
 	}
-	
-	@Override
-	public int getItineraryId() {
-		int id=0;
-		String sqlGetCurrentItineraryId= "SELECT currval(pg_get_serial_sequence('itinerary','itinerary_id'))";
-		
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetCurrentItineraryId);
-		if(results.next()) {
-				 id= results.getInt(1);
-				 
-		}
-		return id;
-	}
+
 	
 	@Override
 	public List <ItineraryNameLandmark> getItineraryAndLandmarkById(int itineraryId) {
 		
-		String sqlgetItineraryAndLandmarkById= "SELECT i.itinerary_name, l.name "
-													+ "FROM itinerary i "
-													+ "INNER JOIN itinerary_landmarks il ON i.itinerary_id=il.itinerary_id "
-													+ "INNER JOIN landmarks l ON l.landmark_id=il.landmark_id "
-													+ "WHERE i.itinerary_id=?";
+		String sqlgetItineraryAndLandmarkById= "SELECT DISTINCT i.itinerary_name, l.name "
+												+ "FROM itinerary i "
+												+ "INNER JOIN itinerary_landmarks il ON i.itinerary_id=il.itinerary_id "
+												+ "INNER JOIN landmarks l ON l.landmark_id=il.landmark_id "
+												+ "INNER JOIN users_itinerary ui ON ui.user_name=ui.user_name "
+												+ "WHERE i.itinerary_id= ?";
+		
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlgetItineraryAndLandmarkById, itineraryId);
 		if(results.next()) {
-			
+			return mapRowSetToItineraryNameAndLandmark(results);
 		}
 		
-		return mapRowSetToItineraryNameAndLandmark(results);
+		return null;
 	}
 	
 	@Override
@@ -82,8 +85,16 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	
 	@Override
 	public void saveItineraryAndUser(String userName, int itineraryId ) {
-		String sqlInsertItineraryandUser = "INSERT INTO users_itinerary (user_name, itinerary_id ) VALUES (?,?)";
-		jdbcTemplate.update(sqlInsertItineraryandUser,  userName, itineraryId );
+	
+		
+		UsersItinerary userItinerary= new UsersItinerary();
+		userItinerary.setItinerary_id(itineraryId);
+		userItinerary.setUserName(userName);
+		
+		
+		
+		String sqlInsertItineraryandUser = "INSERT INTO users_itinerary (user_name, itinerary_id) VALUES (?,?)";
+		jdbcTemplate.update(sqlInsertItineraryandUser,  userName, itineraryId);
 		
 	}
 	
@@ -92,6 +103,8 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		Itinerary itinerary = new Itinerary();
 		itinerary.setItineraryId(results.getInt("itinerary_id"));
 		itinerary.setItineraryName(results.getString("itinerary_name"));
+		itinerary.setCreateDate(results.getTimestamp("create_date").toLocalDateTime());
+		
 		
 		return itinerary;
 	}

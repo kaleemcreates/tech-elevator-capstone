@@ -1,12 +1,15 @@
 package com.techelevator.landmarktours.model;
 
+import java.time.LocalDateTime;
+
 public class UsersItinerary {
 	
 	private String userName;
 	private Integer itinerary_id;
+
 	
 	
-	
+
 	public String getUserName() {
 		return userName;
 	}
