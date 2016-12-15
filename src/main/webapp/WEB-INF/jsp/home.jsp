@@ -9,41 +9,43 @@
       </script> -->
 
 
+<div class="row">
+	<div class="col-md-4"><h4> Please Select Your Hotel as a Starting point</h4>
 
-<h4> Please Select Your Hotel as a Starting point</h4>
-
- <select id="address" name="address" placeholder="Columbus OH">
- <c:forEach var="hotelList" items="${hotelList}">
-    	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
- 	   </c:forEach>
- </select>
+ 	<select id="address" name="address" placeholder="Columbus OH">
+		 <c:forEach var="hotelList" items="${hotelList}">
+		    	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
+		 	   </c:forEach>
+		 </select>
+ 	</div>
   <h4> Please Select Radius Search Distance:</h4>
-  
+  <div class="col-md-4">
  <select id="radius_km">
 	 <option value=1>1 mile</option>
 	 <option value=2>2 miles</option>
 	 <option value=5>5 miles</option>
 	 <option value=30>30 miles</option>
  </select>
- <br>
-
-<%--     <select multiple id="waypoints" name="landmarkId">
-    <c:forEach var="landmarkList" items="${landmarks}">
-    	 	<option value="${landmarkList.landmarkId}">${landmarkList.name}</option>
- 	 </c:forEach>
-    <select multiple id="waypoints" name="type">
-    <c:forEach var="landmarkType" items="${landmarks}">
-    	 	<option value="${landmarkType.type}">"${landmarkType.type}"</option>
- 	 </c:forEach>
-    </select> --%>
-    <br>
- <button onClick="showCloseLocations()">Show Locations In Radius</button>
+ 	</div>
+ 	<br>
+ 	<div class ="col-md-4">
+ 	</div>
+ <div class="row">
+	<div class="col-sm-4"> <button onClick="showCloseLocations()">Show Locations In Radius</button>
 	<br>
-	</br>
+	<div class="col-sm-4"></div>
+	</div>
+</div>
+</div>
+<div class="row">
 <div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
-    <div>
+    <div class= "col-md-2 "></div>
+    <div class= "col-md-10 .col-md-offset-2">
     <h3>To Save Itinery, see Reviews and, Optimized Travel Path Please log In </h3>
+    </div>
+    
+</div>	
 <%--   <form method="POST" action="${formAction}">
  	
    <div id="save Itinerary" style="float: left;" >
@@ -65,7 +67,7 @@
 	
     </div>
     </form> --%>
-    </div>
+    
        <script>
        var map = null;
        var radius_circle = null;
