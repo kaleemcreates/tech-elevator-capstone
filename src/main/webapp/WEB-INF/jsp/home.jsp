@@ -10,21 +10,23 @@
 
 
 
-<h3> Please Select Your Hotel as a Starting point</h3>
+<h4> Please Select Your Hotel as a Starting point</h4>
 
  <select id="address" name="address" placeholder="Columbus OH">
  <c:forEach var="hotelList" items="${hotelList}">
     	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
  	   </c:forEach>
  </select>
+  <h4> Please Select Radius Search Distance:</h4>
+  
  <select id="radius_km">
 	 <option value=1>1 mile</option>
 	 <option value=2>2 miles</option>
 	 <option value=5>5 miles</option>
 	 <option value=30>30 miles</option>
  </select>
-     <b>Waypoints:</b> <br>
-    <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
+ <br>
+
 <%--     <select multiple id="waypoints" name="landmarkId">
     <c:forEach var="landmarkList" items="${landmarks}">
     	 	<option value="${landmarkList.landmarkId}">${landmarkList.name}</option>
@@ -36,7 +38,8 @@
     </select> --%>
     <br>
  <button onClick="showCloseLocations()">Show Locations In Radius</button>
-
+	<br>
+	</br>
 <div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
     <div>
