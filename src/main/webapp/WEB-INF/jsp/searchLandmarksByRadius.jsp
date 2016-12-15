@@ -12,7 +12,7 @@
 <div class="row">
 	<div class="col-md-4"><h4> Please Select Your Hotel as a Starting point</h4>
 
- 	<select id="address" name="address" placeholder="Columbus OH">
+ 	<select class="form-control input-sm" id="address" name="address" placeholder="Columbus OH">
 		 <c:forEach var="hotelList" items="${hotelList}">
 		    	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
 		 	   </c:forEach>
@@ -32,7 +32,7 @@
  	<div class ="col-md-4">
  	</div>
  <div class="row">
-	<div class="col-sm-4"> <button class="btn btn-primary"  onClick="showCloseLocations()">Show Locations In Radius</button>
+	<div class="col-sm-4"> <button class="btn btn-primary" type="submit" onClick="showCloseLocations()">Show Locations In Radius</button>
 	<br>
 	<div class="col-sm-4"></div>
 	</div>
@@ -43,7 +43,7 @@
     </div>
     <div class= "col-md-2 "></div>
     <div class= "col-md-10 .col-md-offset-2">
-    <h3>To Save Itinery see Reviews and Optimized Travel Path Please log In </h3>
+    <h3>To Save Itinery, see Reviews and, Optimized Travel Path Please log In </h3>
     </div>
     
 </div>	

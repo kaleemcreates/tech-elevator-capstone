@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 	
-		$("form").validate({
+		$("#adminAddLandmarkForm").validate({
 			rules : {
 				name : {
 					required : true,
@@ -50,22 +50,6 @@
 					required: true
 				}
 			},
-			messages: {
-				name: {
-					required: "Name is required",
-					maxlength: "Name cannot be more that 64 characters"
-				}, 
-				type: {
-					required: "Type is required"
-				},
-				zip: {
-					required: "Zip code is required",
-					maxlength: "Zip code cannot be more than 5 digits"
-				},
-				description: {
-					required: "Description is required"
-				}
-			},
 			
 			errorClass : "error"
 		});
@@ -73,16 +57,16 @@
 </script>
 <h3>Landmarks to Approve</h3>
 <div>
-Landmark Name: <c:out value="${landmarkSuggestion.name}" /><br>
-Landmark Type:<c:out value="${landmarkSuggestion.type}" /><br>
-Landmark Zip Code: <c:out value="${landmarkSuggestion.zip}" /><br>
-Landmark Description: <c:out value="${landmarkSuggestion.description}" />
+<h4>Landmark Name: </h4><c:out value="${landmarkSuggestion.name}" />
+<h4>Landmark Type: </h4><c:out value="${landmarkSuggestion.type}" />
+<h4>Landmark Zip Code: </h4><c:out value="${landmarkSuggestion.zip}" />
+<h4>Landmark Description: </h4><c:out value="${landmarkSuggestion.description}" />
 
 </div>
 
 <h3>Fill In this Form to Approve The Landmark Above</h3>
 <c:url var="formAction" value="/users/${currentUser.userName}/adminAddLandmark" />
-<form method="POST" action="${formAction}">
+<form id="adminAddLandmarkForm" method="POST" action="${formAction}">
 <input type="hidden" name="suggestionId" value="${landmarkSuggestion.suggestionId}">
 <div class="form-group">
 	<label for="name">Landmark Name</label>

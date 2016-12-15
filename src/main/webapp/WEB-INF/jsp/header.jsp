@@ -4,6 +4,8 @@
 <html>
 	<head>
 		<title>Landmark Tours</title>
+		<meta name="viewport" content="width=device-width">
+		<meta name="description" content="Ca">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
@@ -44,90 +46,106 @@
 	</head>
 	<body>
 		<header>
-			<c:url var="homePageHref" value="/" />
-			<c:url var="imgSrc" value="/img/landmarkTours.png" />
-			<a href="${homePageHref}"><img src="${imgSrc}" class="img-responsive" /></a>
+			<div class="row">
+				<div class="col-md-9">
+					<c:url var="homePageHref" value="/" />
+					<c:url var="imgSrc" value="/img/landmarkTours.png" />
+					<a href="${homePageHref}"><img src="${imgSrc}" class="img-responsive" /></a>
+				</div>
+				<div class="col-md-3">
+				<form action="http://localhost:8080/capstone/addLandmark">
+					<input type="submit" class="btn btn-primary" value="Select here to suggest a landmark!">
+				</form>
+				<br>
+					<div class="dropdown">
+			 				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a landmark to view its page!<span class="caret"></span></button>
+			 				<ul class="dropdown-menu">
+				   				<li>
+				   					<c:forEach var="landmark" items="${landmarks}">
+				    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmarkId}">${landmark.name}</a>
+				    				</c:forEach>
+				   				</li>
+			 				</ul>
+					</div>
+				</div>
+			</div>
 			
 
 			
 		</header>
 		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<ul class="nav navbar-nav">
+			<div class="container-fluid">	
+				<ul class="nav nav-pills">
 					<c:url var="homePageHref" value="/home" />
-					<li><a href="${homePageHref}">Home</a></li>
+					<li role="presentation" class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="${homePageHref}" role="button" aria-haspopup="true" aria-expanded="false">Home
+					<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+						<c:url var="radiusSearchHref" value="/searchLandmarksByRadius" />
+						<li><a href="${radiusSearchHref}">Search Landmarks By Radius</a></li>
+						<c:url var="typeSearchHref" value="/searchLandmarksByType" />
+						<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
+						</ul>
+					</li>
 					<c:url var="typeSearchHref" value="/searchLandmarksByType" />
-					<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
+ 					<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
 					<c:choose>
 						<c:when test="${ currentUser.admin}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
-							<li><a href="${dashboardHref}">Admin Account</a></li>
+							<li role="presentation"><a href="${dashboardHref}">Admin Account</a></li>
 							<c:url var="newAdminHref" value="/users/${currentUser.userName}/adminLanding" />
-							<li><a href="${newAdminHref}">Create/ Edit Users</a></li>
+							<li role="presentation"><a href="${newAdminHref}">Create/ Edit Users</a></li>
 							<c:url var="adminAddLandmarksHref" value="/users/${currentUser.userName}/adminAddLandmark" />
-							<li><a href="${adminAddLandmarksHref}">Add Landmarks</a></li>
+							<li role="presentation"><a href="${adminAddLandmarksHref}">Add Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
-							<li><a href="${changePasswordHref}">Change Password</a></li>
+							<li role="presentation"><a href="${changePasswordHref}">Change Password</a></li>
 
 						</c:when>
 						<c:when test="${not empty currentUser}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
-							<li><a href="${dashboardHref}">My Account</a></li>
+							<li role="presentation"><a href="${dashboardHref}">My Account</a></li>
 							<c:url var="savedList" value="/users/${currentUser.userName}/landmark/list" />
-							<li><a href="${savedList}">Saved List</a></li>
+							<li role="presentation"><a href="${savedList}">Saved List</a></li>
 							<c:url var="itinerary" value="/users/${currentUser.userName}/savedItineraryList" />
-							<li><a href="${itinerary}">Saved Itinerary </a></li>
+							<li role="presentation"><a href="${itinerary}">Saved Itinerary </a></li>
 							<c:url var="sentMessagesHref" value="/users/${currentUser.userName}/search" />
-							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
+							<li role="presentation"><a href="${searchLandmarks}">Search Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
-							<li><a href="${changePasswordHref}">Change Password</a></li>
+							<li role="presentation"><a href="${changePasswordHref}">Change Password</a></li>
 
 							<!-- <li><a id="logoutLink" href="#">Log Out</a></li> -->
 						</c:when>
 					</c:choose>
-				</ul>
+				
+				
 				<ul class="nav navbar-nav navbar-right">
+					
 					<c:choose>
 						<c:when test="${empty currentUser}">
-							<c:url var="searchLandmarks" value="/landmarks/search" />
-							<li><a href="${searchLandmarks}">Search Landmarks</a></li>
 							<c:url var="newUserHref" value="/users/new" />
-							<li><a href="${newUserHref}">Sign Up</a></li>
+							<li role="presentation"><a href="${newUserHref}">Sign Up</a></li>
 							<c:url var="loginHref" value="/login" />
-							<li><a href="${loginHref}">Log In</a></li>
+							<li role="presentation"><a href="${loginHref}">Log In</a></li>
 						</c:when>
 						<c:otherwise>
 							<c:url var="logoutAction" value="/logout" />
-							<form id="logoutForm" action="${logoutAction}" method="POST">
-								<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
-							</form>
-							<li><a id="logoutLink" href="#">Log Out</a></li>
+							<li role="presentation"><a id="logoutLink" href="${logoutAction}">Log Out</a></li>
 						</c:otherwise>
 					</c:choose>
+					</ul>
+
 				</ul>
 			</div>
 		</nav>
-		<div class="page-header">
- 		<div class="pull-right">
-			<form action="http://localhost:8080/capstone/addLandmark">
-				<input type="submit" class="btn btn-primary" value="Select here to suggest a landmark!">
-			</form>
-			<br>
-			<div class="dropdown">
-	 				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a landmark to view its page!<span class="caret"></span></button>
-	 				<ul class="dropdown-menu">
-		   				<li>
-		   					<c:forEach var="landmark" items="${landmarks}">
-		    					<a href="/capstone/landmarkDetail?landmark_id=${landmark.landmarkId}">${landmark.name}</a>
-		    				</c:forEach>
-		   				</li>
-	 				</ul>
-			</div>
+		<div class="page">
+ 				<div class="row">
+			<div class="col-md-4"></div>
+				<div class="col-md-8"><c:if test="${not empty currentUser}">
+					<p id="currentUser">Current User: ${currentUser.userName}</p>
+				</c:if>
+				</div>
 		</div>
 		</div>
 
-
-		<c:if test="${not empty currentUser}">
-			<p id="currentUser">Current User: ${currentUser.userName}</p>
-		</c:if>		
+		
 		<div class="container">
