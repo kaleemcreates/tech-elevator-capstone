@@ -3,7 +3,7 @@ package com.techelevator.landmarktours.model;
 public class ItineraryNameLandmark {
 	
 	private String itineraryName;
-	private String landmarkId;
+	private String landmarkName;
 	
 	
 	public String getItineraryName() {
@@ -12,11 +12,11 @@ public class ItineraryNameLandmark {
 	public void setItineraryName(String itineraryName) {
 		this.itineraryName = itineraryName;
 	}
-	public String getLandmarkId() {
-		return landmarkId;
+	public String getLandmarkName() {
+		return landmarkName;
 	}
-	public void setLandmarkId(String landmarkId) {
-		this.landmarkId = landmarkId;
+	public void setlandmarkName(String landmarkName) {
+		this.landmarkName = landmarkName;
 	}
 
 }

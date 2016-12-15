@@ -1,8 +1,10 @@
 package com.techelevator.landmarktours.controller;
 
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +24,7 @@ import com.techelevator.landmarktours.model.Itinerary;
 import com.techelevator.landmarktours.model.ItineraryDAO;
 import com.techelevator.landmarktours.model.ItineraryLandmarks;
 import com.techelevator.landmarktours.model.ItineraryLandmarksDAO;
+import com.techelevator.landmarktours.model.ItineraryNameLandmark;
 import com.techelevator.landmarktours.model.LandmarkSuggestions;
 import com.techelevator.landmarktours.model.LandmarkSuggestionsDAO;
 import com.techelevator.landmarktours.model.Landmarks;
@@ -102,8 +105,9 @@ public class UserController {
 		}
 			
 		
-		model.put("itineraryName", itineraryName);
+		model.put("itineraryName", itineraryName.toUpperCase());
 		model.put("itineraryId", itineraryId);
+		
 		List<ItineraryLandmarks> landmarkList= itineraryLandmarksDAO.getItineraryByIdAndLandmarks(itineraryId);
 		model.put("landmarkListByItineraryId", landmarkList);
 		
@@ -120,9 +124,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/users/{userName}/savedItineraryList", method=RequestMethod.GET) 
-	public String showSavedItineraryList(HttpServletRequest request, @PathVariable String userName) {
+	public String showSavedItineraryList(Map<String, Object> model, @PathVariable String userName) {
 		
-		itineraryDAO.getItineraryAndLandmarkByUserName(userName);
+		int itineraryId=itineraryDAO.getItineraryId();
+
+	
+		
+		List <ItineraryNameLandmark> list=itineraryDAO.getItineraryAndLandmarkById(itineraryId);
+		
+		
+		for (int i=0; i < list.size(); i++) {
+			ItineraryNameLandmark itineraryNameLandmark=list.get(0);
+			model.put("itineraryName", itineraryNameLandmark.getItineraryName().toUpperCase());
+		}
+		
+		model.put("list", list);
 	
 		return "savedItineraryList";
 		

@@ -4,8 +4,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
+<h1>Your Itinerary:</h1> ${itineraryName}
+<c:forEach var="list" items="${list}">
+	<ul>
+		
+		<li>${list.landmarkName}</li>
+	
+	</ul>
 
-
+</c:forEach>
 
 
 
