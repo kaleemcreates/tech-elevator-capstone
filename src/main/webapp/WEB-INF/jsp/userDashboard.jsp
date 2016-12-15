@@ -6,7 +6,7 @@
 
 
 
-<h3> Please Select Your Hotel as a Starting point</h3>
+<h3> Please Select Your Hotel As a Starting point</h3>
 
 <div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>

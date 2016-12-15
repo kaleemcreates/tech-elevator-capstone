@@ -1,6 +1,9 @@
  header h1 {
 	display : inline;
 }
+.header-site {
+	background-image: url("img/Skyline.jpg");
+}
 
 .content {
 	padding-left : 1em;
@@ -112,4 +115,29 @@ html, body {
   background-color: #FFEE77;
   padding: 10px;
 }
+.posts {
+	padding: 10px;
+}
 
+.posts .post {
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+.posts .post * {
+	color: #000;
+	margin: 0;
+}
+
+.posts .post h4 {
+	padding-top: 5px;
+}
+
+.posts .post p.message {
+	margin-top: 10px;
+	padding-bottom: 10px;
+}
+
+.posts .post:nth-child(2n) {
+	background-color: lightgray;
+}
