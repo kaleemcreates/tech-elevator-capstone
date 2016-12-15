@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="${cssHref}">
 
 
-<img src="css/Columbus.jpg" alt="Columbus">
+
 
 	<div>
 	

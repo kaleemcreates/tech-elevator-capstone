@@ -61,14 +61,14 @@
 	
 	
 	<c:if test="${not empty currentUser}">
-		<h3>Landmark Feedback</h3>
+<%-- 		<h3>Landmark Feedback</h3>
 			<div class="container">
 				<c:forEach var="review" items="${reviewList}">
 					<div>
 					<ul class="list-inline">
 						<li><h4><c:out value="${review.userName}" /></h4></li>
 						<!-- DATE OUTPUT BELOW NOT WORKING -->
-						<%-- <li><h4><c:out value="${formatter.format(review.createDate)}" /></h4></li> --%>
+						<li><h4><c:out value="${formatter.format(review.createDate)}" /></h4></li>
 						<li><c:url var="imagehref" value="/img/${review.thumbsUp}.png" />
 						<img src="${imagehref}" class="img-responsive" alt="Responsive image" width="40"></li>
 					</ul>
@@ -77,11 +77,28 @@
 					</ul>
 					</div>
 				</c:forEach>
+
+			</div> --%>
+			
+			
+		
+		<h3>Landmark Feedback</h3>
+			<div class="posts">
+				<c:forEach var="review" items="${reviewList}">
+					<div class="post">
 					
-		
-		
+						<h4><c:out value="${review.userName}" /></h4>
+						<!-- DATE OUTPUT BELOW NOT WORKING -->
+						<%-- <li><h4><c:out value="${formatter.format(review.createDate)}" /></h4></li> --%>
+						<c:url var="imagehref" value="/img/${review.thumbsUp}.png" />
+						<img src="${imagehref}" class="img-responsive" alt="Responsive image" width="40">
+						<p><c:out value="${review.reviewText}" /></p>
+					</div>
+				</c:forEach>
+
 			</div>
 	</c:if>
+	
 	
 </body>
 </html>

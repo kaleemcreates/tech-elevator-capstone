@@ -10,7 +10,7 @@
 
 
 <div class="row">
-	<div class="col-md-4"><h4> Please Select Your Hotel as a Starting point</h4>
+	<div class="col-md-4"><h4> Please Select Your Hotel As a Starting Point</h4>
 
  	<select id="address" name="address" placeholder="Columbus OH">
 		 <c:forEach var="hotelList" items="${hotelList}">
@@ -43,7 +43,7 @@
     </div>
     <div class= "col-md-2 "></div>
     <div class= "col-md-10 .col-md-offset-2">
-    <h3>To Save Itinery see Reviews and Optimized Travel Path Please log In </h3>
+    <h4>To Save Your Itinerary, See Landmark Reviews, or Optimize Your Travel Path, Please Log In </h4>
     </div>
     
 </div>	

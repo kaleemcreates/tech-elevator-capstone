@@ -45,7 +45,7 @@
 		
 	</head>
 	<body>
-		<header>
+		<header class="header-site">
 			<div class="row">
 				<div class="col-md-9">
 					<c:url var="homePageHref" value="/" />
