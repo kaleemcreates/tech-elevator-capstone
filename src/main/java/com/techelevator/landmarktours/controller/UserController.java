@@ -182,11 +182,11 @@ public class UserController {
 		return "adminLanding";
 	}
 
-	@RequestMapping(path="/users/{userName}/addLandmark", method=RequestMethod.POST)
-	public String createNewLandmarkAdmin(@RequestParam LandmarkSuggestions suggestion ) {
-		landmarkSuggestionsDAO.save(suggestion);
-		return "addLandmark";
-	}
+//	@RequestMapping(path="/users/{userName}/addLandmark", method=RequestMethod.POST)
+//	public String createNewLandmarkAdmin(@RequestParam LandmarkSuggestions suggestion ) {
+//		landmarkSuggestionsDAO.save(suggestion);
+//		return "addLandmark";
+//	}
 	
 
 }

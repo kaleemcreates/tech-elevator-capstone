@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -99,7 +100,7 @@ public class LandmarkController {
 	}
 	
 	@RequestMapping(path="/users/{userName}/adminAddLandmark", method=RequestMethod.GET)
-	public String getLandmarkSuggestions(HttpServletRequest request) {
+	public String getLandmarkSuggestions(HttpServletRequest request, @PathVariable String userName) {
 		LandmarkSuggestions landmarkSuggestion = landmarkSuggestionsDAO.getLandmarkSuggestions();
 		request.setAttribute("landmarkSuggestion", landmarkSuggestion);
 
@@ -136,7 +137,7 @@ public class LandmarkController {
 		
 		landmarksDAO.saveLandmarks(landmark);
 		landmarkSuggestionsDAO.removeSuggestion(suggestionId);
-		return "redirect:/adminLanding";
+		return "redirect:/users/{userName}/adminAddLandmark";
 	}
 
 
