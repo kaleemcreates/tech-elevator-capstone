@@ -82,19 +82,19 @@
 					<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 						<c:url var="radiusSearchHref" value="/searchLandmarksByRadius" />
-						<li><a href="${radiusSearchHref}">Search Landmarks By Radius</a></li>
+						<li><a href="${radiusSearchHref}">Search Landmarks by Radius</a></li>
 						<c:url var="typeSearchHref" value="/searchLandmarksByType" />
-						<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
+						<li><a href="${typeSearchHref}">Search Landmarks by Type</a></li>
 						</ul>
 					</li>
 					<c:url var="typeSearchHref" value="/searchLandmarksByType" />
- 					<li><a href="${typeSearchHref}">Search Landmarks By Type</a></li>
+ 					<li><a href="${typeSearchHref}">Search Landmarks by Type</a></li>
 					<c:choose>
 						<c:when test="${ currentUser.admin}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
 							<li role="presentation"><a href="${dashboardHref}">Admin Account</a></li>
 							<c:url var="newAdminHref" value="/users/${currentUser.userName}/adminLanding" />
-							<li role="presentation"><a href="${newAdminHref}">Create/ Edit Users</a></li>
+							<li role="presentation"><a href="${newAdminHref}">Create/Edit Users</a></li>
 							<c:url var="adminAddLandmarksHref" value="/users/${currentUser.userName}/adminAddLandmark" />
 							<li role="presentation"><a href="${adminAddLandmarksHref}">Add Landmarks</a></li>
 							<c:url var="changePasswordHref" value="/users/${currentUser.userName}/changePassword" />
