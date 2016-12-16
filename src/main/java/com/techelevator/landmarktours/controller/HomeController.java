@@ -43,8 +43,13 @@ public class HomeController {
 		this.hotelsDAO= hotelsDAO;
 		this.itineraryDAO= itineraryDAO;
 	}
+	@RequestMapping(path={"/", "/landing"}, method=RequestMethod.GET)
+	public String landingPage() {
+		
+		return "landing";
+	}
 
-	@RequestMapping(path={"/", "/home"}, method=RequestMethod.GET)
+	@RequestMapping(path={ "/home"}, method=RequestMethod.GET)
 	public String showHomePage(Map<String, Object> model, HttpServletRequest request) {
 		model.put("landmarks", landmarksDAO.getLandmarks());
 		List <Hotels> hotelList= hotelsDAO.getHotels();
