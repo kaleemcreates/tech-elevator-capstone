@@ -2,7 +2,8 @@
 <c:import url="/WEB-INF/jsp/header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-
+<c:url value="/css/landingPage.css" var="cssHref" />
+<link rel="stylesheet" href="${cssHref}">
 
 
 
