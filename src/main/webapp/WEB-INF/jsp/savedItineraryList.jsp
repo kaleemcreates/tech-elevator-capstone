@@ -4,15 +4,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
-<h1>Your Itinerary: ${list[0].itineraryName}</h1>
 
-<ul>
-<c:forEach var="item" items="${list}">
-		<li>${item.landmarkName}</li>
-</c:forEach>
+
+
+<ul class="list-group" style="list-style-type:none">
+  	
+   <li class="list-group-item">Your Itinerary Name: <b>${list[0].itineraryName.toUpperCase()}</b> <li>
+  	<c:forEach var="item" items="${list}">
+  	<li class="list-group-item"><b><em>${item.landmarkName.toUpperCase()}</em></b><li>  	
+	</c:forEach>
+
 </ul>
-
-
 
 
 

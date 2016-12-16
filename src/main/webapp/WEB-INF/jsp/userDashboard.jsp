@@ -6,16 +6,16 @@
 
 
 
-<h3> Please Select Your Hotel As a Starting point</h3>
+<h3> Please Select Your Hotel As a Starting Point</h3>
 
 <div id="map_canvas" style="width-min: 300px; height: 350px; position: relative; background-color: rgb(229, 227, 223);">
     </div>
     <div id="directions-panel"></div>
   
-     <div id="right-panel" >
+     <div id="right-panel" class="row">
     <div>
     <b>Start:</b>
-    <select id="start" name="hotelStart">
+    <select id="start" name="hotelStart" class="form-control input-sm">
        <c:forEach var="hotelList" items="${hotelList}">
     	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
  	   </c:forEach>
@@ -23,20 +23,20 @@
     <br>
     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
-    <select multiple id="waypoints" name="landmarks">
+    <select multiple id="waypoints" name="landmarks" class="form-control">
     <c:forEach var="landmarkList" items="${landmarkList}">
     	 	<option value="${landmarkList.latitude}, ${landmarkList.longitude}">${landmarkList.name}</option>
  	 </c:forEach>
     </select>
     <br>
     <b>End:</b>
-    <select id="end" name="hotelEnd">
+    <select id="end" name="hotelEnd" class="form-control input-sm">
       <c:forEach var="hotelList" items="${hotelList}">
     	 	<option value="${hotelList.latitude}, ${hotelList.longitude}">${hotelList.name}</option>
  	   </c:forEach>
     </select>
     <br>
-      <input type="submit" id="submit">
+      <input type="submit" id="submit" class="form-control">
     </div>      
 	
     </div> <br>
@@ -48,17 +48,17 @@
     <div>
     <div>
     	<b>Enter Name To Save Itinerary:</b><br>
-    	 <input name="itineraryName" >
+    	 <input name="itineraryName" class="form-control input-sm" >
     </div>
     <b>Waypoints:</b> <br>
     <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
-    <select multiple id="waypoints" name="landmarkId">
+    <select multiple id="waypoints" name="landmarkId" class="form-control">
     <c:forEach var="landmarkList" items="${landmarkList}">
     	 	<option value="${landmarkList.landmarkId}">${landmarkList.name}</option>
  	 </c:forEach>
     </select>
     <br>
-      <input type="submit" id="submit" value="Save Itinerary" >
+      <input type="submit" id="submit" value="Save Itinerary" class="form-control" >
     </div>      
 	
     </div>
@@ -74,8 +74,8 @@
          directionsDisplay.setMap(map);
          // Multiple Markers
          var markers = [
-             ['Columbus, Ohio', 39.965741,-83.002793],
-             ['Palace of Westminster, London', 51.499633,-0.124755]
+             ['Columbus, Ohio', 39.965741,-83.002793]
+             
          ];
          
 
@@ -179,10 +179,10 @@
                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
                summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
              }
-             var input = document.createElement("button");        // Create a <button> element
+/*              var input = document.createElement("button");        // Create a <button> element
              var text = document.createTextNode("Save Itinerary")       // Create a text node
              input.appendChild(text);
-             document.getElementById('directions-panel').appendChild(input);
+             document.getElementById('directions-panel').appendChild(input); */
            } else {
              window.alert('Directions request failed due to ' + status);
            }

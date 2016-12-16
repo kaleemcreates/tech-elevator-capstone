@@ -104,8 +104,7 @@
 						<c:when test="${not empty currentUser}">
 							<c:url var="dashboardHref" value="/users/${currentUser.userName}" />
 							<li role="presentation"><a href="${dashboardHref}">My Account</a></li>
-							<c:url var="savedList" value="/users/${currentUser.userName}/landmark/list" />
-							<li role="presentation"><a href="${savedList}">Saved List</a></li>
+
 							<c:url var="itinerary" value="/users/${currentUser.userName}/savedItineraryList" />
 							<li role="presentation"><a href="${itinerary}">Saved Itinerary </a></li>
 							<c:url var="sentMessagesHref" value="/users/${currentUser.userName}/search" />
