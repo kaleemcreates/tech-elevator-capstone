@@ -69,7 +69,7 @@ public class JDBCHotelsDAO implements HotelsDAO {
 		hotel.setLatitude(results.getDouble("latitude"));
 		hotel.setLongitude(results.getDouble("longitude"));
 		hotel.setZip(results.getString("zip"));
-
+		
 		return hotel;
 	}
 		
